@@ -7,7 +7,7 @@ export default function Footer() {
       <p>© {new Date().getFullYear()} Akrisht Kaul · Built with React</p>
       <div className='footer-links'>
         <a
-          href='https://github.com/ashrekthewreck'
+          href='https://github.com/akrishtkaul'
           className='icon'
           target='_blank'
           rel='noopener noreferrer'

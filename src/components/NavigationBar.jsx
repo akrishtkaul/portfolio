@@ -20,7 +20,7 @@ export function NavigationBar() {
             <a className="navbar-link" href="#projects">Projects</a>
           </li>
           <li className="bar-option">
-            <a href='https://github.com/ashrekthewreck' className='icon-link' target='_blank' rel='noopener noreferrer'><FaGithub/></a>
+            <a href='https://github.com/akrishtkaul' className='icon-link' target='_blank' rel='noopener noreferrer'><FaGithub/></a>
           </li>
           <li className="bar-option">
             <a href='https://www.linkedin.com/in/akrishtkaul' className='icon-link' target='_blank' rel='noopener noreferrer'><FaLinkedin/></a>
