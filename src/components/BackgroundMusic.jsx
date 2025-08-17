@@ -22,9 +22,11 @@ export default function BackgroundMusic() {
     start();
     // otherwise, unlock on first user interaction
     window.addEventListener('pointerdown', start, { once: true });
+    window.addEventListener('scroll', start, { once: true });
 
     return () => {
       window.removeEventListener('pointerdown', start);
+      window.removeEventListener('scroll', start);
     };
   }, []);
 
