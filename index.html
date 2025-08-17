@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Akrisht Kaul</title>
+    <meta name="theme-color" content="#0B0F1A" />
+    <style>
+      /* Full-viewport base + fallback while JS loads */
+      html, body { height: 100%; margin: 0; background: #0B0F1A; }
+      /* React app sits above the canvas */
+      #root { position: relative; z-index: 1; }
+
+      /* Finisher target on <body> */
+      .finisher-header { position: relative; }
+
+      /* Force the Finisher canvas to cover the whole screen.
+         Override inline styles the lib injects. */
+      .finisher-header canvas {
+        position: fixed !important;
+        inset: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        z-index: 0 !important;
+        pointer-events: none !important;
+        transform: none !important;
+        -webkit-transform: none !important;
+        outline: 1px solid transparent !important;
+      }
+    </style>
+  </head>
+  <body class="finisher-header">
+    <div id="root"></div>
+
+    <!-- Your React app -->
+    <script type="module" src="/src/main.jsx"></script>
+
+    <!-- Finisher script (place finisher-header.es5.min.js in /public) -->
+    <script src="/finisher-header.es5.min.js?v=ns4"></script>
+
+    <!-- Init AFTER the script above -->
+    <script>
+      // Kill any old canvas if HMR re-ran
+      document.getElementById('finisher-canvas')?.remove();
+
+      // Prevent double-inits
+      if (!window.__FINISHER_ACTIVE__) {
+        window.__FINISHER_ACTIVE__ = true;
+
+        new FinisherHeader({
+          count: 17,
+          size: { min: 372, max: 960, pulse: 0.2 },
+          speed: {
+            x: { min: 0.1, max: 0.6 },
+            y: { min: 0.1, max: 0.6 }
+          },
+          colors: {
+            background: "#0B0F1A",        // deep navy
+            particles: [
+              "#1E3A8A",  // stargazer blue
+              "#005B99",  // professional tech blue
+              "#2235E5",  // innovation blue
+              "#33B4D3"   // cool cyan accent
+            ]
+          },
+          blending: "screen",
+          opacity: { center: 0.6, edge: 0.05 },
+          skew: 0,                       // no angled strip
+          shapes: ["c"]                  // clean circles
+        });
+      }
+    </script>
+  </body>
+</html>

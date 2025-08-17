@@ -1,0 +1,39 @@
+.section-container { 
+    max-width: 1100px; 
+    margin: 50px auto; 
+    padding: 0 20px; 
+}
+.panel {
+  background: color-mix(in oklab, var(--card, #0A1028), transparent 40%);
+  border: 1px solid #133B5C;
+  border-radius: 16px;
+  padding: 20px;
+}
+
+/* Experiences */
+.experience-item {
+  display: grid;
+  grid-template-columns: 1fr auto; /* title left, date right */
+  column-gap: 16px;
+  row-gap: 6px;
+  padding: 12px 0;
+  border-top: 1px solid color-mix(in oklab, #133B5C, transparent 60%);
+}
+.experience-item:first-of-type { 
+    border-top: 0; 
+}
+.experience-title, .experience-date, .experience-details {
+    color: white;
+}
+.experience-title { 
+    margin: 0; 
+    font-weight: 700; }
+.experience-date {
+    white-space: nowrap; 
+    text-align: right; 
+    font-style: italic; }
+.experience-details { 
+    margin-left: 20px;
+    list-style-type: none; 
+    margin-bottom: 1.5rem;
+}

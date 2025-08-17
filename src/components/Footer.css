@@ -1,0 +1,30 @@
+.footer {
+  margin-top: 40px;
+  padding: 20px;
+  height: fit-content;
+  text-align: center;
+  color: white;
+  background: color-mix(in oklab, var(--card, #0A1028), transparent 30%);
+  border-top: 1px solid #133B5C;
+  font-size: 0.9rem;
+ 
+}
+
+.footer-links {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.icon{
+  color: white;
+  font-size: 30px;
+  padding: 5px;
+  transition: color 0.3s ease;
+}
+
+.icon:hover {
+  color: #3fa9f5; /* blue accent on hover */
+}
+

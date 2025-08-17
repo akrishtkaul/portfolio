@@ -1,0 +1,149 @@
+h2{
+  margin-bottom: 10px;
+}
+
+.college-name, .graduation-time, .degree, p, h2, .skill, .skills-tag {
+  color: white;
+}
+
+.aboutme-container {
+  display: grid;
+  grid-template-columns: auto auto;   /* left = photo, right = fixed width */
+  grid-template-rows: auto auto;       /* row1: intro, row2: skills */
+  gap: 20px;
+  max-width: 1100px; 
+  margin: 50px auto; 
+  padding: 0 20px; 
+  align-items: end;
+  margin-top: 100px;
+}
+
+.aboutme-text {
+  margin-top: .25rem;
+  text-align: justify;
+  overflow: anywhere;
+}
+
+.akrisht-introduction {
+  background: color-mix(in oklab, var(--card, #0A1028), transparent 40%);
+  border: 1px solid  #133B5C;
+  height: auto;
+  min-height: 330px;
+  border-radius: 16px;
+  margin-top: 20px;
+  padding: 20px;
+  grid-column: 2;
+  grid-row: 1;
+
+}
+
+/*Skills Content Starts*/
+.skills-container {  
+  height: fit-content;
+  width: 410px;
+  grid-column: 1;
+  grid-row: 2;
+  margin-left: 0; 
+  background: color-mix(in oklab, var(--card, #0A1028), transparent 40%);
+  border: 1px solid  #133B5C;
+  border-radius: 16px; 
+  padding: 20px;
+
+}
+
+.skill-list { 
+  display:flex; 
+  gap:.5rem; 
+  flex-wrap:wrap; 
+  list-style:none; 
+  padding:0; 
+  margin:0; 
+}
+
+.skill { 
+  display:inline-flex; 
+  align-items:center; 
+  padding: 5px;
+  background: color-mix(in oklab, var(--card, #0A1028), transparent 40%);
+  border: 1px solid  #133B5C;
+  border-radius: 16px; 
+}
+
+.skill-box {
+  align-items: center;
+  display: flex;
+}
+
+.skills-tag{
+  color: white;
+  margin-bottom: 10px;
+}
+
+.skill-picture {
+  width: 20px;
+  background: transparent;
+  margin-right: 10px;
+}
+/*Skills Content End*/
+
+
+/*Education Content Starts*/
+.education-container {
+  height: auto;
+  margin-left: 0;
+  background: color-mix(in oklab, var(--card, #0A1028), transparent 40%);
+  border: 1px solid #133B5C;
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.school-info {
+  display: grid;
+  grid-template-columns: 1fr auto; /* left: name/degree, right: date */
+  grid-template-rows: auto auto;   /* row1: name+date, row2: degree */
+  align-items: baseline;
+  margin-bottom: 12px;
+}
+
+.college-name {
+  grid-column: 1; grid-row: 1;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+}
+
+.graduation-time {
+  grid-column: 2; 
+  grid-row: 1;
+  text-align: end;
+  font-style: italic;
+}
+
+/* Degree spans both columns and is indented */
+.degree {
+  grid-column: 1 / -1;  /* span full width */
+  grid-row: 2;
+  margin-left: 1.25rem;
+}
+.awards {
+  margin-left: 1.25rem;
+}
+
+
+@media (max-width: 900px) {
+  .aboutme-container {
+    grid-template-columns: 1fr;     /* single column */
+    grid-template-rows: auto auto auto; 
+    margin-top: 80px;               /* small nudge if needed */
+  }
+
+  /* let date wrap under school name instead of forcing one line */
+  .school-info {
+    grid-template-columns: 1fr;     /* stack name/date/degree */
+    row-gap: 6px;
+  }
+  .graduation-time {
+    text-align: left;
+    white-space: normal;            /* was: nowrap */
+  }
+}

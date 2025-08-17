@@ -1,0 +1,12 @@
+
+.caret {
+   display: inline-block;
+   width: 1ch; 
+   color: #3fa9f5;
+}
+
+.text {
+    color: #3fa9f5;
+    font-weight: bold;
+    font-size: 20px;
+}
