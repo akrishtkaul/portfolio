@@ -1,0 +1,3 @@
+Set-Content -Path public/robots.txt -Value 'User-agent: *
+Allow: /
+Sitemap: https://www.akrishtkaul.com/sitemap.xml'
