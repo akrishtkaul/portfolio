@@ -47,7 +47,7 @@ export default function TypeWriter({
       }
     }
 
-    timer.current = setTimeout(tick, 300);
+    timer.current = setTimeout(tick, 90);
     return () => clearTimeout(timer.current);
   }, [base, words, minSpeedMs, maxSpeedMs, pauseDoneMs, pauseSwapMs]);
 
