@@ -1,0 +1,8 @@
+Set-Content -Path public/sitemap.xml -Value '<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://www.akrishtkaul.com/</loc></url>
+  <url><loc>https://www.akrishtkaul.com/#about</loc></url>
+  <url><loc>https://www.akrishtkaul.com/#experience</loc></url>
+  <url><loc>https://www.akrishtkaul.com/#projects</loc></url>
+  <url><loc>https://www.akrishtkaul.com/#footer</loc></url>
+</urlset>'

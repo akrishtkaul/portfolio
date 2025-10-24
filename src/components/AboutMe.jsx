@@ -35,7 +35,7 @@ export default function AboutMe() {
         <br />
 
         <p className='aboutme-text'>
-          Akrisht is a computer engineering student who turns ideas into working rockets, cars, and full stack apps. 
+          Akrisht is a computer science student who turns ideas into working cars, robots, and full stack apps. 
           He writes backend Java, builds clean web interfaces, and explores machine learning with Python. 
           On the hardware side he prototypes with Arduino and designs custom PCBs in Altium, then wires, tests, 
           and documents the systems. He also leads planning, fundraising, and execution so projects have the funds 
@@ -67,7 +67,7 @@ export default function AboutMe() {
         <div className='school-info'> 
           <h3 className='college-name'>Columbia University</h3> 
           <p className='graduation-time'>September 2025 - May 2028</p>
-          <p className='degree'>B.S. Computer Engineering</p>  
+          <p className='degree'>B.S. Computer Science</p>  
         </div>
 
         <div className='school-info'>

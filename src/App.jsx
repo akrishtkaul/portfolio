@@ -5,6 +5,7 @@ import Projects from "./components/Projects";
 import Footer from "./components/Footer";
 import BackgroundMusic from "./components/BackgroundMusic";
 
+
 export default function App() {
   return (
     <>

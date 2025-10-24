@@ -13,12 +13,12 @@
   <meta property="og:url" content="https://akrishtkaul.com" />
   <meta property="og:type" content="website" />
 
-  <!-- Favicon -->next
+  <!-- Favicon -->
   <link rel="icon" href="/favicon.ico" />
   <meta name="theme-color" content="#0B0F1A" />
     <style>
       /* Full-viewport base + fallback while JS loads */
-      html, body { height: 100%; margin: 0; background: #0B0F1A; }
+      html, body { height: 100%; margin: 0; background: white; }
       /* React app sits above the canvas */
       #root { position: relative; z-index: 1; }
 
@@ -51,7 +51,7 @@
 
     <!-- Init AFTER the script above -->
     <script>
-      // Kill any old canvas if HMR re-ran
+      /* Kill any old canvas if HMR re-ran
       document.getElementById('finisher-canvas')?.remove();
 
       // Prevent double-inits
@@ -79,7 +79,7 @@
           skew: 0,                       // no angled strip
           shapes: ["c"]                  // clean circles
         });
-      }
+      } */
     </script>
   </body>
 </html>

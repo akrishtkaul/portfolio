@@ -3,6 +3,23 @@ import './Experiences.css';
 export default function Experiences() {
   const experiences = [
     {
+      title: 'Storage Buddy (Columbia Build Lab)',
+      duration: 'September 2025 - Present',
+      duties: [
+        'Building production chat (JavaScript) with regex input validation and AI-assisted moderation',
+        'Wrote lightweight API tests and message threading logic, instrumented basic logs for debugging',
+        'Partnered with PM/design in Figma/Miro; translated flows into tickets and shipped iteratively'
+      ],
+    },
+    {
+      title: 'Columbia Formula SAE',
+      duration: 'September 2025 - Present',
+      duties: [
+        'Programming embedded C++ firmware and PCB systems enabling real-time data flow across CAN bus',
+        'Designing PCB for HV electronics such as ready-to-start system',
+      ],
+    },
+    {
       title: 'Boston University Rocket Propulsion Club',
       duration: 'September 2024 - August 2025',
       duties: [
@@ -19,6 +36,7 @@ export default function Experiences() {
         'Led workshops and STEM outreach to engage students in science and engineering.',
       ],
     },
+    /*
     {
       title: 'FIRST Robotics Competition Team [569]',
       duration: 'September 2022 - June 2024',
@@ -27,7 +45,7 @@ export default function Experiences() {
         'Worked with CAN bus and electrical wiring to integrate subsystems.',
         'Collaborated with mechanical and electrical teams to deliver competition-ready robots.',
       ],
-    },
+    }, */
   ];
 
   return (
