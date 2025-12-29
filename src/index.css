@@ -41,10 +41,23 @@ main {
   display: grid;
 }
 
+html,
+body {
+  /* Hide scrollbars across browsers while allowing scroll */
+  -ms-overflow-style: none;   /* IE/Edge */
+  scrollbar-width: none;      /* Firefox */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;              /* Chrome/Safari/Opera */
+}
+
+/* Hide scrollbars on scrollable elements */
 .no-scrollbar {
-  -ms-overflow-style: none; /* IE/Edge */
-  scrollbar-width: none;    /* Firefox */
+  -ms-overflow-style: none;   /* IE/Edge */
+  scrollbar-width: none;      /* Firefox */
 }
 .no-scrollbar::-webkit-scrollbar {
-  display: none;            /* Chrome/Safari */
+  display: none;
 }

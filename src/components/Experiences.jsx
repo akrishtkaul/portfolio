@@ -49,7 +49,7 @@ export default function Experiences() {
   ];
 
   return (
-    <section className="min-h-screen bg-zinc-950 py-20 px-4 md:px-8">
+    <section className="min-h-screen bg-zinc-900 py-20 px-4 md:px-8">
       <div className="max-w-5xl mx-auto">
         
         {/* Section Header */}

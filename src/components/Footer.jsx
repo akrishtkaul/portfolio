@@ -1,9 +1,8 @@
-
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 
 export default function Footer() {
   return (
-    <footer className="relative bg-gradient-to-b from-zinc-950 to-black py-12 px-4 md:px-8 border-t border-white/5">
+    <footer className="relative bg-zinc-900 py-12 px-4 md:px-8 border-t border-white/5">
       <div className="max-w-6xl mx-auto">
         
         {/* Main Content */}

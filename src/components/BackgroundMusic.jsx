@@ -7,13 +7,15 @@ export default function BackgroundMusic() {
   const audioRef = useRef(null);
   const [isMuted, setIsMuted] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const initialVolume = 0.5;
+  const boostedVolume = 0.75;
 
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
 
     audio.loop = true;
-    audio.volume = 0.3;
+    audio.volume = initialVolume;
 
     const start = () => {
       audio.play().catch(() => {
@@ -34,12 +36,25 @@ export default function BackgroundMusic() {
     };
   }, []);
 
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const handleBoost = () => {
+      if (isMuted) return;
+      audio.volume = boostedVolume;
+    };
+
+    window.addEventListener('entry-card-pressed', handleBoost);
+    return () => window.removeEventListener('entry-card-pressed', handleBoost);
+  }, [isMuted]);
+
   const toggleMute = () => {
     const audio = audioRef.current;
     if (!audio) return;
 
     if (isMuted) {
-      audio.volume = 0.3;
+      audio.volume = initialVolume;
       setIsMuted(false);
     } else {
       audio.volume = 0;

@@ -54,7 +54,7 @@ export default function AboutMe() {
   ];
 
   return (
-    <section className="min-h-screen bg-gradient-to-b bg-zinc-950 py-20 md:ml-20">
+    <section className="min-h-screen bg-zinc-900 py-20 md:ml-20">
       <div className="max-w-6xl mx-auto px-6">
 
         {/* Hero Section - Two Column Layout */}

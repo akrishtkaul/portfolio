@@ -9,11 +9,9 @@ export default function Projects() {
       blurb: 'Full-stack Next.js web app with gamified math practice for special-education learners using Firebase Auth and Firestore.',
       tags: ['React', 'Next.js', 'Tailwind', 'Firebase', 'PostgreSQL'],
       details: [
-        'Building full-stack Next.js web app with Firebase Auth and Firestore for real-time data synchronization',
-        'Conducted classroom interviews with special-education teachers to understand pain points and engagement barriers',
-        'Designed gamified scoring logic and low-friction UX to keep neurodiverse students engaged without feeling overwhelmed',
-        'Implemented accessible component library with focus on cognitive load and visual clarity',
-        'Integrated PostgreSQL for persistent analytics and student progress tracking across sessions'
+        'Interviewed special-education teachers and built gamified scoring/UX for neurodiverse students',
+        'Implemented Firebase Auth + Firestore with accessible component library and low cognitive load',
+        "Piloted the app with my mother's special-education class to validate engagement and usability"
       ]
     },
     {
@@ -21,11 +19,9 @@ export default function Projects() {
       blurb: 'Trained YOLOv8 model achieving 85% detection accuracy for real-time keyboard identification in video streams.',
       tags: ['Python', 'OpenCV', 'YOLOv8', 'Machine Learning'],
       details: [
-        'Achieved 85% keyboard detection accuracy in real-time video by training YOLOv8 on custom dataset',
-        'Built OpenCV pipeline for autonomous keyboard identification and bounding box refinement',
-        'Developed for Mars Rover competition with strict real-time performance constraints',
-        'Optimized model inference on resource-constrained hardware using quantization techniques',
-        'Created annotation pipeline and data augmentation strategy to improve model robustness'
+        'Trained YOLOv8 on custom dataset to reach 85% real-time detection accuracy',
+        'Built OpenCV pipeline with bounding-box refinement for Mars Rover constraints',
+        'Optimized inference via quantization on resource-limited hardware'
       ]
     },
     {
@@ -33,11 +29,9 @@ export default function Projects() {
       blurb: '2nd place hackathon winner – Financial literacy app helping international students navigate settling finances.',
       tags: ['React', 'Bootstrap', 'Hackathon'],
       details: [
-        'Secured 2nd place out of 25 teams at Boston University hackathon in 48-hour sprint',
-        'Conducted user research interviews with international students to identify key pain points in settling finances',
-        'Designed intuitive user flows translating complex financial processes into simple, actionable steps',
-        'Built responsive React app with Bootstrap for quick iteration and clean UI',
-        'Created feature requirement documentation based on user feedback for post-hackathon development'
+        'Won 2nd place (25 teams) after 48-hour sprint with responsive React + Bootstrap app',
+        'Interviewed international students and turned complex finance flows into simple steps',
+        'Shipped core flows and feature requirements for post-hackathon roadmap'
       ]
     },
     {
@@ -45,11 +39,9 @@ export default function Projects() {
       blurb: 'Designed nozzle in SolidWorks and programmed Arduino for automated actuation; integrated with soldered wiring.',
       tags: ['SolidWorks', 'Arduino', 'Soldering'],
       details: [
-        'Engineered rocket nozzle design in SolidWorks with precise aerodynamic specifications for high-performance propulsion',
-        'Developed Arduino control system for automated fluid actuation sequences with real-time monitoring',
-        'Hand-soldered all electrical connections ensuring robust field operation under extreme conditions',
-        'Integrated mechanical and electrical systems for seamless operation during test flights',
-        'Performed iterative testing and refinement based on launch data and telemetry feedback'
+        'Designed aerodynamic nozzle in SolidWorks with iterative test-driven refinements',
+        'Built Arduino control system for automated fluid actuation and monitoring',
+        'Soldered and integrated electrical + mechanical systems for flight tests'
       ]
     },
     {
@@ -57,11 +49,9 @@ export default function Projects() {
       blurb: 'Custom PCB for Horizontal Test Stand; full schematic design to Gerber fabrication.',
       tags: ['Altium', 'Schematic Design', 'PCB Layout'],
       details: [
-        'Designed complete PCB schematic from concept to production-ready Gerber files in Altium Designer',
-        'Simplified complex wire harness integration for Horizontal Test Stand with clean signal routing',
-        'Created custom component footprints and maintained rigorous design rule checks for manufacturability',
-        'Coordinated with manufacturing team ensuring successful first-pass fabrication with zero defects',
-        'Implemented power distribution and signal integrity analysis for reliable high-frequency operations'
+        'Created full Altium schematic to Gerbers with custom footprints and DRC compliance',
+        'Simplified wire-harness integration with clean routing and power distribution',
+        'Coordinated fabrication to achieve first-pass success with zero defects'
       ]
     },
     {
@@ -69,11 +59,9 @@ export default function Projects() {
       blurb: 'Java-controlled robot with CAN bus wiring; led programming team to school\'s top finish in 15 years.',
       tags: ['Java', 'CAN-BUS Wiring', 'Robotics'],
       details: [
-        'Led programming team of 8 students to develop complete robot control system in Java',
-        'Implemented CAN bus communication protocol for distributed sensor network across robot subsystems',
-        'Achieved school\'s highest regional competition ranking in 15 years through iterative testing and optimization',
-        'Designed autonomous routines using trajectory planning and vision-based target tracking',
-        'Mentored junior programmers in robotics software development and debugging techniques'
+        'Led team of 8 to build full robot control stack in Java with CAN bus networking',
+        'Developed autonomous routines using trajectory planning and vision targeting',
+        'Drove school’s best regional finish in 15 years through iterative testing'
       ]
     }
   ];
@@ -83,7 +71,7 @@ export default function Projects() {
   };
 
   return (
-    <section className="min-h-screen bg-zinc-950 py-20 px-4 md:px-8">
+    <section className="min-h-screen bg-zinc-900 py-20 px-4 md:px-8">
       <div className="max-w-6xl mx-auto">
         
         {/* Section Header */}
