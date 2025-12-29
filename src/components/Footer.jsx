@@ -48,7 +48,7 @@ export default function Footer() {
         
         {/* Additional Info */}
         <p className="text-center text-white/30 text-xs mt-4">
-          Designed & Developed with 💙 in New York
+          Designed & Developed in The City That Never Sleeps.
         </p>
       </div>
     </footer>
