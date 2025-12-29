@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import './TypeWriter.css'
 
 export default function TypeWriter({
   base = "",
@@ -8,7 +7,7 @@ export default function TypeWriter({
   maxSpeedMs = 60,   
   pauseDoneMs = 400, 
   pauseSwapMs = 120,  
-  className = "text",
+  className = "",
 }) {
   const [text, setText] = useState(base);
   const [showCaret, setShowCaret] = useState(true);
@@ -60,10 +59,9 @@ export default function TypeWriter({
   }, []);
 
   return (
-    
-    <span className={className} aria-live="polite">
+    <span className={`text-sky-300 font-bold text-xl ${className}`} aria-live="polite">
       {text}
-      <span className="caret">{showCaret ? "|" : " "}</span>
+      <span className="inline-block w-[1ch] text-sky-300">{showCaret ? "|" : " "}</span>
     </span>
   );
 }
