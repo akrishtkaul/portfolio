@@ -24,7 +24,7 @@ export default function AboutMe() {
     { icon: JSIcon, label: 'JavaScript' },
     { icon: CPLusPlus, label: 'C++' },
     { icon: TypescriptIcon, label: 'TypeScript' },
-    {icon: PGSQLIcon, label: 'PostgreSQL' }
+    {icon: PGSQLIcon, label: 'PSQL' }
   ];
 
   const frameworksAndTools = [
@@ -152,8 +152,8 @@ export default function AboutMe() {
                       <div className="space-y-2">
                         <p className="text-xs font-bold text-sky-300 uppercase tracking-widest opacity-70">Honors</p>
                         {edu.awards.map((award, aIdx) => (
-                          <p key={aIdx} className="text-white/70 text-sm flex items-start gap-2">
-                            <span className="text-cyan-400 mt-0.5">★</span>
+                          <p key={aIdx} className="text-white/70 text-sm flex items-center gap-2">
+                            <span className="text-cyan-300 text-base leading-none">•</span>
                             {award}
                           </p>
                         ))}

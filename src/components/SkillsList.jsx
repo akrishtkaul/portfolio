@@ -16,7 +16,7 @@ export default function SkillsList({ skills }) {
           </div>
           
           {/* Label */}
-          <p className="text-white/70 text-xs sm:text-sm font-medium group-hover:text-sky-300 transition-colors whitespace-nowrap">
+          <p className="text-white/70 text-[clamp(10px,2.6vw,12px)] sm:text-sm font-medium leading-tight group-hover:text-sky-300 transition-colors whitespace-nowrap">
             {skill.label}
           </p>
         </div>
