@@ -10,7 +10,7 @@ export default function Footer() {
           
           {/* Copyright */}
           <p className="text-[#64748B] text-sm">
-            © {new Date().getFullYear()} Akrisht Kaul · Built with React & Tailwind CSS
+            © {new Date().getFullYear()} Akrisht Kaul
           </p>
 
           {/* Social Links */}
