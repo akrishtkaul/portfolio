@@ -59,9 +59,9 @@ export default function TypeWriter({
   }, []);
 
   return (
-    <span className={`text-sky-300 font-bold text-xl ${className}`} aria-live="polite">
+    <span className={`text-[#2563EB] font-bold text-xl ${className}`} aria-live="polite">
       {text}
-      <span className="inline-block w-[1ch] text-sky-300">{showCaret ? "|" : " "}</span>
+      <span className="inline-block w-[1ch] text-[#2563EB]">{showCaret ? "|" : " "}</span>
     </span>
   );
 }

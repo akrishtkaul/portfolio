@@ -5,13 +5,33 @@ export default function Projects() {
 
   const projects = [
     {
-      title: 'Add Up Café',
-      blurb: 'Full-stack Next.js web app with gamified math practice for special-education learners using Firebase Auth and Firestore.',
-      tags: ['React', 'Next.js', 'Tailwind', 'Firebase', 'PostgreSQL'],
+      title: 'SQIRL',
+      period: 'March 2026 - Present',
+      blurb: 'Full-stack social platform startup project focused on gamified local food and cultural discovery.',
+      tags: ['Node.js (Express)', 'React', 'SQL', 'AWS'],
       details: [
-        'Interviewed special-education teachers and built gamified scoring/UX for neurodiverse students',
-        'Implemented Firebase Auth + Firestore with accessible component library and low cognitive load',
-        "Piloted the app with my mother's special-education class to validate engagement and usability"
+        'Collaborating in a startup team to build a full-stack social platform that gamifies discovering local food and cultural experiences through quest creation, community feeds, and user engagement features',
+        'Designing and testing core product flows, data models, and interaction logic for a gamified MVP, demonstrating adaptability in shipping new features across the stack in a fast-moving environment'
+      ]
+    },
+    {
+      title: 'StonksGPT',
+      period: 'February 2026',
+      blurb: 'Agentic trading copilot that turns natural-language requests into constrained, auditable tool execution.',
+      tags: ['Node.js (Express)', 'Python (MCP)', 'Gemini API', 'React'],
+      details: [
+        'Built an agentic trading copilot that translates natural-language requests into constrained, auditable tool executions using Python-based tooling, LLM reasoning, and real-time portfolio context',
+        'Implemented a backend system with validated tool schemas, token-efficient context compression, and market and news pipelines, using caching to support portfolio analytics, sessions, and voice-enabled interactions at low latency'
+      ]
+    },
+    {
+      title: 'Add Up Café',
+      period: 'December 2025 - January 2026',
+      blurb: 'Full-stack classroom management platform with gamified learning for a special-education environment.',
+      tags: ['React', 'Next.js', 'Tailwind', 'Firebase'],
+      details: [
+        'Built a full-stack classroom management platform with role-based user flows, assignment tracking, and gamified learning features for a special education setting',
+        'Iterated on system design, UX flows, and feature reliability through direct user feedback in a live special-education setting, supporting approximately 15 students and demonstrating rapid learning and end-to-end ownership'
       ]
     },
     {
@@ -35,16 +55,6 @@ export default function Projects() {
       ]
     },
     {
-      title: 'Rocket Nozzle (HIP Project)',
-      blurb: 'Designed nozzle in SolidWorks and programmed Arduino for automated actuation; integrated with soldered wiring.',
-      tags: ['SolidWorks', 'Arduino', 'Soldering'],
-      details: [
-        'Designed aerodynamic nozzle in SolidWorks with iterative test-driven refinements',
-        'Built Arduino control system for automated fluid actuation and monitoring',
-        'Soldered and integrated electrical + mechanical systems for flight tests'
-      ]
-    },
-    {
       title: 'HTSwireHarness PCB',
       blurb: 'Custom PCB for Horizontal Test Stand; full schematic design to Gerber fabrication.',
       tags: ['Altium', 'Schematic Design', 'PCB Layout'],
@@ -53,8 +63,8 @@ export default function Projects() {
         'Simplified wire-harness integration with clean routing and power distribution',
         'Coordinated fabrication to achieve first-pass success with zero defects'
       ]
-    },
-    {
+    }
+    /*{
       title: 'FRC Ivan 3.0',
       blurb: 'Java-controlled robot with CAN bus wiring; led programming team to school\'s top finish in 15 years.',
       tags: ['Java', 'CAN-BUS Wiring', 'Robotics'],
@@ -63,7 +73,7 @@ export default function Projects() {
         'Developed autonomous routines using trajectory planning and vision targeting',
         'Drove school’s best regional finish in 15 years through iterative testing'
       ]
-    }
+    }*/
   ];
 
   const handleCardClick = (index) => {
@@ -71,13 +81,13 @@ export default function Projects() {
   };
 
   return (
-    <section className="min-h-screen bg-zinc-900 py-20 px-4 md:px-8">
+    <section className="min-h-screen bg-[#F8FAFC] py-20 px-4 md:px-8">
       <div className="max-w-6xl mx-auto">
         
         {/* Section Header */}
         <div className="flex items-center gap-4 mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white">Projects</h2>
-          <div className="flex-grow h-px bg-gradient-to-r from-sky-400/50 to-transparent" />
+          <h2 className="text-4xl md:text-5xl font-bold text-[#0F172A]">Projects</h2>
+          <div className="flex-grow section-divider" />
         </div>
 
         {/* Projects Grid */}
@@ -85,7 +95,7 @@ export default function Projects() {
           {projects.map((project, idx) => (
             <div
               key={idx}
-              className="relative h-80 cursor-pointer perspective-1000"
+              className="relative h-[26rem] cursor-pointer perspective-1000"
               onClick={() => handleCardClick(idx)}
             >
               {/* Card Container with 3D transform */}
@@ -103,15 +113,19 @@ export default function Projects() {
                   className="absolute inset-0 backface-hidden"
                   style={{ backfaceVisibility: 'hidden' }}
                 >
-                  <div className="h-full border border-white/10 rounded-2xl p-6 bg-zinc-950/40 backdrop-blur hover:bg-zinc-950/60 transition-all duration-300 hover:border-sky-400/30 hover:shadow-[0_0_30px_rgba(56,189,248,0.1)] flex flex-col group">
+                  <div className="h-full border border-[#E2E8F0] rounded-2xl p-6 bg-white transition-all duration-200 hover:border-[#BFDBFE] shadow-[0_8px_24px_rgba(15,23,42,0.05)] hover:shadow-[0_10px_26px_rgba(15,23,42,0.07)] flex flex-col group">
                     {/* Accent Corner */}
-                    <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-sky-400/10 to-transparent rounded-tr-2xl" />
+                    <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-[#EFF6FF] to-transparent rounded-tr-2xl" />
                     
-                    <h3 className="text-xl font-bold text-white mb-3 group-hover:text-sky-300 transition-colors relative z-10">
+                    <h3 className="text-xl font-bold text-[#0F172A] mb-3 relative z-10">
                       {project.title}
                     </h3>
-                    
-                    <p className="text-white/70 text-sm leading-relaxed mb-4 flex-grow">
+
+                    {project.period && (
+                      <p className="text-xs text-[#64748B] mb-3">{project.period}</p>
+                    )}
+
+                    <p className="text-[#334155] text-sm leading-relaxed mb-4 flex-grow">
                       {project.blurb}
                     </p>
                     
@@ -119,7 +133,7 @@ export default function Projects() {
                       {project.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="px-3 py-1 text-xs font-medium rounded-full bg-sky-400/10 text-sky-300 border border-sky-400/20"
+                          className="px-3 py-1 text-xs font-medium rounded-full bg-[#EFF6FF] text-[#1D4ED8] border border-[#DBEAFE]"
                         >
                           {tag}
                         </span>
@@ -136,15 +150,19 @@ export default function Projects() {
                     transform: 'rotateY(180deg)'
                   }}
                 >
-                  <div className="h-full border border-sky-400/30 rounded-2xl p-6 bg-zinc-950/60 backdrop-blur shadow-[0_0_30px_rgba(56,189,248,0.15)] flex flex-col overflow-y-auto no-scrollbar">
-                    <h3 className="text-xl font-bold text-sky-300 mb-4">
+                  <div className="h-full border border-blue-200 rounded-2xl p-6 bg-white shadow-sm flex flex-col overflow-hidden">
+                    <h3 className="text-xl font-bold text-[#1D4ED8] mb-2">
                       {project.title}
                     </h3>
-                    
-                    <ul className="space-y-3 flex-grow pr-1">
+
+                    {project.period && (
+                      <p className="text-xs text-[#64748B] mb-4">{project.period}</p>
+                    )}
+
+                    <ul className="space-y-2.5 flex-grow pr-1">
                       {project.details.map((detail, dIdx) => (
-                        <li key={dIdx} className="text-white/70 text-sm leading-relaxed flex items-start gap-2">
-                          <span className="text-cyan-400 mt-1 flex-shrink-0">•</span>
+                        <li key={dIdx} className="text-[#475569] text-sm leading-relaxed flex items-start gap-2">
+                          <span className="text-[#2563EB] mt-1 flex-shrink-0">•</span>
                           <span>{detail}</span>
                         </li>
                       ))}

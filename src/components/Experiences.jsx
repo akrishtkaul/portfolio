@@ -1,122 +1,145 @@
+import { useMemo, useState } from 'react';
+
 export default function Experiences() {
+  const [activeExperienceId, setActiveExperienceId] = useState(null);
+
   const experiences = [
     {
-      title: 'Storage Buddy',
-      organization: 'Columbia Build Lab',
-      duration: 'September 2025 - Present',
-      year: '2025',
-      duties: [
-        'Building production chat (JavaScript) with regex input validation and AI-assisted moderation',
-        'Wrote lightweight API tests and message threading logic, instrumented basic logs for debugging',
-        'Partnered with PM/design in Figma/Miro; translated flows into tickets and shipped iteratively'
-      ],
-      side: 'left'
-    },
-    {
-      title: 'Columbia Formula SAE',
-      organization: '',
-      duration: 'September 2025 - Present',
-      year: '2025',
-      duties: [
-        'Programming embedded C++ firmware and PCB systems enabling real-time data flow across CAN bus',
-        'Designing PCB for HV electronics such as ready-to-start system',
-      ],
-      side: 'right'
-    },
-    {
-      title: 'Boston University Rocket Propulsion Club',
-      organization: '',
-      duration: 'September 2024 - August 2025',
-      year: '2024',
-      duties: [
-        'Developed PCB to interface with Horizontal Test Stand, from schematic to Gerbers, cleaning up wiring',
-        'Designed eMMC flash and altimeter schematics for Argo (Typhus FC), including custom library parts',
-        'Programmed Arduino + designed SolidWorks nozzle (HIP Project) for automated fluid actuation',
-      ],
-      side: 'left'
-    },
-    {
+      id: 'ewb-2024',
+      year: 2024,
       title: 'Engineers Without Borders',
-      organization: 'Boston University Chapter',
-      duration: 'September 2024 - May 2025',
-      year: '2024',
+      position: 'Fundraising Lead',
       duties: [
         'Fundraised $4,000+ through public events for Kenya borehole project',
-        'Led workshops and STEM outreach to engage students in science and engineering',
-      ],
-      side: 'right'
+        'Led workshops and STEM outreach to engage students in science and engineering'
+      ]
     },
+    {
+      id: 'rocket-2024',
+      year: 2024,
+      title: 'Boston University Rocket Propulsion Group',
+      position: 'Avionics Team',
+      duties: [
+        'Designed an eMMC storage expansion module in Altium, doubling flight computer storage capacity from 2GB to 4GB',
+        'Supported multiple schematic and PCB design iterations'
+      ]
+    },
+    {
+      id: 'rastic-2024',
+      year: 2024,
+      title: 'BU RASTIC',
+      position: 'Robotics Assistant',
+      duties: [
+        'Engineered ROS/Python autonomous driving logic for AgileX robot cars by integrating five waypoint-based highway simulation tracks and refining path-following behavior, improving trajectory smoothness by 30%',
+        'Developed validation test cases and performed iterative PID tuning in a Linux-based simulation stack, increasing lap completion rate from 75% to 85%'
+      ]
+    },
+    {
+      id: 'storage-2025',
+      year: 2025,
+      title: 'Storage Buddy',
+      position: 'Full Stack Intern',
+      duties: [
+        'Built an in-app messaging system with RESTful APIs for a storage marketplace, shipping features in weekly iteration cycles to implement profanity filtering, email/phone masking, and user blocking for 50+ users across Boston & NYC',
+        'Iterated on chat UI and messaging workflows through rapid feedback-driven development, refining features and resolving usability issues to improve the end-to-end messaging experience'
+      ]
+    },
+    {
+      id: 'fsae-2025',
+      year: 2025,
+      title: 'Columbia FSAE',
+      position: 'Electrical & Software Team Member',
+      duties: [
+        'Developing embedded C firmware for the ADBMS6830 to stream telemetry (14 cell voltages and temperatures) to a monitoring UI',
+        'Reduced refresh latency to ~750 ms and implemented cell-balancing control logic'
+      ]
+    }
   ];
 
+  const groupedByYear = useMemo(() => {
+    const map = new Map();
+    const sorted = [...experiences].sort((a, b) => b.year - a.year);
+    for (const exp of sorted) {
+      if (!map.has(exp.year)) map.set(exp.year, []);
+      map.get(exp.year).push(exp);
+    }
+    return Array.from(map.entries()).map(([year, items]) => ({ year, items }));
+  }, []);
+
+  let timelineIndex = 0;
+
   return (
-    <section className="min-h-screen bg-zinc-900 py-20 px-4 md:px-8">
+    <section className="bg-[#F8FAFC] py-12 px-4 md:px-8">
       <div className="max-w-5xl mx-auto">
-        
-        {/* Section Header */}
-        <div className="flex items-center gap-4 mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white">Experience</h2>
-          <div className="flex-grow h-px bg-gradient-to-r from-sky-400/50 to-transparent" />
+        <div className="flex items-center gap-4 mb-10">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#0F172A]">Experience</h2>
+          <div className="flex-grow section-divider" />
         </div>
 
-        {/* Timeline Container */}
         <div className="relative">
-          {/* Vertical Line - Hidden on mobile */}
-          <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-gradient-to-b from-sky-400 via-cyan-400 to-sky-400" />
+          <div className="hidden lg:block absolute left-1/2 -translate-x-1/2 w-0.5 h-full bg-[#BFDBFE]" />
+          <div className="lg:hidden absolute left-5 top-0 w-0.5 h-full bg-[#BFDBFE]" />
 
-          {/* Vertical Line - Mobile (left side) */}
-          <div className="lg:hidden absolute left-6 top-0 w-0.5 h-full bg-gradient-to-b from-sky-400 via-cyan-400 to-sky-400" />
-
-          {/* Timeline Items */}
-          <div className="space-y-12">
-            {experiences.map((exp, idx) => (
-              <div key={idx} className="relative">
-                {/* Year Marker on Timeline */}
-                <div className="absolute left-6 lg:left-1/2 transform lg:-translate-x-1/2 -translate-y-1/2 top-8 z-10">
-                  <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full border-2 border-sky-400 bg-zinc-950 flex items-center justify-center shadow-[0_0_20px_rgba(56,189,248,0.4)]">
-                    <span className="text-sky-300 font-bold text-xs lg:text-sm">{exp.year}</span>
-                  </div>
-                </div>
-
-                {/* Experience Card */}
-                <div className="pl-20 lg:pl-0 lg:grid lg:grid-cols-2 lg:gap-8">
-                  {/* Spacer for alternating sides on desktop */}
-                  <div className={`hidden lg:block ${exp.side === 'right' ? 'lg:col-start-1' : 'lg:col-start-2'}`} />
-                  
-                  {/* Card Content */}
-                  <div className={`${exp.side === 'left' ? 'lg:col-start-1' : 'lg:col-start-2'} group`}>
-                    <div className="relative border border-white/10 rounded-2xl p-5 lg:p-6 bg-zinc-950/40 backdrop-blur hover:bg-zinc-950/60 transition-all duration-300 hover:border-sky-400/30 hover:shadow-[0_0_30px_rgba(56,189,248,0.1)]">
-                      
-                      {/* Connecting Line to Timeline - Desktop */}
-                      <div className={`hidden lg:block absolute top-8 w-8 h-0.5 bg-gradient-to-r ${exp.side === 'left' ? 'right-0 translate-x-full from-sky-400/50 to-transparent' : 'left-0 -translate-x-full from-transparent to-sky-400/50'}`} />
-                      
-                      {/* Connecting Line to Timeline - Mobile */}
-                      <div className="lg:hidden absolute left-0 top-8 w-12 h-0.5 -translate-x-full bg-gradient-to-l from-sky-400/50 to-transparent" />
-                      
-                      {/* Accent Corner */}
-                      <div className="absolute top-0 left-0 w-12 h-12 lg:w-16 lg:h-16 bg-gradient-to-br from-sky-400/10 to-transparent rounded-tl-2xl" />
-                      
-                      {/* Content */}
-                      <div className="relative">
-                        <h3 className="text-lg lg:text-xl xl:text-2xl font-bold text-white mb-1 group-hover:text-sky-300 transition-colors">
-                          {exp.title}
-                        </h3>
-                        {exp.organization && (
-                          <p className="text-sky-300/80 text-sm lg:text-base font-semibold mb-2">{exp.organization}</p>
-                        )}
-                        <p className="text-white/50 text-xs lg:text-sm mb-4">{exp.duration}</p>
-                        
-                        <ul className="space-y-2">
-                          {exp.duties.map((duty, dIdx) => (
-                            <li key={dIdx} className="text-white/70 text-xs lg:text-sm leading-relaxed flex items-start gap-2">
-                              <span className="text-cyan-400 mt-1 flex-shrink-0">•</span>
-                              <span>{duty}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+          <div className="space-y-6">
+            {groupedByYear.map((group) => (
+              <div key={group.year} className="space-y-5">
+                <div className="relative h-10">
+                  <div className="absolute left-5 lg:left-1/2 lg:-translate-x-1/2 top-1/2 -translate-y-1/2 z-10">
+                    <div className="w-10 h-10 rounded-full border border-[#93C5FD] bg-[#EFF6FF] flex items-center justify-center">
+                      <span className="text-[#1D4ED8] font-bold text-xs">{group.year}</span>
                     </div>
                   </div>
                 </div>
+
+                {group.items.map((exp) => {
+                  const side = timelineIndex % 2 === 0 ? 'left' : 'right';
+                  timelineIndex += 1;
+                  const isOpen = activeExperienceId === exp.id;
+
+                  return (
+                    <div key={exp.id} className="relative">
+                      <div className="pl-14 lg:pl-0 lg:grid lg:grid-cols-2 lg:gap-6">
+                        <div className={`hidden lg:block ${side === 'right' ? 'lg:col-start-1' : 'lg:col-start-2'}`} />
+
+                        <div className={`${side === 'left' ? 'lg:col-start-1' : 'lg:col-start-2'} group`}>
+                          <button
+                            type="button"
+                            onClick={() => setActiveExperienceId(isOpen ? null : exp.id)}
+                            className="w-full text-left relative border border-[#E2E8F0] rounded-xl p-4 lg:p-5 bg-white hover:border-[#BFDBFE] transition-all duration-200 shadow-[0_8px_24px_rgba(15,23,42,0.05)]"
+                          >
+                            <div
+                              className={`hidden lg:block absolute top-7 w-6 h-0.5 bg-gradient-to-r ${
+                                side === 'left'
+                                  ? 'right-0 translate-x-full from-blue-200 to-transparent'
+                                  : 'left-0 -translate-x-full from-transparent to-blue-200'
+                              }`}
+                            />
+                            <div className="lg:hidden absolute left-0 top-7 w-8 h-0.5 -translate-x-full bg-gradient-to-l from-blue-200 to-transparent" />
+
+                            <h3 className="text-base lg:text-lg font-bold text-[#0F172A]">{exp.title}</h3>
+                            <p className="text-[#2563EB] text-xs lg:text-sm font-semibold mt-0.5">{exp.position}</p>
+
+                            <div
+                              className={`overflow-hidden transition-[max-height,opacity,transform,margin] duration-300 ease-out ${
+                                isOpen ? 'max-h-72 opacity-100 translate-y-0 mt-3' : 'max-h-0 opacity-0 -translate-y-1 mt-0'
+                              }`}
+                              aria-hidden={!isOpen}
+                            >
+                              <ul className="space-y-2.5 pb-0.5">
+                                {exp.duties.map((duty, idx) => (
+                                  <li key={idx} className="text-[#334155] text-sm leading-relaxed flex items-start gap-2">
+                                    <span className="text-[#2563EB] mt-1 flex-shrink-0">•</span>
+                                    <span>{duty}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             ))}
           </div>

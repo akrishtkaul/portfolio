@@ -1,9 +1,7 @@
 @import "tailwindcss";
 
-.finisher-header {
-  position: relative;
-}
-
+/* Layout layering */
+.finisher-header { position: relative; }
 .finisher-header canvas {
   position: fixed;
   inset: 0;
@@ -14,50 +12,99 @@
 #root {
   position: relative;
   z-index: 1;
-}
-
-.navigation-bar {
-  background: transparent;
-}
-
-html,
-body,
-#root {
   height: 100%;
+}
+
+/* Base */
+html,
+body {
+  height: 100%;
+  scroll-behavior: smooth;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 body {
   margin: 0;
-  background: #18181b; /* zinc-900 */
-  color: #ffffff;
-  font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif;
+  background: var(--bg-page);
+  color: var(--text-primary);
+  font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
 }
 
-html {
-  scroll-behavior: smooth;
+.surface-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
 }
 
-main {
-  display: grid;
+.section-divider {
+  height: 1px;
+  background: var(--border);
 }
 
-html,
-body {
-  /* Hide scrollbars across browsers while allowing scroll */
-  -ms-overflow-style: none;   /* IE/Edge */
-  scrollbar-width: none;      /* Firefox */
+/* Conveyor (icon-only, preserved) */
+@keyframes conveyorLtr {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0%); }
 }
 
-html::-webkit-scrollbar,
-body::-webkit-scrollbar {
-  display: none;              /* Chrome/Safari/Opera */
+.conveyor-wrap {
+  position: relative;
+  overflow: hidden;
 }
 
-/* Hide scrollbars on scrollable elements */
-.no-scrollbar {
-  -ms-overflow-style: none;   /* IE/Edge */
-  scrollbar-width: none;      /* Firefox */
+.conveyor-wrap::before,
+.conveyor-wrap::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 72px;
+  pointer-events: none;
+  z-index: 1;
 }
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
+
+.conveyor-wrap::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(248, 250, 252, 1), rgba(248, 250, 252, 0));
 }
+.conveyor-wrap::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(248, 250, 252, 1), rgba(248, 250, 252, 0));
+}
+
+.conveyor-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  gap: 40px;
+  animation: conveyorLtr 22s linear infinite;
+}
+
+.conveyor-logo {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  opacity: 0.95;
+  flex: 0 0 auto;
+}
+@media (min-width: 768px) {
+  .conveyor-logo {
+    width: 64px;
+    height: 64px;
+  }
+}
+
+@keyframes skillsFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes skillsPanelFadeIn {
+  from { opacity: 0; transform: translateY(8px) scale(0.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.skills-fade-in { animation: skillsFadeIn 220ms ease-out; }
+.skills-backdrop-fade-in { animation: skillsFadeIn 220ms ease-out; }
+.skills-panel-fade-in { animation: skillsPanelFadeIn 260ms ease-out; }

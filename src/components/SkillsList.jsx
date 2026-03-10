@@ -4,19 +4,12 @@ export default function SkillsList({ skills }) {
       {skills.map((skill) => (
         <div
           key={skill.label}
-          className="inline-flex items-center gap-1.5 sm:gap-2 px-2 sm:px-4 py-1.5 sm:py-2 rounded-full border border-white/10 bg-white/5 hover:bg-sky-400/10 hover:border-sky-400/30 transition-all duration-300 group"
+          className="inline-flex items-center gap-1.5 sm:gap-2 px-2 sm:px-4 py-1.5 sm:py-2 rounded-full border border-[#E2E8F0] bg-[#EFF6FF] hover:bg-blue-100 transition-all duration-200 group"
         >
-          {/* Icon */}
           <div className="w-4 h-4 sm:w-6 sm:h-6 flex items-center justify-center flex-shrink-0">
-            <img
-              src={skill.icon}
-              alt={skill.label}
-              className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300"
-            />
+            <img src={skill.icon} alt={skill.label} className="w-full h-full object-contain" />
           </div>
-          
-          {/* Label */}
-          <p className="text-white/70 text-[clamp(10px,2.6vw,12px)] sm:text-sm font-medium leading-tight group-hover:text-sky-300 transition-colors whitespace-nowrap">
+          <p className="text-[#1D4ED8] text-[clamp(10px,2.6vw,12px)] sm:text-sm font-medium leading-tight whitespace-nowrap">
             {skill.label}
           </p>
         </div>

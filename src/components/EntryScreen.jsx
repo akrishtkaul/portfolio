@@ -7,13 +7,18 @@ export default function EntryScreen() {
 
   // Lock scroll while overlay is shown
   useEffect(() => {
-    if (shouldRender) {
-      const prev = document.body.style.overflow;
-      document.body.style.overflow = "hidden";
-      return () => {
-        document.body.style.overflow = prev;
-      };
+    // lock only while entry screen is rendered
+    if (!shouldRender) {
+      document.body.style.overflow = "auto";
+      return;
     }
+
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previous || "auto";
+    };
   }, [shouldRender]);
 
   // Mount animation
@@ -32,9 +37,12 @@ export default function EntryScreen() {
   });
 
   const handleClose = () => {
-    if (!visible) return;
     setVisible(false);
-    setTimeout(() => setShouldRender(false), 650);
+    // wait for fade-out animation, then unmount overlay and restore scroll
+    window.setTimeout(() => {
+      setShouldRender(false);
+      document.body.style.overflow = "auto";
+    }, 350);
   };
 
   if (!shouldRender) return null;
@@ -59,42 +67,33 @@ export default function EntryScreen() {
       />
 
       {/* Card */}
+      <div className="absolute inset-0 bg-[#F8FAFC]" />
       <div className="relative px-8 py-10 w-full max-w-xl">
         <div
-          className={`relative overflow-hidden rounded-3xl border border-white/10 bg-zinc-950/70 backdrop-blur-xl shadow-[0_20px_80px_rgba(0,0,0,0.55)] transition-all duration-700 ${
-            mounted && visible
-              ? "opacity-100 scale-100 translate-y-0"
-              : "opacity-0 scale-[0.98] translate-y-2"
+          className={`relative overflow-hidden rounded-3xl border border-[#E2E8F0] bg-white shadow-[0_20px_50px_rgba(15,23,42,0.08)] transition-all duration-700 ${
+            mounted && visible ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-[0.98] translate-y-2"
           } ${!visible ? "opacity-0 scale-[0.98] translate-y-2" : ""}`}
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-sky-400/8 via-transparent to-cyan-400/10" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#EFF6FF] via-transparent to-transparent" />
           <div className="relative p-8 flex flex-col gap-4 items-start">
-            <p className="text-xs uppercase tracking-[0.3em] text-sky-300/80">
+            <p className="text-xs uppercase tracking-[0.3em] text-[#2563EB]">
               Building and shipping products
             </p>
-            <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight">
+            <h1 className="text-4xl md:text-5xl font-bold text-[#0F172A] leading-tight">
               Akrisht Kaul
             </h1>
-            <p className="text-white/70 text-base md:text-lg leading-relaxed">
+            <p className="text-[#475569] text-base md:text-lg leading-relaxed">
               Full stack builder. Musician. Breakdancer. Always making something real.
             </p>
 
             <div className="pt-2 space-y-2 w-full">
               <button
                 onClick={handleClose}
-                className="group relative inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-sky-500 to-cyan-400 hover:from-sky-400 hover:to-cyan-300 shadow-[0_0_25px_rgba(56,189,248,0.35)] transition-all duration-200 hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-white bg-[#2563EB] hover:bg-[#1D4ED8] transition-all duration-200"
               >
-                <span
-                  className="absolute inset-0 rounded-full bg-cyan-400/20 blur-xl opacity-0 group-hover:opacity-60 transition-opacity duration-200"
-                  aria-hidden
-                />
-                Explore my work
-                <span className="text-white/80">↗</span>
+                Explore my work <span className="text-white/90">↗</span>
               </button>
-              <button
-                onClick={handleClose}
-                className="block text-sm text-white/50 hover:text-sky-300 transition-colors"
-              >
+              <button onClick={handleClose} className="block text-sm text-[#64748B] hover:text-[#2563EB] transition-colors">
                 Press Enter or Skip
               </button>
             </div>

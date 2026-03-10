@@ -2,14 +2,14 @@ import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 
 export default function Footer() {
   return (
-    <footer className="relative bg-zinc-900 py-12 px-4 md:px-8 border-t border-white/5">
+    <footer className="relative bg-[#F8FAFC] py-12 px-4 md:px-8 border-t border-[#E2E8F0]">
       <div className="max-w-6xl mx-auto">
         
         {/* Main Content */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           
           {/* Copyright */}
-          <p className="text-white/50 text-sm">
+          <p className="text-[#64748B] text-sm">
             © {new Date().getFullYear()} Akrisht Kaul · Built with React & Tailwind CSS
           </p>
 
@@ -20,7 +20,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"
-              className="w-10 h-10 flex items-center justify-center rounded-full border border-white/10 text-white/60 hover:text-sky-300 hover:border-sky-400/50 hover:bg-sky-400/10 transition-all duration-300 hover:shadow-[0_0_15px_rgba(56,189,248,0.4)]"
+              className="w-10 h-10 flex items-center justify-center rounded-full border border-[#E2E8F0] text-[#64748B] hover:text-[#2563EB] hover:border-[#BFDBFE] hover:bg-[#EFF6FF] transition-all duration-200"
             >
               <FaGithub className="text-lg" />
             </a>
@@ -29,14 +29,14 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
-              className="w-10 h-10 flex items-center justify-center rounded-full border border-white/10 text-white/60 hover:text-sky-300 hover:border-sky-400/50 hover:bg-sky-400/10 transition-all duration-300 hover:shadow-[0_0_15px_rgba(56,189,248,0.4)]"
+              className="w-10 h-10 flex items-center justify-center rounded-full border border-[#E2E8F0] text-[#64748B] hover:text-[#2563EB] hover:border-[#BFDBFE] hover:bg-[#EFF6FF] transition-all duration-200"
             >
               <FaLinkedin className="text-lg" />
             </a>
             <a
               href="mailto:akrishtkaul@gmail.com"
               aria-label="Email"
-              className="w-10 h-10 flex items-center justify-center rounded-full border border-white/10 text-white/60 hover:text-sky-300 hover:border-sky-400/50 hover:bg-sky-400/10 transition-all duration-300 hover:shadow-[0_0_15px_rgba(56,189,248,0.4)]"
+              className="w-10 h-10 flex items-center justify-center rounded-full border border-[#E2E8F0] text-[#64748B] hover:text-[#2563EB] hover:border-[#BFDBFE] hover:bg-[#EFF6FF] transition-all duration-200"
             >
               <FaEnvelope className="text-lg" />
             </a>
@@ -44,10 +44,10 @@ export default function Footer() {
         </div>
 
         {/* Decorative Line */}
-        <div className="mt-8 h-px bg-gradient-to-r from-transparent via-sky-400/30 to-transparent" />
+        <div className="mt-8 h-px bg-[#E2E8F0]" />
         
         {/* Additional Info */}
-        <p className="text-center text-white/30 text-xs mt-4">
+        <p className="text-center text-[#94A3B8] text-xs mt-4">
           Designed & Developed in The City That Never Sleeps.
         </p>
       </div>
