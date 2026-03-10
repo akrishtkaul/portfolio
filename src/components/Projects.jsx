@@ -1,14 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function Projects() {
   const [flippedCard, setFlippedCard] = useState(null);
+  const [visibleCards, setVisibleCards] = useState(() => new Set());
+  const cardRefs = useRef(new Map());
 
   const projects = [
     {
       title: 'SQIRL',
       period: 'March 2026 - Present',
       blurb: 'Full-stack social platform startup project focused on gamified local food and cultural discovery.',
-      tags: ['Node.js (Express)', 'React', 'SQL', 'AWS'],
+      tags: ['Node.js', 'React', 'SQL', 'AWS'],
       details: [
         'Collaborating in a startup team to build a full-stack social platform that gamifies discovering local food and cultural experiences through quest creation, community feeds, and user engagement features',
         'Designing and testing core product flows, data models, and interaction logic for a gamified MVP, demonstrating adaptability in shipping new features across the stack in a fast-moving environment'
@@ -18,7 +20,7 @@ export default function Projects() {
       title: 'StonksGPT',
       period: 'February 2026',
       blurb: 'Agentic trading copilot that turns natural-language requests into constrained, auditable tool execution.',
-      tags: ['Node.js (Express)', 'Python (MCP)', 'Gemini API', 'React'],
+      tags: ['Node.js', 'Python MCP', 'Gemini API', 'React'],
       details: [
         'Built an agentic trading copilot that translates natural-language requests into constrained, auditable tool executions using Python-based tooling, LLM reasoning, and real-time portfolio context',
         'Implemented a backend system with validated tool schemas, token-efficient context compression, and market and news pipelines, using caching to support portfolio analytics, sessions, and voice-enabled interactions at low latency'
@@ -37,7 +39,7 @@ export default function Projects() {
     {
       title: 'Computer Keyboard Detection',
       blurb: 'Trained YOLOv8 model achieving 85% detection accuracy for real-time keyboard identification in video streams.',
-      tags: ['Python', 'OpenCV', 'YOLOv8', 'Machine Learning'],
+      tags: ['Python', 'OpenCV', 'YOLOv8', 'ML'],
       details: [
         'Trained YOLOv8 on custom dataset to reach 85% real-time detection accuracy',
         'Built OpenCV pipeline with bounding-box refinement for Mars Rover constraints',
@@ -80,6 +82,31 @@ export default function Projects() {
     setFlippedCard(flippedCard === index ? null : index);
   };
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const id = entry.target.getAttribute('data-project-id');
+          if (!id) return;
+
+          setVisibleCards((prev) => {
+            if (prev.has(id)) return prev;
+            const next = new Set(prev);
+            next.add(id);
+            return next;
+          });
+
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.2, rootMargin: '0px 0px -10% 0px' }
+    );
+
+    cardRefs.current.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className="min-h-screen bg-[#F8FAFC] py-20 px-4 md:px-8">
       <div className="max-w-6xl mx-auto">
@@ -92,86 +119,101 @@ export default function Projects() {
 
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project, idx) => (
-            <div
-              key={idx}
-              className="relative h-[26rem] cursor-pointer perspective-1000"
-              onClick={() => handleCardClick(idx)}
-            >
-              {/* Card Container with 3D transform */}
+          {projects.map((project, idx) => {
+            const id = `project-${idx}`;
+            const isVisible = visibleCards.has(id);
+
+            return (
               <div
-                className={`relative w-full h-full transition-transform duration-500 transform-style-3d ${
-                  flippedCard === idx ? 'rotate-y-180' : ''
-                }`}
-                style={{
-                  transformStyle: 'preserve-3d',
-                  transform: flippedCard === idx ? 'rotateY(180deg)' : 'rotateY(0deg)'
+                key={idx}
+                data-project-id={id}
+                ref={(el) => {
+                  if (el) cardRefs.current.set(id, el);
+                  else cardRefs.current.delete(id);
                 }}
+                className={`relative h-[26rem] cursor-pointer perspective-1000 transition-all duration-500 ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                }`}
+                onClick={() => handleCardClick(idx)}
               >
-                {/* Front of Card */}
                 <div
-                  className="absolute inset-0 backface-hidden"
-                  style={{ backfaceVisibility: 'hidden' }}
+                  className="relative w-full h-full transition-transform duration-500"
+                  style={{
+                    transformStyle: 'preserve-3d',
+                    WebkitTransformStyle: 'preserve-3d',
+                    transform: flippedCard === idx ? 'rotateY(180deg) translateZ(0)' : 'rotateY(0deg) translateZ(0)'
+                  }}
                 >
-                  <div className="h-full border border-[#E2E8F0] rounded-2xl p-6 bg-white transition-all duration-200 hover:border-[#BFDBFE] shadow-[0_8px_24px_rgba(15,23,42,0.05)] hover:shadow-[0_10px_26px_rgba(15,23,42,0.07)] flex flex-col group">
-                    {/* Accent Corner */}
-                    <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-[#EFF6FF] to-transparent rounded-tr-2xl" />
-                    
-                    <h3 className="text-xl font-bold text-[#0F172A] mb-3 relative z-10">
-                      {project.title}
-                    </h3>
+                  {/* Front */}
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      backfaceVisibility: 'hidden',
+                      WebkitBackfaceVisibility: 'hidden',
+                      transform: 'rotateY(0deg) translateZ(1px)'
+                    }}
+                  >
+                    <div className="h-full border border-[#E2E8F0] rounded-2xl p-6 bg-white transition-all duration-200 hover:border-[#BFDBFE] shadow-[0_8px_24px_rgba(15,23,42,0.05)] hover:shadow-[0_10px_26px_rgba(15,23,42,0.07)] flex flex-col group">
+                      {/* Accent Corner */}
+                      <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-[#EFF6FF] to-transparent rounded-tr-2xl" />
+                        
+                      <h3 className="text-xl font-bold text-[#0F172A] mb-3 relative z-10">
+                        {project.title}
+                      </h3>
 
-                    {project.period && (
-                      <p className="text-xs text-[#64748B] mb-3">{project.period}</p>
-                    )}
+                      {project.period && (
+                        <p className="text-xs text-[#64748B] mb-3">{project.period}</p>
+                      )}
 
-                    <p className="text-[#334155] text-sm leading-relaxed mb-4 flex-grow">
-                      {project.blurb}
-                    </p>
-                    
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-3 py-1 text-xs font-medium rounded-full bg-[#EFF6FF] text-[#1D4ED8] border border-[#DBEAFE]"
-                        >
-                          {tag}
-                        </span>
-                      ))}
+                      <p className="text-[#334155] text-sm leading-relaxed mb-4 flex-grow">
+                        {project.blurb}
+                      </p>
+                        
+                      <div className="flex flex-wrap gap-2.5">
+                        {project.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="px-3.5 py-1.5 text-[13px] font-medium rounded-full bg-[#EFF6FF] text-[#1D4ED8] border border-[#DBEAFE]"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Back */}
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      backfaceVisibility: 'hidden',
+                      WebkitBackfaceVisibility: 'hidden',
+                      transform: 'rotateY(180deg) translateZ(1px)'
+                    }}
+                  >
+                    <div className="h-full border border-blue-200 rounded-2xl p-6 bg-white shadow-sm flex flex-col overflow-hidden">
+                      <h3 className="text-xl font-bold text-[#1D4ED8] mb-2">
+                        {project.title}
+                      </h3>
+
+                      {project.period && (
+                        <p className="text-xs text-[#64748B] mb-4">{project.period}</p>
+                      )}
+
+                      <ul className="space-y-2.5 flex-grow pr-1">
+                        {project.details.map((detail, dIdx) => (
+                          <li key={dIdx} className="text-[#475569] text-sm leading-relaxed flex items-start gap-2">
+                            <span className="text-[#2563EB] mt-1 flex-shrink-0">•</span>
+                            <span>{detail}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   </div>
                 </div>
-
-                {/* Back of Card */}
-                <div
-                  className="absolute inset-0 backface-hidden"
-                  style={{
-                    backfaceVisibility: 'hidden',
-                    transform: 'rotateY(180deg)'
-                  }}
-                >
-                  <div className="h-full border border-blue-200 rounded-2xl p-6 bg-white shadow-sm flex flex-col overflow-hidden">
-                    <h3 className="text-xl font-bold text-[#1D4ED8] mb-2">
-                      {project.title}
-                    </h3>
-
-                    {project.period && (
-                      <p className="text-xs text-[#64748B] mb-4">{project.period}</p>
-                    )}
-
-                    <ul className="space-y-2.5 flex-grow pr-1">
-                      {project.details.map((detail, dIdx) => (
-                        <li key={dIdx} className="text-[#475569] text-sm leading-relaxed flex items-start gap-2">
-                          <span className="text-[#2563EB] mt-1 flex-shrink-0">•</span>
-                          <span>{detail}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

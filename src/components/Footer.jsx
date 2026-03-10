@@ -2,7 +2,7 @@ import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 
 export default function Footer() {
   return (
-    <footer className="relative bg-[#F8FAFC] py-12 px-4 md:px-8 border-t border-[#E2E8F0]">
+    <footer className="relative bg-[#EAF0F6] py-12 px-4 md:px-8 border-t border-[#D8E1EB]">
       <div className="max-w-6xl mx-auto">
         
         {/* Main Content */}
@@ -48,7 +48,7 @@ export default function Footer() {
         
         {/* Additional Info */}
         <p className="text-center text-[#94A3B8] text-xs mt-4">
-          Designed & Developed in The City That Never Sleeps.
+          Designed & Developed in NYC
         </p>
       </div>
     </footer>

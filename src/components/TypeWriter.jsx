@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 export default function TypeWriter({
   base = "",
-  words = ["A Full Stack Builder", "A Product-Minded Engineer", "A Systems Thinker", "An ML Explorer", "A Musician & Breakdancer"],
+  words = ["A Full Stack Builder", "A Product-Minded Engineer", "A Systems Thinker", "A Musician & Breakdancer"],
   minSpeedMs = 20,   
   maxSpeedMs = 60,   
   pauseDoneMs = 400, 

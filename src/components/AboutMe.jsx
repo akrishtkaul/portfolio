@@ -97,15 +97,15 @@ export default function AboutMe() {
 
             <div className="space-y-4 text-[#475569] text-base md:text-lg leading-relaxed">
               <p>
-                I build full stack products end to end. I focus on clean React frontends backed by Java or Python services, and I am comfortable working closer to the system when needed. I have also designed and tested custom PCBs in Altium, which gives me a strong understanding of how software and hardware connect in real projects.
+                Whether it is building a full stack web app, designing firmware for a car, or shipping an AI feature, I love taking ideas from concept to reality. I have a strong foundation in software engineering with experience across the stack, and I enjoy working on projects that combine hardware and software in creative ways.
               </p>
 
               <p>
-                I also work in ML and AI with an emphasis on shipping practical, user facing features. Alongside engineering, I bring a PM mindset by defining the problem, prioritizing effectively, and driving execution so ideas turn into real outcomes.
+                I'm passionate about understanding user needs and approaching problems with a product mindset. I bring experience in user-centered thinking, prioritization, and execution, with a focus on turning ideas into practical, user-facing features.
               </p>
 
               <p className="text-slate-500 italic">
-                When I'm not coding or sketching circuits, you'll find me making music, breakdancing, or perfecting my kickboxing technique.
+                When I'm not coding or sketching circuits, you'll find me making music, breakdancing, or grappling with my sparring mates. 
               </p>
             </div>
           </div>

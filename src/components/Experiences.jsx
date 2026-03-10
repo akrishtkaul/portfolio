@@ -1,7 +1,9 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 export default function Experiences() {
   const [activeExperienceId, setActiveExperienceId] = useState(null);
+  const [visibleCards, setVisibleCards] = useState(() => new Set());
+  const cardRefs = useRef(new Map());
 
   const experiences = [
     {
@@ -66,6 +68,31 @@ export default function Experiences() {
     return Array.from(map.entries()).map(([year, items]) => ({ year, items }));
   }, []);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const id = entry.target.getAttribute('data-exp-id');
+          if (!id) return;
+
+          setVisibleCards((prev) => {
+            if (prev.has(id)) return prev;
+            const next = new Set(prev);
+            next.add(id);
+            return next;
+          });
+
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.2, rootMargin: '0px 0px -10% 0px' }
+    );
+
+    cardRefs.current.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [groupedByYear]);
+
   let timelineIndex = 0;
 
   return (
@@ -95,9 +122,18 @@ export default function Experiences() {
                   const side = timelineIndex % 2 === 0 ? 'left' : 'right';
                   timelineIndex += 1;
                   const isOpen = activeExperienceId === exp.id;
+                  const isVisible = visibleCards.has(exp.id);
 
                   return (
-                    <div key={exp.id} className="relative">
+                    <div
+                      key={exp.id}
+                      className="relative"
+                      data-exp-id={exp.id}
+                      ref={(el) => {
+                        if (el) cardRefs.current.set(exp.id, el);
+                        else cardRefs.current.delete(exp.id);
+                      }}
+                    >
                       <div className="pl-14 lg:pl-0 lg:grid lg:grid-cols-2 lg:gap-6">
                         <div className={`hidden lg:block ${side === 'right' ? 'lg:col-start-1' : 'lg:col-start-2'}`} />
 
@@ -105,7 +141,9 @@ export default function Experiences() {
                           <button
                             type="button"
                             onClick={() => setActiveExperienceId(isOpen ? null : exp.id)}
-                            className="w-full text-left relative border border-[#E2E8F0] rounded-xl p-4 lg:p-5 bg-white hover:border-[#BFDBFE] transition-all duration-200 shadow-[0_8px_24px_rgba(15,23,42,0.05)]"
+                            className={`w-full text-left relative border border-[#E2E8F0] rounded-xl p-4 lg:p-5 bg-white hover:border-[#BFDBFE] shadow-[0_8px_24px_rgba(15,23,42,0.05)] transition-all duration-500 ${
+                              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                            }`}
                           >
                             <div
                               className={`hidden lg:block absolute top-7 w-6 h-0.5 bg-gradient-to-r ${
