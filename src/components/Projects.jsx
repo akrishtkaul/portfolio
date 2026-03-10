@@ -153,7 +153,7 @@ export default function Projects() {
                       transform: 'rotateY(0deg) translateZ(1px)'
                     }}
                   >
-                    <div className="h-full border border-[#E2E8F0] rounded-2xl p-6 bg-white transition-all duration-200 hover:border-[#BFDBFE] shadow-[0_8px_24px_rgba(15,23,42,0.05)] hover:shadow-[0_10px_26px_rgba(15,23,42,0.07)] flex flex-col group">
+                    <div className="h-full border border-[#E2E8F0] rounded-2xl p-6 bg-white hover:bg-[#F1F5F9] transition-all duration-200 hover:border-[#BFDBFE] shadow-[0_8px_24px_rgba(15,23,42,0.05)] hover:shadow-[0_10px_26px_rgba(15,23,42,0.07)] flex flex-col group">
                       {/* Accent Corner */}
                       <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-[#EFF6FF] to-transparent rounded-tr-2xl" />
                         

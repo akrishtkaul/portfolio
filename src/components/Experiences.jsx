@@ -141,7 +141,7 @@ export default function Experiences() {
                           <button
                             type="button"
                             onClick={() => setActiveExperienceId(isOpen ? null : exp.id)}
-                            className={`w-full text-left relative border border-[#E2E8F0] rounded-xl p-4 lg:p-5 bg-white hover:border-[#BFDBFE] shadow-[0_8px_24px_rgba(15,23,42,0.05)] transition-all duration-500 ${
+                            className={`w-full text-left relative border border-[#E2E8F0] rounded-xl p-4 lg:p-5 bg-white hover:bg-[#F1F5F9] hover:border-[#BFDBFE] shadow-[0_8px_24px_rgba(15,23,42,0.05)] transition-all duration-500 ${
                               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
                             }`}
                           >
