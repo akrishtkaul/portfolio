@@ -22,28 +22,26 @@ export default function Experiences() {
       title: 'Boston University Rocket Propulsion Group',
       position: 'Avionics Team',
       duties: [
-        'Designed an eMMC storage expansion module in Altium, doubling flight computer storage capacity from 2GB to 4GB',
-        'Supported multiple schematic and PCB design iterations'
+        'Built real-time ground support equipment dashboard in Flask with WebSocket streaming across 4 sensors and 8 actuators, managing autosequence launch/abort handling with armed/disarmed safety states'
       ]
     },
     {
-      id: 'rastic-2024',
+      id: 'marsrover-2024',
       year: 2024,
-      title: 'BU RASTIC',
-      position: 'Robotics Assistant',
+      title: 'Boston University Mars Rover Club',
+      position: 'Software Team',
       duties: [
-        'Engineered ROS/Python autonomous driving logic for AgileX robot cars by integrating five waypoint-based highway simulation tracks and refining path-following behavior, improving trajectory smoothness by 30%',
-        'Developed validation test cases and performed iterative PID tuning in a Linux-based simulation stack, increasing lap completion rate from 75% to 85%'
+        'Built a Python computer vision pipeline using YOLOv8 and OpenCV, creating and classifying a custom dataset from scratch to achieve 85% real-time detection accuracy and refine bounding boxes for Mars rover constraints'
       ]
     },
     {
       id: 'storage-2025',
       year: 2025,
-      title: 'Storage Buddy',
+      title: 'Storage Buddy (Columbia Business School)',
       position: 'Full Stack Intern',
       duties: [
-        'Built an in-app messaging system with RESTful APIs for a storage marketplace, shipping features in weekly iteration cycles to implement profanity filtering, email/phone masking, and user blocking for 50+ users across Boston & NYC',
-        'Iterated on chat UI and messaging workflows through rapid feedback-driven development, refining features and resolving usability issues to improve the end-to-end messaging experience'
+        'Built real-time messaging system with sub-second message delivery across text, images, and documents, implementing profanity filtering, PII masking, and user blocking for 50+ users across Boston & NYC',
+        'Migrated core platform from Bubble.io to React/Supabase stack, reducing dependency on no-code tools and enabling custom feature development, coordinated across 4-person team using Miro and Figma for sprint planning'
       ]
     },
     {
@@ -52,8 +50,8 @@ export default function Experiences() {
       title: 'Columbia FSAE',
       position: 'Electrical & Software Team Member',
       duties: [
-        'Developing embedded C firmware for the ADBMS6830 to stream telemetry (14 cell voltages and temperatures) to a monitoring UI',
-        'Reduced refresh latency to ~750 ms and implemented cell-balancing control logic'
+        'Developed embedded C/C++ firmware on an STM32G4 for a safety-critical high-voltage BMS, monitoring 14 battery cells via the ADBMS6830 over SPI and coordinating 6 concurrent timed tasks for sensing, balancing, contactor control, and real-time fault monitoring, achieving 10 ms contactor response and 100 ms CAN fault broadcast latency',
+        'Diagnosed and eliminated critical SPI hang in ADBMS6830 driver that could freeze the entire BMS loop indefinitely by replacing HAL_MAX_DELAY with a 500 ms timeout to ensure fail-safe recovery'
       ]
     }
   ];

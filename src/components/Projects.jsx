@@ -7,33 +7,43 @@ export default function Projects() {
 
   const projects = [
     {
-      title: 'SQIRL',
-      period: 'March 2026 - Present',
-      blurb: 'Full-stack social platform startup project focused on gamified local food and cultural discovery.',
-      tags: ['Node.js', 'React', 'SQL', 'AWS'],
+      title: 'FitBro',
+      period: 'April 2026 - Present',
+      blurb: 'Full-stack AI fitness trainer with RAG-based chat that retrieves workout history to deliver personalized advice.',
+      tags: ['React', 'FastAPI', 'MongoDB Atlas', 'OpenAI API'],
       details: [
-        'Collaborating in a startup team to build a full-stack social platform that gamifies discovering local food and cultural experiences through quest creation, community feeds, and user engagement features',
-        'Designing and testing core product flows, data models, and interaction logic for a gamified MVP, demonstrating adaptability in shipping new features across the stack in a fast-moving environment'
+        'Built a full-stack AI fitness trainer with RAG-based chat that retrieves workout history to deliver personalized advice via GPT-4o mini',
+        'Integrated 1,300+ exercise library with auto-save persistence and real-time search; working towards AWS deployment and progressive overload tracking'
       ]
     },
     {
       title: 'StonksGPT',
       period: 'February 2026',
-      blurb: 'Agentic trading copilot that turns natural-language requests into constrained, auditable tool execution.',
-      tags: ['Node.js', 'Python MCP', 'Gemini API', 'React'],
+      blurb: 'Agentic trading copilot to make stock trading accessible to beginners via voice-driven LLM tool execution.',
+      tags: ['React', 'Node.js', 'Gemini API', 'Python'],
       details: [
-        'Built an agentic trading copilot that translates natural-language requests into constrained, auditable tool executions using Python-based tooling, LLM reasoning, and real-time portfolio context',
-        'Implemented a backend system with validated tool schemas, token-efficient context compression, and market and news pipelines, using caching to support portfolio analytics, sessions, and voice-enabled interactions at low latency'
+        'Built an agentic trading copilot where users interact via voice with an LLM that executes schema-validated trades, tracks portfolios, and delivers real-time market news',
+        'Prevented hallucinations through structured audit trails, validated across 50+ test trades'
+      ]
+    },
+    {
+      title: 'What Makes Songs Pop',
+      period: 'April 2026',
+      blurb: 'Data analysis of 114K songs to identify the statistical drivers of music popularity using ML.',
+      tags: ['Python', 'pandas', 'SQLite3', 'scikit-learn'],
+      details: [
+        'Analyzed 114K songs across 114 genres using linear regression and K-means clustering to identify what makes songs popular',
+        'Found "instrumentalness" as the strongest predictor (r=−0.095) and that the energetic cluster produces 60% of top-1% hits despite lower average popularity'
       ]
     },
     {
       title: 'Add Up Café',
       period: 'December 2025 - January 2026',
       blurb: 'Full-stack classroom management platform with gamified learning for a special-education environment.',
-      tags: ['React', 'Next.js', 'Tailwind', 'Firebase'],
+      tags: ['Next.js', 'Tailwind', 'Shadcn', 'Firebase'],
       details: [
-        'Built a full-stack classroom management platform with role-based user flows, assignment tracking, and gamified learning features for a special education setting',
-        'Iterated on system design, UX flows, and feature reliability through direct user feedback in a live special-education setting, supporting approximately 15 students and demonstrating rapid learning and end-to-end ownership'
+        'Built and deployed a full-stack classroom management platform to Vercel with role-based user flows, assignment tracking, and gamified learning features',
+        'Iterated directly with a special-education teacher and 15 students in a live classroom setting to refine UX and feature reliability'
       ]
     },
     {
@@ -44,16 +54,6 @@ export default function Projects() {
         'Trained YOLOv8 on custom dataset to reach 85% real-time detection accuracy',
         'Built OpenCV pipeline with bounding-box refinement for Mars Rover constraints',
         'Optimized inference via quantization on resource-limited hardware'
-      ]
-    },
-    {
-      title: 'DollarLearn',
-      blurb: '2nd place hackathon winner – Financial literacy app helping international students navigate settling finances.',
-      tags: ['React', 'Bootstrap', 'Hackathon'],
-      details: [
-        'Won 2nd place (25 teams) after 48-hour sprint with responsive React + Bootstrap app',
-        'Interviewed international students and turned complex finance flows into simple steps',
-        'Shipped core flows and feature requirements for post-hackathon roadmap'
       ]
     },
     {
@@ -114,6 +114,17 @@ export default function Projects() {
         {/* Section Header */}
         <div className="flex items-center gap-4 mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-[#0F172A]">Projects</h2>
+          <a
+            href="https://github.com/akrishtkaul"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#64748B] hover:text-[#0F172A] transition-colors duration-200 flex-shrink-0"
+            aria-label="GitHub profile"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.015 2.896-.015 3.286 0 .322.216.694.825.576C20.565 21.795 24 17.298 24 12c0-6.63-5.37-12-12-12z" />
+            </svg>
+          </a>
           <div className="flex-grow section-divider" />
         </div>
 
