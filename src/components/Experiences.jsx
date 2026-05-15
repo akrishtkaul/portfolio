@@ -7,6 +7,15 @@ export default function Experiences() {
 
   const experiences = [
     {
+      id: 'eulerity-2026',
+      year: 2026,
+      title: 'Eulerity',
+      position: 'Backend Engineer Intern · May 2026 – Present',
+      duties: [
+        'Building and maintaining backend services for an AI-driven ad platform, integrating Google, Meta, and TikTok Ads APIs to automate campaign deployment for small businesses'
+      ]
+    },
+    {
       id: 'ewb-2024',
       year: 2024,
       title: 'Engineers Without Borders',
