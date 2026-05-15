@@ -10,7 +10,8 @@ export default function Experiences() {
       id: 'eulerity-2026',
       year: 2026,
       title: 'Eulerity',
-      position: 'Backend Engineer Intern · May 2026 – Present',
+      url: 'https://www.eulerity.ai/',
+      position: 'Backend Engineer Intern',
       duties: [
         'Building and maintaining backend services for an AI-driven ad platform, integrating Google, Meta, and TikTok Ads APIs to automate campaign deployment for small businesses'
       ]
@@ -19,6 +20,7 @@ export default function Experiences() {
       id: 'ewb-2024',
       year: 2024,
       title: 'Engineers Without Borders',
+      url: 'https://ewbbu.org/',
       position: 'Fundraising Lead',
       duties: [
         'Fundraised $4,000+ through public events for Kenya borehole project',
@@ -29,6 +31,7 @@ export default function Experiences() {
       id: 'rocket-2024',
       year: 2024,
       title: 'Boston University Rocket Propulsion Group',
+      url: 'https://burpg.org/',
       position: 'Avionics Team',
       duties: [
         'Built real-time ground support equipment dashboard in Flask with WebSocket streaming across 4 sensors and 8 actuators, managing autosequence launch/abort handling with armed/disarmed safety states'
@@ -38,6 +41,7 @@ export default function Experiences() {
       id: 'marsrover-2024',
       year: 2024,
       title: 'Boston University Mars Rover Club',
+      url: 'https://www.instagram.com/bumarsrover/',
       position: 'Software Team',
       duties: [
         'Built a Python computer vision pipeline using YOLOv8 and OpenCV, creating and classifying a custom dataset from scratch to achieve 85% real-time detection accuracy and refine bounding boxes for Mars rover constraints'
@@ -47,6 +51,7 @@ export default function Experiences() {
       id: 'storage-2025',
       year: 2025,
       title: 'Storage Buddy (Columbia Business School)',
+      url: 'https://www.storagebuddyco.com/',
       position: 'Full Stack Intern',
       duties: [
         'Built real-time messaging system with sub-second message delivery across text, images, and documents, implementing profanity filtering, PII masking, and user blocking for 50+ users across Boston & NYC',
@@ -57,6 +62,7 @@ export default function Experiences() {
       id: 'fsae-2025',
       year: 2025,
       title: 'Columbia FSAE',
+      url: 'https://www.instagram.com/columbiafsae/',
       position: 'Electrical & Software Team Member',
       duties: [
         'Developed embedded C/C++ firmware on an STM32G4 for a safety-critical high-voltage BMS, monitoring 14 battery cells via the ADBMS6830 over SPI and coordinating 6 concurrent timed tasks for sensing, balancing, contactor control, and real-time fault monitoring, achieving 10 ms contactor response and 100 ms CAN fault broadcast latency',
@@ -161,7 +167,23 @@ export default function Experiences() {
                             />
                             <div className="lg:hidden absolute left-0 top-7 w-8 h-0.5 -translate-x-full bg-gradient-to-l from-blue-200 to-transparent" />
 
-                            <h3 className="text-base lg:text-lg font-bold text-[#0F172A]">{exp.title}</h3>
+                            <h3 className="text-base lg:text-lg font-bold text-[#0F172A] flex items-center gap-1.5">
+                              {exp.title}
+                              {exp.url && (
+                                <a
+                                  href={exp.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  onClick={(e) => e.stopPropagation()}
+                                  className="text-[#93C5FD] hover:text-[#2563EB] transition-colors"
+                                  aria-label={`Visit ${exp.title}`}
+                                >
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-3.5 h-3.5">
+                                    <path fillRule="evenodd" d="M4.25 5.5a.75.75 0 0 0-.75.75v8.5c0 .414.336.75.75.75h8.5a.75.75 0 0 0 .75-.75v-4a.75.75 0 0 1 1.5 0v4A2.25 2.25 0 0 1 12.75 17h-8.5A2.25 2.25 0 0 1 2 14.75v-8.5A2.25 2.25 0 0 1 4.25 4h5a.75.75 0 0 1 0 1.5h-5Zm6.75-3a.75.75 0 0 1 .75-.75h5.25a.75.75 0 0 1 .75.75v5.25a.75.75 0 0 1-1.5 0V4.06l-6.22 6.22a.75.75 0 1 1-1.06-1.06L15.44 3H11a.75.75 0 0 1-.75-.75Z" clipRule="evenodd" />
+                                  </svg>
+                                </a>
+                              )}
+                            </h3>
                             <p className="text-[#2563EB] text-xs lg:text-sm font-semibold mt-0.5">{exp.position}</p>
 
                             <div
