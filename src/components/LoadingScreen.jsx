@@ -22,21 +22,15 @@ export default function LoadingScreen({ onEnter }) {
         <BootSequence />
         <div
           style={{
-            marginTop: 16,
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 6,
-            padding: '7px 12px',
-            border: '1px solid #2A3242',
-            color: '#F0854A',
-            fontSize: 10,
+            marginTop: 14,
+            fontSize: 15,
+            color: '#8A99AE',
             opacity: 0,
             animation: 'bootLineIn 200ms ease-out forwards',
-            animationDelay: '1100ms',
+            animationDelay: '1200ms',
           }}
         >
-          <span>click or press any key to continue</span>
-          <span style={{ width: 5, height: 11, background: '#F0854A', display: 'inline-block', animation: 'blink 1.1s step-end infinite' }} />
+          or click the logo (top left) for a quick, professional view
         </div>
       </div>
     </div>

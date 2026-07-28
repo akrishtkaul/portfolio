@@ -37,6 +37,9 @@ export default function DeskTop({ app, large = false, toggleLabel = 'expand', on
   // Keep the icon column clear of the app window so icons stay visible and
   // clickable (to switch apps or close the active one) while a window is open.
   const iconColumnWidth = large ? 86 : 78;
+  // Reserve room above the app window for the toggle button so it stays
+  // clickable instead of being covered by the window's own title bar.
+  const appTopInset = showToggle ? 44 : 6;
 
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden', fontFamily: "'JetBrains Mono', ui-monospace, monospace", color: '#C6D0DD' }}>
@@ -110,7 +113,7 @@ export default function DeskTop({ app, large = false, toggleLabel = 'expand', on
       </div>
 
       {app && (
-        <div style={{ position: 'absolute', top: 6, left: iconColumnWidth, right: 6, bottom: 6, background: '#0B0F1B', border: '1px solid #232B3A', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', top: appTopInset, left: iconColumnWidth, right: 6, bottom: 6, background: '#0B0F1B', border: '1px solid #232B3A', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
           <div style={{ flex: 'none', display: 'flex', alignItems: 'center', gap: 7, height: 24, padding: '0 8px', borderBottom: '1px solid #1E2532', background: '#0D1220' }}>
             <img src={ICONS[app]} alt="" style={{ width: 16, height: 16, imageRendering: 'pixelated', display: 'block' }} />
             <span style={{ flex: 1, fontSize: 11, color: '#C6D0DD' }}>{TITLES[app]}</span>

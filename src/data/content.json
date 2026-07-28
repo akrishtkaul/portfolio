@@ -9,7 +9,7 @@
       "Musician & Breakdancer"
     ],
     "bio": [
-      "TODO: rewrite at ~40 words total. Lead with what is specific to you: production backend at an ad platform, safety-critical firmware on a race car. Cut anything that would be true of any CS student."
+      "Whether it is building a full stack web app, designing firmware for a car, or shipping an AI feature, I love taking ideas from concept to reality. I have a strong foundation in software engineering with experience across the stack, and I enjoy working on projects that combine hardware and software in creative ways."
     ],
     "personalNote": "When I'm not coding or sketching circuits, you'll find me making music, breakdancing, or grappling with my sparring mates.",
     "contact": {
@@ -50,6 +50,7 @@
       "id": "eulerity",
       "type": ["experience"],
       "featured": true,
+      "professional": true,
       "org": "Eulerity",
       "role": "Backend Engineer Intern",
       "name": "Ad Automation Platform",
@@ -67,6 +68,7 @@
       "id": "fsae-bms",
       "type": ["experience"],
       "featured": true,
+      "professional": true,
       "org": "Columbia FSAE",
       "role": "Head of Firmware",
       "name": "Battery Management System Firmware",
@@ -84,21 +86,23 @@
       "id": "wastewise",
       "type": ["project"],
       "featured": true,
+      "professional": true,
       "org": null,
       "role": null,
       "name": "WasteWise",
-      "dates": "VERIFY",
+      "dates": "Jun 2026 - Present",
       "url": null,
-      "description": "VERIFY: Mobile app for waste and compliance document handling with AI parsing and provenance tracking.",
+      "description": "Mobile app helping Town of Hempstead residents navigate area-specific rules for disposing of electronics, furniture, and bulk waste items.",
       "tags": ["React Native", "Expo", "FastAPI", "Supabase", "Python"],
       "details": [
-        "AI document parsing with provenance tracking so every extracted field traces back to its source"
+        "Building a mobile app that helps Town of Hempstead residents determine how to properly dispose of different waste types (electronics, furniture, bulk items) based on area-specific rules, letting users look up disposal guidelines, book pickups, and manage requests in one localized place"
       ]
     },
     {
       "id": "fitbro",
       "type": ["project"],
       "featured": true,
+      "professional": true,
       "org": null,
       "role": null,
       "name": "FitBro",
@@ -115,6 +119,7 @@
       "id": "stonksgpt",
       "type": ["project"],
       "featured": false,
+      "professional": true,
       "org": null,
       "role": null,
       "name": "StonksGPT",
@@ -131,6 +136,7 @@
       "id": "storage-buddy",
       "type": ["experience"],
       "featured": false,
+      "professional": true,
       "org": "Storage Buddy",
       "role": "Full Stack Intern",
       "name": "Storage Buddy Platform",

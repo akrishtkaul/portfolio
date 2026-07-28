@@ -23,19 +23,18 @@ export default function Scene() {
   const [expanded, setExpanded] = useState(false);
   const [entered, setEntered] = useState(false);
 
-  // Opening an app from the small embedded screen also expands it, since
-  // that tiny laptop-screen view is too small to comfortably read content in.
-  const openAndExpand = (id) => {
-    setApp(id);
-    setExpanded(true);
-  };
-
   const handleEnter = useCallback(() => {
     setEntered(true);
     // Mobile already shows the desktop UI full-screen; only desktop needs
     // the separate expanded modal.
     if (!mobile) setExpanded(true);
   }, [mobile]);
+
+  useEffect(() => {
+    const onCollapse = () => setExpanded(false);
+    window.addEventListener('pixel-desk-collapse', onCollapse);
+    return () => window.removeEventListener('pixel-desk-collapse', onCollapse);
+  }, []);
 
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 900px)');
@@ -57,10 +56,6 @@ export default function Scene() {
     const onKeyDown = (e) => {
       if (!entered) {
         if (!IGNORED_KEYS.includes(e.key)) handleEnter();
-        return;
-      }
-      if (e.key === 'Enter' && !expanded && !mobile) {
-        setExpanded(true);
         return;
       }
       if (e.key !== 'Escape') return;
@@ -114,7 +109,7 @@ export default function Scene() {
               overflow: 'hidden',
             }}
           >
-            {entered ? deskTop(() => setExpanded(true), 'expand', false, openAndExpand) : <LoadingScreen onEnter={handleEnter} />}
+            {entered ? deskTop(() => setExpanded(true), 'expand', false) : <LoadingScreen onEnter={handleEnter} />}
           </div>
         </div>
       )}
