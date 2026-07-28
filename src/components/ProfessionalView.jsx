@@ -71,6 +71,7 @@ export default function ProfessionalView() {
       {open && (
         <div
           className="fixed inset-0 z-[200] overflow-y-auto"
+          data-scroll="1"
           style={{
             background: 'rgba(6, 8, 16, 0.9)',
             backdropFilter: 'blur(18px)',

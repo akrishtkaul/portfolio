@@ -59,9 +59,13 @@ export default function BackgroundMusic() {
     <>
       <audio ref={audioRef} src={track} preload='auto' />
 
+      {/* Below 900px the desktop UI fills the screen and an open app window
+          reaches nearly to the top-right corner, so the button sits lower,
+          in DeskTop's reserved icon column (see DeskTop.jsx's
+          iconColumnWidth) instead of overlapping the window title bar. */}
       <button
         onClick={toggleMute}
-        className="fixed top-6 right-6 z-50 w-12 h-12 flex items-center justify-center rounded-full border border-[#1E2532] bg-[#0B0F1B] text-[#8A99AE] hover:text-[#F0854A] hover:border-[#2A3242] transition-all duration-200"
+        className="fixed z-50 w-12 h-12 flex items-center justify-center rounded-full border border-[#1E2532] bg-[#0B0F1B] text-[#8A99AE] hover:text-[#F0854A] hover:border-[#2A3242] transition-all duration-200 bottom-[52px] left-4 min-[901px]:bottom-auto min-[901px]:left-auto min-[901px]:top-6 min-[901px]:right-6"
         aria-label={isMuted ? 'Unmute music' : 'Mute music'}
       >
         {isMuted ? (
