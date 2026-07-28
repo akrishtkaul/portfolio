@@ -104,7 +104,7 @@ export default function DeskTop({ app, large = false, toggleLabel = 'expand', on
       >
         <div style={{ flex: 'none', display: 'flex', alignItems: 'center', gap: 6, height: 18, padding: '0 7px', borderBottom: '1px solid #171C28', background: '#0D1220' }}>
           <div style={{ width: 6, height: 6, background: '#F0854A' }} />
-          <span style={{ flex: 1, fontSize: 10, color: '#8A99AE' }}>status.log</span>
+          <span style={{ flex: 1, fontSize: 10, color: '#8A99AE' }}>personal-assistant</span>
           <span style={{ fontSize: 10, color: '#4E5C72' }}>live</span>
         </div>
         <div data-scroll="1" style={{ flex: 1, overflowY: 'auto', overflowX: 'hidden', padding: '8px 9px 9px 9px' }}>

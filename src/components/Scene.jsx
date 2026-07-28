@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import DeskTop from './DeskTop';
 import LoadingScreen from './LoadingScreen';
+import { AssistantProvider } from './AssistantContext';
 
 const SCENE_WIDTH = 1440;
 const SCENE_HEIGHT = 810;
@@ -85,48 +86,50 @@ export default function Scene() {
   );
 
   return (
-    <div
-      style={{
-        height: '100vh',
-        background: '#060810',
-        overflow: 'hidden',
-        position: 'relative',
-        fontFamily: "'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace",
-      }}
-    >
-      {!mobile && (
-        <div style={{ position: 'absolute', top, left, width: SCENE_WIDTH, height: SCENE_HEIGHT, transform: `scale(${scale})`, transformOrigin: 'top left' }}>
-          <img src="/scene.png" alt="Pixel art desk scene at sunset" style={{ display: 'block', width: SCENE_WIDTH, height: SCENE_HEIGHT, imageRendering: 'pixelated' }} />
+    <AssistantProvider>
+      <div
+        style={{
+          height: '100vh',
+          background: '#060810',
+          overflow: 'hidden',
+          position: 'relative',
+          fontFamily: "'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace",
+        }}
+      >
+        {!mobile && (
+          <div style={{ position: 'absolute', top, left, width: SCENE_WIDTH, height: SCENE_HEIGHT, transform: `scale(${scale})`, transformOrigin: 'top left' }}>
+            <img src="/scene.png" alt="Pixel art desk scene at sunset" style={{ display: 'block', width: SCENE_WIDTH, height: SCENE_HEIGHT, imageRendering: 'pixelated' }} />
 
-          <div
-            style={{
-              position: 'absolute',
-              left: 489,
-              top: 332,
-              width: 460,
-              height: 281,
-              background: 'linear-gradient(#090A16 0px, #090A16 5px, #050A11 5px, #050A11 61px, #090A16 61px)',
-              overflow: 'hidden',
-            }}
-          >
-            {entered ? deskTop(() => setExpanded(true), 'expand', false) : <LoadingScreen onEnter={handleEnter} />}
+            <div
+              style={{
+                position: 'absolute',
+                left: 489,
+                top: 332,
+                width: 460,
+                height: 281,
+                background: 'linear-gradient(#090A16 0px, #090A16 5px, #050A11 5px, #050A11 61px, #090A16 61px)',
+                overflow: 'hidden',
+              }}
+            >
+              {entered ? deskTop(() => setExpanded(true), 'expand', false) : <LoadingScreen onEnter={handleEnter} />}
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {mobile && (
-        <div style={{ position: 'relative', width: '100%', height: '100%', background: '#090A16', overflow: 'hidden' }}>
-          {entered ? deskTop(() => setExpanded(true), 'expand', false, setApp, false) : <LoadingScreen onEnter={handleEnter} />}
-        </div>
-      )}
-
-      {expanded && !mobile && (
-        <div style={{ position: 'fixed', inset: 0, zIndex: 50, background: 'rgba(6, 8, 16, 0.94)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
-          <div style={{ width: EXPANDED_WIDTH, height: EXPANDED_HEIGHT, background: '#090A16', border: '1px solid #1A202C', overflow: 'hidden', transform: `scale(${expandedScale})`, transformOrigin: 'center center' }}>
-            {deskTop(() => setExpanded(false), 'close', true)}
+        {mobile && (
+          <div style={{ position: 'relative', width: '100%', height: '100%', background: '#090A16', overflow: 'hidden' }}>
+            {entered ? deskTop(() => setExpanded(true), 'expand', false, setApp, false) : <LoadingScreen onEnter={handleEnter} />}
           </div>
-        </div>
-      )}
-    </div>
+        )}
+
+        {expanded && !mobile && (
+          <div style={{ position: 'fixed', inset: 0, zIndex: 50, background: 'rgba(6, 8, 16, 0.94)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
+            <div style={{ width: EXPANDED_WIDTH, height: EXPANDED_HEIGHT, background: '#090A16', border: '1px solid #1A202C', overflow: 'hidden', transform: `scale(${expandedScale})`, transformOrigin: 'center center' }}>
+              {deskTop(() => setExpanded(false), 'close', true)}
+            </div>
+          </div>
+        )}
+      </div>
+    </AssistantProvider>
   );
 }

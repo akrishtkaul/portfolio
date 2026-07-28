@@ -49,7 +49,7 @@ export default function ProfessionalView() {
         type="button"
         onClick={handleOpen}
         aria-label="Open recruiter-friendly view"
-        className="fixed top-6 left-6 z-[150] w-32 h-32 rounded-full overflow-hidden border-2 border-transparent hover:border-[#F0854A] hover:scale-105 transition-all duration-200 shadow-[0_8px_24px_rgba(0,0,0,0.45)]"
+        className="hidden min-[901px]:block fixed top-6 left-6 z-[150] w-32 h-32 rounded-full overflow-hidden border-2 border-transparent hover:border-[#F0854A] hover:scale-105 transition-all duration-200 shadow-[0_8px_24px_rgba(0,0,0,0.45)]"
       >
         <img src={logo} alt="Akrisht Kaul logo" className="w-full h-full object-cover" />
       </button>

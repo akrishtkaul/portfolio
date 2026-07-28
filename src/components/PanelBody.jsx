@@ -2,53 +2,24 @@ import { useState } from 'react';
 import content from '../data/content.json';
 import { isPlaceholder } from '../utils/placeholder';
 import profilePhoto from '../assets/akrisht_profile.jpg';
-
-const TONE_COLORS = {
-  muted: '#67788F',
-  accent: '#F0854A',
-  amber: '#F2B94A',
-  light: '#C6D0DD',
-};
+import Assistant from './Assistant';
 
 function stripUrl(url) {
   return url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
 }
 
-function StatusView({ status, syncedAt }) {
-  const rows = (status || [])
-    .map((row) => ({ ...row, segments: (row.segments || []).filter((s) => !isPlaceholder(s.text)) }))
-    .filter((row) => row.segments.length > 0);
-
+function StatusView() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 5, fontSize: 11 }}>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, fontSize: 11, borderBottom: '1px dotted #1A202C', paddingBottom: 5 }}>
         <span style={{ color: '#67788F' }}>visitor@akrisht</span>
         <span style={{ color: '#3D4658' }}>:</span>
         <span style={{ color: '#67788F' }}>~$</span>
-        <span style={{ color: '#F2B94A' }}>status --live</span>
+        <span style={{ color: '#F2B94A' }}>ask --live</span>
         <span style={{ width: 6, height: 11, background: '#F0854A', display: 'inline-block', animation: 'blink 1.1s step-end infinite' }} />
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-        {rows.map((row, i) => (
-          <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
-            <span style={{ width: 72, flex: 'none', color: '#67788F', fontSize: 10, letterSpacing: '0.02em', whiteSpace: 'nowrap' }}>{row.label}</span>
-            <span style={{ flex: 1, minWidth: 0 }}>
-              {row.segments.map((seg, j) => (
-                <span key={j} style={{ color: TONE_COLORS[seg.tone] || TONE_COLORS.light }}>{seg.text}</span>
-              ))}
-            </span>
-            <span style={{ flex: 'none', color: row.mark ? '#B9832F' : 'transparent', fontSize: 10, paddingTop: 1 }}>{row.mark || ''}</span>
-          </div>
-        ))}
-      </div>
-
-      {!isPlaceholder(syncedAt) && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 1, paddingTop: 4, borderTop: '1px dotted #1A202C', fontSize: 10, color: '#6D7D95' }}>
-          <span style={{ width: 5, height: 5, background: '#F0854A', display: 'inline-block', animation: 'pulse 2.2s ease-in-out infinite' }} />
-          <span>synced {syncedAt}</span>
-        </div>
-      )}
+      <Assistant />
     </div>
   );
 }
