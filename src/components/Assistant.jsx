@@ -14,6 +14,7 @@ export default function Assistant() {
   const bottomRef = useRef(null);
   const measureRef = useRef(null);
   const charRef = useRef(null);
+  const inputRef = useRef(null);
   const [cursorLeft, setCursorLeft] = useState(0);
   const [cursorWidth, setCursorWidth] = useState(6);
   const [caretPos, setCaretPos] = useState(0);
@@ -22,6 +23,14 @@ export default function Assistant() {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' });
     bottomRef.current?.scrollIntoView({ block: 'end', behavior: 'smooth' });
   }, [messages, loading, error]);
+
+  // `disabled={loading}` below forces the browser to blur the input the
+  // moment a reply starts loading, and disabling never restores focus on
+  // its own — so re-focus it whenever loading finishes (this also covers
+  // the very first mount, when loading is already false).
+  useEffect(() => {
+    if (!loading) inputRef.current?.focus();
+  }, [loading]);
 
   useEffect(() => {
     setCaretPos((p) => Math.min(p, input.length));
@@ -98,6 +107,7 @@ export default function Assistant() {
             {input[caretPos] ?? '0'}
           </span>
           <input
+            ref={inputRef}
             value={input}
             onChange={(e) => {
               setInput(e.target.value);
@@ -108,7 +118,6 @@ export default function Assistant() {
             onSelect={syncCaret}
             placeholder="ask a question..."
             disabled={loading}
-            autoFocus
             style={{
               width: '100%',
               boxSizing: 'border-box',
