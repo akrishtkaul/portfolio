@@ -108,6 +108,7 @@ export default function Assistant() {
             onSelect={syncCaret}
             placeholder="ask a question..."
             disabled={loading}
+            autoFocus
             style={{
               width: '100%',
               boxSizing: 'border-box',
