@@ -1,0 +1,278 @@
+{
+  "about": {
+    "name": "Akrisht Kaul",
+    "location": "New York, NY",
+    "taglineWords": [
+      "Backend Engineer",
+      "Embedded Systems",
+      "Systems Thinker",
+      "Musician & Breakdancer"
+    ],
+    "bio": [
+      "TODO: rewrite at ~40 words total. Lead with what is specific to you: production backend at an ad platform, safety-critical firmware on a race car. Cut anything that would be true of any CS student."
+    ],
+    "personalNote": "When I'm not coding or sketching circuits, you'll find me making music, breakdancing, or grappling with my sparring mates.",
+    "contact": {
+      "email": "akrishtkaul@gmail.com",
+      "github": "https://github.com/akrishtkaul",
+      "linkedin": "https://www.linkedin.com/in/akrishtkaul"
+    },
+    "skills": {
+      "languages": ["Java", "Python", "C", "C++", "TypeScript", "JavaScript", "SQL"],
+      "backend": ["Spring Boot", "FastAPI", "Node.js", "PostgreSQL", "MongoDB", "Supabase"],
+      "frontend": ["React", "Next.js", "React Native", "Tailwind"],
+      "systems": ["STM32", "SPI", "CAN", "Embedded C"],
+      "tools": ["Git", "Docker", "Altium", "Figma", "OpenCV"]
+    }
+  },
+
+  "education": [
+    {
+      "id": "columbia",
+      "school": "Columbia University",
+      "degree": "B.S. Computer Science",
+      "dates": "Sep 2025 - May 2028",
+      "detail": "School of Engineering and Applied Science",
+      "honors": ["Dean's List"]
+    },
+    {
+      "id": "clubs",
+      "school": "Clubs & Activities",
+      "degree": "Columbia Build Lab · Columbia FSAE · Columbia BJJ",
+      "dates": "",
+      "detail": "",
+      "honors": []
+    }
+  ],
+
+  "items": [
+    {
+      "id": "eulerity",
+      "type": ["experience"],
+      "featured": true,
+      "org": "Eulerity",
+      "role": "Backend Engineer Intern",
+      "name": "Ad Automation Platform",
+      "dates": "Jun 2026 - Present",
+      "url": "https://www.eulerity.ai/",
+      "description": "Production backend for an AI-driven ad platform automating multi-channel campaign deployment for small businesses.",
+      "tags": ["Java 17", "Spring Boot", "Google Ads API", "Twilio", "REST"],
+      "details": [
+        "Refactored fake-data generation which included 42 endpoints and 10+ services, reducing test data generation time from 2 minutes to 30 seconds",
+        "Designed bulk campaign ad creation using CSV, allows for 500 ads to be scheduled to 50 locations in one go",
+        "Co-built an internal applicant tracking system to replace a paid Greenhouse contract, designed to handle ~3,000 applications annually"
+      ]
+    },
+    {
+      "id": "fsae-bms",
+      "type": ["experience"],
+      "featured": true,
+      "org": "Columbia FSAE",
+      "role": "Head of Firmware",
+      "name": "Battery Management System Firmware",
+      "dates": "Sep 2025 - Present",
+      "url": "https://www.instagram.com/columbiafsae/",
+      "description": "Safety-critical embedded firmware for a high-voltage battery management system on a Formula SAE race car.",
+      "tags": ["C", "C++", "STM32G4", "SPI", "CAN", "Embedded"],
+      "details": [
+        "Developed embedded C/C++ firmware on an STM32G4 for a safety-critical high-voltage BMS, monitoring 14 battery cells via the ADBMS6830 over SPI and coordinating 6 concurrent timed tasks for sensing, balancing, contactor control, and real-time fault monitoring",
+        "Achieved 10 ms contactor response and 100 ms CAN fault broadcast latency",
+        "Diagnosed and eliminated a critical SPI hang in the ADBMS6830 driver that could freeze the entire BMS loop indefinitely, replacing HAL_MAX_DELAY with a 500 ms timeout for fail-safe recovery"
+      ]
+    },
+    {
+      "id": "wastewise",
+      "type": ["project"],
+      "featured": true,
+      "org": null,
+      "role": null,
+      "name": "WasteWise",
+      "dates": "VERIFY",
+      "url": null,
+      "description": "VERIFY: Mobile app for waste and compliance document handling with AI parsing and provenance tracking.",
+      "tags": ["React Native", "Expo", "FastAPI", "Supabase", "Python"],
+      "details": [
+        "AI document parsing with provenance tracking so every extracted field traces back to its source"
+      ]
+    },
+    {
+      "id": "fitbro",
+      "type": ["project"],
+      "featured": true,
+      "org": null,
+      "role": null,
+      "name": "FitBro",
+      "dates": "Apr 2026 - Present",
+      "url": null,
+      "description": "Full-stack AI fitness trainer with RAG-based chat that retrieves workout history to deliver personalized advice.",
+      "tags": ["React", "FastAPI", "MongoDB Atlas", "OpenAI API"],
+      "details": [
+        "Built a full-stack AI fitness trainer with RAG-based chat that retrieves workout history to deliver personalized advice via GPT-4o mini",
+        "Integrated a 1,300+ exercise library with auto-save persistence and real-time search"
+      ]
+    },
+    {
+      "id": "stonksgpt",
+      "type": ["project"],
+      "featured": false,
+      "org": null,
+      "role": null,
+      "name": "StonksGPT",
+      "dates": "Feb 2026",
+      "url": null,
+      "description": "Agentic trading copilot that makes stock trading approachable through voice-driven LLM tool execution.",
+      "tags": ["React", "Node.js", "Gemini API", "Alpaca API", "Python"],
+      "details": [
+        "Built an agentic trading copilot where users interact via voice with an LLM that executes schema-validated trades, tracks portfolios, and delivers real-time market news",
+        "Prevented hallucinations through structured audit trails, validated across 50+ test trades"
+      ]
+    },
+    {
+      "id": "storage-buddy",
+      "type": ["experience"],
+      "featured": false,
+      "org": "Storage Buddy",
+      "role": "Full Stack Intern",
+      "name": "Storage Buddy Platform",
+      "dates": "2025",
+      "url": "https://www.storagebuddyco.com/",
+      "description": "Full-stack work on a storage marketplace incubated at Columbia Business School.",
+      "tags": ["React", "Supabase", "Real-time"],
+      "details": [
+        "Built a real-time messaging system with sub-second delivery across text, images, and documents, with profanity filtering, PII masking, and user blocking for 50+ users across Boston and NYC",
+        "Migrated the core platform from Bubble.io to a React/Supabase stack, reducing no-code dependency and enabling custom feature development across a 4-person team"
+      ]
+    },
+    {
+      "id": "add-up-cafe",
+      "type": ["project"],
+      "featured": false,
+      "org": null,
+      "role": null,
+      "name": "Add Up Cafe",
+      "dates": "Dec 2025 - Jan 2026",
+      "url": null,
+      "description": "Classroom management platform with gamified learning, built for a special-education environment.",
+      "tags": ["Next.js", "Tailwind", "shadcn/ui", "Firebase"],
+      "details": [
+        "Built and deployed a full-stack classroom management platform with role-based user flows, assignment tracking, and gamified learning features",
+        "Iterated directly with a special-education teacher and 15 students in a live classroom to refine UX and feature reliability"
+      ]
+    },
+    {
+      "id": "songs-analysis",
+      "type": ["project"],
+      "featured": false,
+      "org": null,
+      "role": null,
+      "name": "What Makes Songs Pop",
+      "dates": "Apr 2026",
+      "url": null,
+      "description": "Statistical analysis of 114K songs to identify the drivers of music popularity.",
+      "tags": ["Python", "pandas", "SQLite3", "scikit-learn"],
+      "details": [
+        "Analyzed 114K songs across 114 genres using linear regression and K-means clustering",
+        "Found instrumentalness to be the strongest single predictor (r = -0.095), and that the high-energy cluster produces 60% of top-1% hits despite lower average popularity"
+      ]
+    },
+    {
+      "id": "burpg",
+      "type": ["experience"],
+      "featured": false,
+      "org": "BU Rocket Propulsion Group",
+      "role": "Avionics Team",
+      "name": "Ground Support Dashboard",
+      "dates": "2024 - 2025",
+      "url": "https://burpg.org/",
+      "description": "Real-time ground support equipment dashboard for static-fire testing.",
+      "tags": ["Python", "Flask", "WebSocket"],
+      "details": [
+        "Built a real-time ground support dashboard in Flask with WebSocket streaming across 4 sensors and 8 actuators, handling autosequence launch/abort with armed and disarmed safety states"
+      ]
+    },
+    {
+      "id": "mars-rover",
+      "type": ["experience", "project"],
+      "featured": false,
+      "org": "BU Mars Rover Club",
+      "role": "Software Team",
+      "name": "Object Detection Pipeline",
+      "dates": "2024 - 2025",
+      "url": "https://www.instagram.com/bumarsrover/",
+      "description": "Computer vision pipeline for real-time object detection under rover hardware constraints.",
+      "tags": ["Python", "OpenCV", "YOLOv8"],
+      "details": [
+        "Built a Python computer vision pipeline using YOLOv8 and OpenCV, creating and classifying a custom dataset from scratch to reach 85% real-time detection accuracy",
+        "Refined bounding boxes and optimized inference via quantization for resource-limited rover hardware"
+      ]
+    },
+    {
+      "id": "ewb",
+      "type": ["experience"],
+      "featured": false,
+      "org": "Engineers Without Borders",
+      "role": "Fundraising Lead",
+      "name": "Kenya Borehole Project",
+      "dates": "2024 - 2025",
+      "url": "https://ewbbu.org/",
+      "description": "Fundraising and outreach for a clean water borehole project in Kenya.",
+      "tags": ["Nonprofit", "Outreach"],
+      "details": [
+        "Raised $4,000+ through public events for the Kenya borehole project",
+        "Led workshops and STEM outreach to engage students in science and engineering"
+      ]
+    },
+    {
+      "id": "hts-pcb",
+      "type": ["project"],
+      "featured": false,
+      "org": null,
+      "role": null,
+      "name": "HTS Wire Harness PCB",
+      "dates": "2024",
+      "url": null,
+      "description": "Custom PCB for a horizontal test stand, taken from schematic through fabrication.",
+      "tags": ["Altium", "PCB Layout", "Hardware"],
+      "details": [
+        "Created a full Altium schematic through Gerber output with custom footprints and DRC compliance",
+        "Coordinated fabrication and achieved first-pass success with zero defects"
+      ]
+    }
+  ],
+
+  "status": [
+    {
+      "label": "now",
+      "segments": [
+        { "text": "backend intern @ ", "tone": "muted" },
+        { "text": "Eulerity", "tone": "accent" },
+        { "text": ", NYC", "tone": "muted" }
+      ]
+    },
+    {
+      "label": "building",
+      "segments": [
+        { "text": "BMS firmware", "tone": "amber" },
+        { "text": " for ", "tone": "muted" },
+        { "text": "Columbia FSAE", "tone": "light" }
+      ]
+    },
+    {
+      "label": "last commit",
+      "segments": [
+        { "text": "fsae-bms", "tone": "light" },
+        { "text": " — ", "tone": "muted" },
+        { "text": "spi timeout guard, 500ms", "tone": "light" }
+      ],
+      "mark": "6d"
+    },
+    {
+      "label": "solved",
+      "segments": [
+        { "text": "SPI hang", "tone": "accent" },
+        { "text": " that froze the whole BMS loop", "tone": "muted" }
+      ]
+    }
+  ],
+  "syncedAt": "2026-07-28 14:02 EDT"
+}

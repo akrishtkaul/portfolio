@@ -70,7 +70,7 @@ export default function BackgroundMusic() {
       {isPlaying && (
         <button
           onClick={toggleMute}
-          className="fixed top-6 right-6 z-50 w-12 h-12 flex items-center justify-center rounded-full border border-[#E2E8F0] bg-white text-[#64748B] hover:text-[#2563EB] hover:border-[#BFDBFE] hover:bg-[#EFF6FF] transition-all duration-200"
+          className="fixed top-6 right-6 z-50 w-12 h-12 flex items-center justify-center rounded-full border border-[#1E2532] bg-[#0B0F1B] text-[#8A99AE] hover:text-[#F0854A] hover:border-[#2A3242] transition-all duration-200"
           aria-label={isMuted ? 'Unmute music' : 'Mute music'}
         >
           {isMuted ? (

@@ -31,109 +31,36 @@ body {
 
 body {
   margin: 0;
-  background: var(--bg-page);
-  color: var(--text-primary);
+  background: #060810;
+  color: #C6D0DD;
   font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
 }
 
-.surface-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-soft);
+/* pixel-desk: blinking cursor + "live" pulse dot (status.log window) */
+@keyframes blink {
+  0%, 55% { opacity: 1; }
+  56%, 100% { opacity: 0; }
 }
 
-.section-divider {
-  height: 1px;
-  background: var(--border);
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
 }
 
-/* Conveyor (icon-only, preserved) */
-@keyframes conveyorLtr {
-  from {
-    transform: translateX(-50%);
-  }
-  to {
-    transform: translateX(0%);
-  }
+/* pixel-desk: boot sequence lines fading in on the status.log window */
+@keyframes bootLineIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-.conveyor-wrap {
-  position: relative;
-  overflow: hidden;
+/* pixel-desk: hide scrollbars in desktop-window content areas */
+[data-scroll] {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-.conveyor-wrap::before,
-.conveyor-wrap::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 72px;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.conveyor-wrap::before {
-  left: 0;
-  background: linear-gradient(to right, rgba(248, 250, 252, 1), rgba(248, 250, 252, 0));
-}
-
-.conveyor-wrap::after {
-  right: 0;
-  background: linear-gradient(to left, rgba(248, 250, 252, 1), rgba(248, 250, 252, 0));
-}
-
-.conveyor-track {
-  display: flex;
-  align-items: center;
-  width: max-content;
-  gap: 40px;
-  animation: conveyorLtr 22s linear infinite;
-}
-
-.conveyor-logo {
-  width: 56px;
-  height: 56px;
-  object-fit: contain;
-  opacity: 0.95;
-  flex: 0 0 auto;
-}
-
-@media (min-width: 768px) {
-  .conveyor-logo {
-    width: 64px;
-    height: 64px;
-  }
-}
-
-@keyframes skillsFadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes skillsPanelFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(8px) scale(0.985);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.skills-fade-in {
-  animation: skillsFadeIn 220ms ease-out;
-}
-
-.skills-backdrop-fade-in {
-  animation: skillsFadeIn 220ms ease-out;
-}
-
-.skills-panel-fade-in {
-  animation: skillsPanelFadeIn 260ms ease-out;
+[data-scroll]::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
 }
