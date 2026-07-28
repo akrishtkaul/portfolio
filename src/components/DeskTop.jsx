@@ -17,7 +17,7 @@ const TITLES = {
   education: 'education.txt',
 };
 
-export default function DeskTop({ app, large = false, toggleLabel = 'expand', onOpen, onClose, onToggle }) {
+export default function DeskTop({ app, large = false, toggleLabel = 'expand', onOpen, onClose, onToggle, showToggle = true }) {
   const defs = large
     ? [
         ['about', 'about', 16, 14],
@@ -70,17 +70,19 @@ export default function DeskTop({ app, large = false, toggleLabel = 'expand', on
         );
       })}
 
-      <div
-        onClick={onToggle}
-        title={toggleLabel}
-        className="hover:text-[#F0854A] hover:border-[#2A3242] transition-colors"
-        style={{ position: 'absolute', top: 10, right: 12, display: 'flex', alignItems: 'center', gap: 5, padding: '4px 7px', cursor: 'pointer', userSelect: 'none', border: '1px solid #1E2532', color: '#6D7D95', fontSize: 10 }}
-      >
-        <div style={{ width: 12, height: 10, border: '2px solid currentColor', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
-          <div style={{ width: 5, height: 4, background: 'currentColor' }} />
+      {showToggle && (
+        <div
+          onClick={onToggle}
+          title={toggleLabel}
+          className="hover:text-[#F0854A] hover:border-[#2A3242] transition-colors"
+          style={{ position: 'absolute', top: 10, right: 12, display: 'flex', alignItems: 'center', gap: 5, padding: '4px 7px', cursor: 'pointer', userSelect: 'none', border: '1px solid #1E2532', color: '#6D7D95', fontSize: 10 }}
+        >
+          <div style={{ width: 12, height: 10, border: '2px solid currentColor', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
+            <div style={{ width: 5, height: 4, background: 'currentColor' }} />
+          </div>
+          <span>{toggleLabel}</span>
         </div>
-        <span>{toggleLabel}</span>
-      </div>
+      )}
 
       <div
         style={{

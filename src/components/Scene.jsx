@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import DeskTop from './DeskTop';
 import LoadingScreen from './LoadingScreen';
 
@@ -30,10 +30,12 @@ export default function Scene() {
     setExpanded(true);
   };
 
-  const handleEnter = () => {
+  const handleEnter = useCallback(() => {
     setEntered(true);
-    setExpanded(true);
-  };
+    // Mobile already shows the desktop UI full-screen; only desktop needs
+    // the separate expanded modal.
+    if (!mobile) setExpanded(true);
+  }, [mobile]);
 
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 900px)');
@@ -67,7 +69,7 @@ export default function Scene() {
     };
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [app, expanded, mobile, entered]);
+  }, [app, expanded, mobile, entered, handleEnter]);
 
   // Never shrink below native size (keeps the panel text legible), but on
   // viewports larger than the native 1440x810 scale the whole scene up to
@@ -83,17 +85,16 @@ export default function Scene() {
 
   const expandedScale = Math.min((EXPANDED_COVERAGE * vw) / EXPANDED_WIDTH, (EXPANDED_COVERAGE * vh) / EXPANDED_HEIGHT);
 
-  const deskTop = (onExpandOrCollapse, label, largeMode, onOpen = setApp) => (
-    <DeskTop app={app} large={largeMode} toggleLabel={label} onOpen={onOpen} onClose={() => setApp(null)} onToggle={onExpandOrCollapse} />
+  const deskTop = (onExpandOrCollapse, label, largeMode, onOpen = setApp, showToggle = true) => (
+    <DeskTop app={app} large={largeMode} toggleLabel={label} onOpen={onOpen} onClose={() => setApp(null)} onToggle={onExpandOrCollapse} showToggle={showToggle} />
   );
 
   return (
     <div
       style={{
-        height: mobile ? 'auto' : '100vh',
-        minHeight: '100vh',
+        height: '100vh',
         background: '#060810',
-        overflow: mobile ? 'visible' : 'hidden',
+        overflow: 'hidden',
         position: 'relative',
         fontFamily: "'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace",
       }}
@@ -119,16 +120,12 @@ export default function Scene() {
       )}
 
       {mobile && (
-        <img src="/scene.png" alt="Pixel art desk scene at sunset" style={{ display: 'block', width: '100%', height: 'auto', imageRendering: 'pixelated' }} />
-      )}
-
-      {mobile && (
-        <div style={{ position: 'relative', width: '100%', height: '78vh', background: '#090A16', borderTop: '1px solid #171C28', overflow: 'hidden' }}>
-          {entered ? deskTop(() => setExpanded(true), 'expand', false) : <LoadingScreen onEnter={handleEnter} />}
+        <div style={{ position: 'relative', width: '100%', height: '100%', background: '#090A16', overflow: 'hidden' }}>
+          {entered ? deskTop(() => setExpanded(true), 'expand', false, setApp, false) : <LoadingScreen onEnter={handleEnter} />}
         </div>
       )}
 
-      {expanded && (
+      {expanded && !mobile && (
         <div style={{ position: 'fixed', inset: 0, zIndex: 50, background: 'rgba(6, 8, 16, 0.94)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
           <div style={{ width: EXPANDED_WIDTH, height: EXPANDED_HEIGHT, background: '#090A16', border: '1px solid #1A202C', overflow: 'hidden', transform: `scale(${expandedScale})`, transformOrigin: 'center center' }}>
             {deskTop(() => setExpanded(false), 'close', true)}
