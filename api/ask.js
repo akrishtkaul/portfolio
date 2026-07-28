@@ -9,9 +9,48 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const content = JSON.parse(fs.readFileSync(path.join(__dirname, '../src/data/content.json'), 'utf8'));
 
 const MODEL = 'claude-haiku-4-5-20251001';
+// Fixed server-side — never read from the request body, so a client can't
+// raise its own cost ceiling.
 const MAX_TOKENS = 160;
 const MAX_MESSAGE_LENGTH = 500;
 const MAX_HISTORY = 8;
+
+// Same-instance, in-memory rate limiting: no external store, so counts reset
+// on a cold start and aren't shared across concurrent instances. That's a
+// deliberate tradeoff for a low-traffic personal site — it stops a single
+// client/script from hammering the endpoint (the real cost risk) without
+// standing up Redis/KV for a portfolio chat box.
+const RATE_LIMIT_PER_MINUTE = 10;
+const RATE_LIMIT_PER_DAY = 50;
+const MINUTE_MS = 60 * 1000;
+const DAY_MS = 24 * 60 * 60 * 1000;
+const rateLimitStore = new Map();
+
+function checkRateLimit(ip) {
+  const now = Date.now();
+  let entry = rateLimitStore.get(ip);
+  if (!entry) {
+    entry = { minuteStart: now, minuteCount: 0, dayStart: now, dayCount: 0 };
+    rateLimitStore.set(ip, entry);
+  }
+  if (now - entry.minuteStart >= MINUTE_MS) {
+    entry.minuteStart = now;
+    entry.minuteCount = 0;
+  }
+  if (now - entry.dayStart >= DAY_MS) {
+    entry.dayStart = now;
+    entry.dayCount = 0;
+  }
+  entry.minuteCount += 1;
+  entry.dayCount += 1;
+  return entry.minuteCount <= RATE_LIMIT_PER_MINUTE && entry.dayCount <= RATE_LIMIT_PER_DAY;
+}
+
+function getClientIp(req) {
+  const forwarded = req.headers['x-forwarded-for'];
+  if (typeof forwarded === 'string' && forwarded.length > 0) return forwarded.split(',')[0].trim();
+  return req.socket?.remoteAddress || 'unknown';
+}
 
 function isPlaceholder(value) {
   return !value || /^(TODO|VERIFY)/i.test(value);
@@ -93,9 +132,22 @@ export default async function handler(req, res) {
     return;
   }
 
+  // ALLOWED_ORIGIN is unset during local `vercel dev` unless you add it to
+  // .env — set it in production so requests from other sites are rejected.
+  const allowedOrigin = process.env.ALLOWED_ORIGIN;
+  if (allowedOrigin && req.headers.origin !== allowedOrigin) {
+    res.status(403).json({ error: 'Forbidden.' });
+    return;
+  }
+
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
     res.status(500).json({ error: 'Assistant is not configured yet.' });
+    return;
+  }
+
+  if (!checkRateLimit(getClientIp(req))) {
+    res.status(429).json({ reply: "You've sent a lot of questions in a short time — give it a minute and try again." });
     return;
   }
 

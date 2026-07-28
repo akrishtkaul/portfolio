@@ -54,6 +54,20 @@ export default function ProfessionalView() {
         <img src={logo} alt="Akrisht Kaul logo" className="w-full h-full object-cover" />
       </button>
 
+      {/* Mobile: the desk scene isn't rendered below 900px, so the logo above
+          is hidden. This sits in the icon column's own reserved strip (the
+          same width DeskTop keeps clear of its app windows), below the last
+          icon, where nothing else ever renders. */}
+      <button
+        type="button"
+        onClick={handleOpen}
+        aria-label="Open recruiter-friendly view"
+        className="block min-[901px]:hidden fixed z-[150] rounded-lg border border-[#1E2532] bg-[#0B0F1B] text-[#8A99AE] hover:text-[#F0854A] hover:border-[#2A3242] transition-colors text-[9px] leading-tight text-center"
+        style={{ bottom: 10, left: 8, width: 62, padding: '6px 2px' }}
+      >
+        resume<br />view
+      </button>
+
       {open && (
         <div
           className="fixed inset-0 z-[200] overflow-y-auto"

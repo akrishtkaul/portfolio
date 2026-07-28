@@ -50,6 +50,9 @@ export default function Scene() {
 
   const handleEnter = useCallback(() => {
     setEntered(true);
+    // This gesture (the boot sequence's "press any key or click to
+    // continue") is what BackgroundMusic waits for to start playback.
+    window.dispatchEvent(new Event('pixel-desk-entered'));
     // Mobile already shows the desktop UI full-screen; only desktop needs
     // the separate expanded modal.
     if (!mobile) setExpanded(true);

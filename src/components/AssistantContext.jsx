@@ -24,7 +24,15 @@ export function AssistantProvider({ children }) {
         body: JSON.stringify({ message: trimmed, history }),
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Something went wrong.');
+      if (!res.ok) {
+        // Rate-limit / validation responses carry a friendly `reply` so they
+        // read as a normal chat message instead of a raw error banner.
+        if (data.reply) {
+          setMessages((prev) => [...prev, { role: 'assistant', content: data.reply }]);
+          return;
+        }
+        throw new Error(data.error || 'Something went wrong.');
+      }
       setMessages((prev) => [...prev, { role: 'assistant', content: data.reply }]);
     } catch (err) {
       setError(err.message || 'Something went wrong.');
