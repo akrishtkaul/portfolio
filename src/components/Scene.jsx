@@ -1,12 +1,28 @@
 import { useCallback, useEffect, useState } from 'react';
+import { FaSun, FaCloudSun } from 'react-icons/fa';
 import DeskTop from './DeskTop';
 import LoadingScreen from './LoadingScreen';
+import MorningPlane from './MorningPlane';
 import { AssistantProvider } from './AssistantContext';
 
 const SCENE_WIDTH = 1440;
 const SCENE_HEIGHT = 810;
 const SCREEN_MID = 472;
 const IGNORED_KEYS = ['Shift', 'Control', 'Alt', 'Meta', 'CapsLock', 'Tab'];
+
+const SCENES = {
+  sunset: {
+    src: '/scene.png',
+    alt: 'Pixel art desk scene at sunset',
+    rect: { left: 489, top: 332, width: 460, height: 281 },
+  },
+  morning: {
+    src: '/scene-morning.png',
+    alt: 'Pixel art desk scene in the morning',
+    rect: { left: 489, top: 332, width: 460, height: 281 },
+  },
+};
+const SCENE_STORAGE_KEY = 'pixel-desk-scene';
 
 // Design size the "large" DeskTop layout (icon column, status window, app
 // window) is tuned for. The expanded modal scales this box uniformly so it
@@ -23,6 +39,14 @@ export default function Scene() {
   const [vh, setVh] = useState(window.innerHeight);
   const [expanded, setExpanded] = useState(false);
   const [entered, setEntered] = useState(false);
+  const [sceneKey, setSceneKey] = useState(() => {
+    const stored = localStorage.getItem(SCENE_STORAGE_KEY);
+    return stored && SCENES[stored] ? stored : 'sunset';
+  });
+
+  useEffect(() => {
+    localStorage.setItem(SCENE_STORAGE_KEY, sceneKey);
+  }, [sceneKey]);
 
   const handleEnter = useCallback(() => {
     setEntered(true);
@@ -81,6 +105,8 @@ export default function Scene() {
 
   const expandedScale = Math.min((EXPANDED_COVERAGE * vw) / EXPANDED_WIDTH, (EXPANDED_COVERAGE * vh) / EXPANDED_HEIGHT);
 
+  const scene = SCENES[sceneKey];
+
   const deskTop = (onExpandOrCollapse, label, largeMode, onOpen = setApp, showToggle = true) => (
     <DeskTop app={app} large={largeMode} toggleLabel={label} onOpen={onOpen} onClose={() => setApp(null)} onToggle={onExpandOrCollapse} showToggle={showToggle} />
   );
@@ -98,15 +124,17 @@ export default function Scene() {
       >
         {!mobile && (
           <div style={{ position: 'absolute', top, left, width: SCENE_WIDTH, height: SCENE_HEIGHT, transform: `scale(${scale})`, transformOrigin: 'top left' }}>
-            <img src="/scene.png" alt="Pixel art desk scene at sunset" style={{ display: 'block', width: SCENE_WIDTH, height: SCENE_HEIGHT, imageRendering: 'pixelated' }} />
+            <img src={scene.src} alt={scene.alt} style={{ display: 'block', width: SCENE_WIDTH, height: SCENE_HEIGHT, imageRendering: 'pixelated' }} />
+
+            {sceneKey === 'morning' && <MorningPlane />}
 
             <div
               style={{
                 position: 'absolute',
-                left: 489,
-                top: 332,
-                width: 460,
-                height: 281,
+                left: scene.rect.left,
+                top: scene.rect.top,
+                width: scene.rect.width,
+                height: scene.rect.height,
                 background: 'linear-gradient(#090A16 0px, #090A16 5px, #050A11 5px, #050A11 61px, #090A16 61px)',
                 overflow: 'hidden',
               }}
@@ -116,6 +144,16 @@ export default function Scene() {
           </div>
         )}
 
+        {!mobile && (
+          <button
+            onClick={() => setSceneKey((k) => (k === 'sunset' ? 'morning' : 'sunset'))}
+            className="fixed top-6 right-[84px] z-[60] w-12 h-12 flex items-center justify-center rounded-full border border-[#1E2532] bg-[#0B0F1B] text-[#8A99AE] hover:text-[#F0854A] hover:border-[#2A3242] transition-all duration-200"
+            aria-label={sceneKey === 'sunset' ? 'Switch to morning scene' : 'Switch to sunset scene'}
+          >
+            {sceneKey === 'sunset' ? <FaSun className="text-lg" /> : <FaCloudSun className="text-lg" />}
+          </button>
+        )}
+
         {mobile && (
           <div style={{ position: 'relative', width: '100%', height: '100%', background: '#090A16', overflow: 'hidden' }}>
             {entered ? deskTop(() => setExpanded(true), 'expand', false, setApp, false) : <LoadingScreen onEnter={handleEnter} />}
@@ -123,7 +161,7 @@ export default function Scene() {
         )}
 
         {expanded && !mobile && (
-          <div style={{ position: 'fixed', inset: 0, zIndex: 50, background: 'rgba(6, 8, 16, 0.94)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
+          <div style={{ position: 'fixed', inset: 0, zIndex: 50, background: 'rgba(6, 8, 16, 0.55)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
             <div style={{ width: EXPANDED_WIDTH, height: EXPANDED_HEIGHT, background: '#090A16', border: '1px solid #1A202C', overflow: 'hidden', transform: `scale(${expandedScale})`, transformOrigin: 'center center' }}>
               {deskTop(() => setExpanded(false), 'close', true)}
             </div>

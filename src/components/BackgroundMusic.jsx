@@ -1,7 +1,7 @@
 // src/components/BackgroundMusic.jsx
 import { useEffect, useRef, useState } from 'react';
 import { FaVolumeUp, FaVolumeMute } from 'react-icons/fa';
-import track from '../assets/website-background-music.mp3';
+import track from '../assets/alex-morgan-lofi-coffee-shop-568150.mp3';
 
 export default function BackgroundMusic() {
   const audioRef = useRef(null);
@@ -26,13 +26,16 @@ export default function BackgroundMusic() {
 
     // try immediately (if autoplay allowed)
     start();
-    // otherwise, unlock on first user interaction
+    // otherwise, unlock on first user interaction — covers the loading
+    // screen's "click or press any key" dismissal either way it's used
     window.addEventListener('pointerdown', start, { once: true });
     window.addEventListener('scroll', start, { once: true });
+    window.addEventListener('keydown', start, { once: true });
 
     return () => {
       window.removeEventListener('pointerdown', start);
       window.removeEventListener('scroll', start);
+      window.removeEventListener('keydown', start);
     };
   }, []);
 

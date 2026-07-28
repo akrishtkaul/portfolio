@@ -128,7 +128,7 @@
       "description": "Agentic trading copilot that makes stock trading approachable through voice-driven LLM tool execution.",
       "tags": ["React", "Node.js", "Gemini API", "Alpaca API", "Python"],
       "details": [
-        "Built an agentic trading copilot where users interact via voice with an LLM that executes schema-validated trades, tracks portfolios, and delivers real-time market news",
+        "Built an agentic trading copilot where users interact via voice with an LLM that executes trades, tracks portfolios, and delivers real-time market news",
         "Prevented hallucinations through structured audit trails, validated across 50+ test trades"
       ]
     },

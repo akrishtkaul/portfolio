@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import AssistantContext from './assistantStore';
 
 const SUGGESTIONS = [
@@ -10,27 +10,56 @@ const SUGGESTIONS = [
 
 export default function Assistant() {
   const { messages, input, setInput, loading, error, send } = useContext(AssistantContext);
+  const scrollRef = useRef(null);
+  const bottomRef = useRef(null);
+  const measureRef = useRef(null);
+  const charRef = useRef(null);
+  const [cursorLeft, setCursorLeft] = useState(0);
+  const [cursorWidth, setCursorWidth] = useState(6);
+  const [caretPos, setCaretPos] = useState(0);
+
+  useEffect(() => {
+    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' });
+    bottomRef.current?.scrollIntoView({ block: 'end', behavior: 'smooth' });
+  }, [messages, loading, error]);
+
+  useEffect(() => {
+    setCaretPos((p) => Math.min(p, input.length));
+  }, [input]);
+
+  useLayoutEffect(() => {
+    setCursorLeft(measureRef.current?.offsetWidth ?? 0);
+    setCursorWidth(charRef.current?.offsetWidth || 6);
+  }, [input, caretPos]);
+
+  const syncCaret = (e) => setCaretPos(e.target.selectionStart ?? input.length);
 
   return (
-    <div style={{ marginTop: 6, paddingTop: 8, borderTop: '1px dotted #1A202C' }}>
+    <div style={{ marginTop: 6 }}>
       {messages.length === 0 && (
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
-          {SUGGESTIONS.map((s) => (
-            <button
-              key={s}
-              type="button"
-              onClick={() => send(s)}
-              className="hover:text-[#F0854A] hover:border-[#2A3242] transition-colors"
-              style={{ fontSize: 9, color: '#7C8CA3', border: '1px solid #1E2532', padding: '3px 7px', background: 'transparent', cursor: 'pointer' }}
-            >
-              {s}
-            </button>
-          ))}
-        </div>
+        <>
+          <div style={{ fontSize: 11, lineHeight: 1.45, marginBottom: 6 }}>
+            <span style={{ color: '#F0854A' }}>ak-bot &gt; </span>
+            <span style={{ color: '#C6D0DD' }}>type a question below, or click the icons on the desk if you'd rather explore yourself.</span>
+          </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
+            {SUGGESTIONS.map((s) => (
+              <button
+                key={s}
+                type="button"
+                onClick={() => send(s)}
+                className="hover:text-[#F0854A] hover:border-[#2A3242] transition-colors"
+                style={{ fontSize: 9, color: '#7C8CA3', border: '1px solid #1E2532', padding: '3px 7px', background: 'transparent', cursor: 'pointer' }}
+              >
+                {s}
+              </button>
+            ))}
+          </div>
+        </>
       )}
 
       {(messages.length > 0 || loading || error) && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginTop: 8, maxHeight: 160, overflowY: 'auto' }} data-scroll="1">
+        <div ref={scrollRef} style={{ display: 'flex', flexDirection: 'column', gap: 6, marginTop: 8, maxHeight: 160, overflowY: 'auto' }} data-scroll="1">
           {messages.map((m, i) => (
             <div key={i} style={{ fontSize: 11, lineHeight: 1.45 }}>
               <span style={{ color: m.role === 'user' ? '#67788F' : '#F0854A' }}>{m.role === 'user' ? 'you > ' : 'ak-bot > '}</span>
@@ -55,23 +84,61 @@ export default function Assistant() {
         style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 8 }}
       >
         <span style={{ color: '#67788F', fontSize: 11 }}>visitor@akrisht : ~$</span>
-        <input
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="ask a question..."
-          disabled={loading}
-          style={{
-            flex: 1,
-            minWidth: 0,
-            background: 'transparent',
-            border: 'none',
-            outline: 'none',
-            color: '#E7EDF5',
-            fontSize: 11,
-            fontFamily: 'inherit',
-          }}
-        />
+        <div style={{ position: 'relative', flex: 1, minWidth: 0 }}>
+          <span
+            ref={measureRef}
+            style={{ position: 'absolute', visibility: 'hidden', whiteSpace: 'pre', fontSize: 11, fontFamily: 'inherit' }}
+          >
+            {input.slice(0, caretPos)}
+          </span>
+          <span
+            ref={charRef}
+            style={{ position: 'absolute', visibility: 'hidden', whiteSpace: 'pre', fontSize: 11, fontFamily: 'inherit' }}
+          >
+            {input[caretPos] ?? '0'}
+          </span>
+          <input
+            value={input}
+            onChange={(e) => {
+              setInput(e.target.value);
+              syncCaret(e);
+            }}
+            onClick={syncCaret}
+            onKeyUp={syncCaret}
+            onSelect={syncCaret}
+            placeholder="ask a question..."
+            disabled={loading}
+            style={{
+              width: '100%',
+              boxSizing: 'border-box',
+              padding: 0,
+              margin: 0,
+              background: 'transparent',
+              border: 'none',
+              outline: 'none',
+              caretColor: 'transparent',
+              color: '#E7EDF5',
+              fontSize: 11,
+              fontFamily: 'inherit',
+            }}
+          />
+          <span
+            style={{
+              position: 'absolute',
+              left: cursorLeft,
+              top: '50%',
+              transform: 'translateY(-50%)',
+              width: cursorWidth,
+              height: 11,
+              background: '#F0854A',
+              display: 'inline-block',
+              animation: 'blink 1.1s step-end infinite',
+              pointerEvents: 'none',
+            }}
+          />
+        </div>
       </form>
+      <div ref={bottomRef} />
     </div>
   );
 }

@@ -53,6 +53,20 @@ body {
   to { opacity: 1; }
 }
 
+/* pixel-desk: distant plane crossing the morning scene's center window pane.
+   --fly-start/--fly-end (native-scale px, set inline by MorningPlane.jsx)
+   keep the travel bounds derived from the scene's own coordinate space. */
+@keyframes morningPlaneFly {
+  from { left: var(--fly-start); }
+  to { left: var(--fly-end); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .morning-plane-flight {
+    display: none;
+  }
+}
+
 /* pixel-desk: hide scrollbars in desktop-window content areas */
 [data-scroll] {
   scrollbar-width: none;

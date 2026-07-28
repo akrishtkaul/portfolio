@@ -16,7 +16,6 @@ function StatusView() {
         <span style={{ color: '#3D4658' }}>:</span>
         <span style={{ color: '#67788F' }}>~$</span>
         <span style={{ color: '#F2B94A' }}>ask --live</span>
-        <span style={{ width: 6, height: 11, background: '#F0854A', display: 'inline-block', animation: 'blink 1.1s step-end infinite' }} />
       </div>
 
       <Assistant />
