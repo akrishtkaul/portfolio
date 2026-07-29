@@ -8,7 +8,7 @@ function stripUrl(url) {
   return url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
 }
 
-function StatusView() {
+function StatusView({ large }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 5, fontSize: 11 }}>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, fontSize: 11, borderBottom: '1px dotted #1A202C', paddingBottom: 5 }}>
@@ -18,7 +18,7 @@ function StatusView() {
         <span style={{ color: '#F2B94A' }}>ask --live</span>
       </div>
 
-      <Assistant />
+      <Assistant large={large} />
     </div>
   );
 }
@@ -207,9 +207,9 @@ function EducationView({ education }) {
   );
 }
 
-export default function PanelBody({ view }) {
+export default function PanelBody({ view, large }) {
   let body = null;
-  if (view === 'status') body = <StatusView status={content.status} syncedAt={content.syncedAt} />;
+  if (view === 'status') body = <StatusView large={large} />;
   else if (view === 'about') body = <AboutView about={content.about} />;
   else if (view === 'work') body = <WorkView items={content.items} />;
   else if (view === 'experience') body = <ExperienceView items={content.items} />;

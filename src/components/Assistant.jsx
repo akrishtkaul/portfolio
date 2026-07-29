@@ -8,7 +8,7 @@ const SUGGESTIONS = [
   'What are you working on right now?',
 ];
 
-export default function Assistant() {
+export default function Assistant({ large }) {
   const { messages, input, setInput, loading, error, send } = useContext(AssistantContext);
   const scrollRef = useRef(null);
   const bottomRef = useRef(null);
@@ -46,10 +46,11 @@ export default function Assistant() {
   }, [input, caretPos]);
 
   const syncCaret = (e) => setCaretPos(e.target.selectionStart ?? input.length);
-  // The status window itself is much taller on mobile (see DeskTop.jsx),
-  // so let the conversation use more of that room before it needs to
-  // scroll internally.
+  // The status window itself is much taller on mobile and in the expanded
+  // desktop modal (see DeskTop.jsx's useFullBoundsStatus), so let the
+  // conversation use more of that room before it needs to scroll internally.
   const isMobile = window.matchMedia('(max-width: 900px)').matches;
+  const messagesMaxHeight = isMobile ? 440 : large ? 300 : 160;
 
   return (
     <div style={{ marginTop: 6 }}>
@@ -76,7 +77,7 @@ export default function Assistant() {
       )}
 
       {(messages.length > 0 || loading || error) && (
-        <div ref={scrollRef} style={{ display: 'flex', flexDirection: 'column', gap: 6, marginTop: 8, maxHeight: isMobile ? 440 : 160, overflowY: 'auto' }} data-scroll="1">
+        <div ref={scrollRef} style={{ display: 'flex', flexDirection: 'column', gap: 6, marginTop: 8, maxHeight: messagesMaxHeight, overflowY: 'auto' }} data-scroll="1">
           {messages.map((m, i) => (
             <div key={i} style={{ fontSize: 11, lineHeight: 1.45 }}>
               <span style={{ color: m.role === 'user' ? '#67788F' : '#F0854A' }}>{m.role === 'user' ? 'you > ' : 'ak-bot > '}</span>

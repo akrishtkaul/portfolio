@@ -32,8 +32,13 @@ export default function DeskTop({ app, large = false, mobile = false, toggleLabe
         ['work', 'projects', 8, 200],
       ];
 
-  const statusW = large ? 540 : 372;
-  const statusH = large ? 312 : 228;
+  // Only the small embedded desktop view (not large, not mobile) keeps a
+  // fixed-size status window — it's sized to fit the tiny scene rect it
+  // sits in. Large (expanded) and mobile both have real room to spare, so
+  // they use the same full-bleed footprint as an open app window instead.
+  const statusW = 372;
+  const statusH = 228;
+  const useFullBoundsStatus = large || mobile;
   // Keep the icon column clear of the app window so icons stay visible and
   // clickable (to switch apps or close the active one) while a window is open.
   const iconColumnWidth = large ? 86 : 78;
@@ -89,12 +94,12 @@ export default function DeskTop({ app, large = false, mobile = false, toggleLabe
 
       <div
         style={
-          mobile
+          useFullBoundsStatus
             ? {
                 position: 'absolute',
                 left: iconColumnWidth,
                 right: 6,
-                top: 6,
+                top: appTopInset,
                 bottom: 6,
                 background: '#0B0F1B',
                 border: '1px solid #1E2532',
@@ -123,7 +128,7 @@ export default function DeskTop({ app, large = false, mobile = false, toggleLabe
           <span style={{ fontSize: 10, color: '#4E5C72' }}>live</span>
         </div>
         <div data-scroll="1" style={{ flex: 1, overflowY: 'auto', overflowX: 'hidden', padding: '8px 9px 9px 9px' }}>
-          <PanelBody view="status" />
+          <PanelBody view="status" large={large} />
         </div>
       </div>
 
