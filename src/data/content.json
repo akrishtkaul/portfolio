@@ -42,6 +42,14 @@
       "dates": "",
       "detail": "",
       "honors": []
+    },
+    {
+      "id": "coursework",
+      "school": "Relevant Coursework",
+      "degree": "Programming in Python · Data Structures in Java · Advanced Programming · Discrete Mathematics · Linear Algebra · Multivariable Calculus · Electric Circuits · Artificial Intelligence · UI Design",
+      "dates": "",
+      "detail": "",
+      "honors": []
     }
   ],
 
