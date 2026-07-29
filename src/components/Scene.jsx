@@ -23,10 +23,10 @@ const SCENES = {
   },
 };
 const SCENE_STORAGE_KEY = 'pixel-desk-scene';
-const SCENE_PREFS = ['auto', 'sunset', 'morning'];
 
 // Local-clock morning window: 05:00–11:59. Everything else (noon through
-// 04:59) reads as sunset.
+// 04:59) reads as sunset. Only used as the first-visit default — once a
+// scene is stored, toggling is a plain sunset/morning swap from then on.
 function pickSceneByTime() {
   const hour = new Date().getHours();
   return hour >= 5 && hour < 12 ? 'morning' : 'sunset';
@@ -47,31 +47,18 @@ export default function Scene() {
   const [vh, setVh] = useState(window.innerHeight);
   const [expanded, setExpanded] = useState(false);
   const [entered, setEntered] = useState(false);
-  // The stored preference is 'auto' | 'sunset' | 'morning' — 'auto' means
-  // "derive from the clock" and must stay distinguishable from an explicit
-  // pick, so it can't just be collapsed into a scene name.
-  const [scenePref, setScenePref] = useState(() => {
+  // First visit (nothing stored yet) picks from the local clock, evaluated
+  // once on mount — never polled, so the scene won't swap under someone
+  // mid-visit. Any later toggle overwrites this with an explicit choice
+  // that just persists as-is from then on.
+  const [sceneKey, setSceneKey] = useState(() => {
     const stored = localStorage.getItem(SCENE_STORAGE_KEY);
-    return SCENE_PREFS.includes(stored) ? stored : 'auto';
+    return stored === 'sunset' || stored === 'morning' ? stored : pickSceneByTime();
   });
-  // Evaluated once on mount (and again if the user explicitly cycles back
-  // into auto) — never polled, so the scene won't swap under someone
-  // mid-visit just because the clock ticked past a boundary.
-  const [autoScene, setAutoScene] = useState(pickSceneByTime);
-  const sceneKey = scenePref === 'auto' ? autoScene : scenePref;
 
   useEffect(() => {
-    localStorage.setItem(SCENE_STORAGE_KEY, scenePref);
-  }, [scenePref]);
-
-  const cycleScenePref = () => {
-    if (scenePref === 'auto') setScenePref('sunset');
-    else if (scenePref === 'sunset') setScenePref('morning');
-    else {
-      setAutoScene(pickSceneByTime());
-      setScenePref('auto');
-    }
-  };
+    localStorage.setItem(SCENE_STORAGE_KEY, sceneKey);
+  }, [sceneKey]);
 
   const handleEnter = useCallback(() => {
     setEntered(true);
@@ -174,32 +161,11 @@ export default function Scene() {
 
         {!mobile && (
           <button
-            onClick={cycleScenePref}
+            onClick={() => setSceneKey((k) => (k === 'sunset' ? 'morning' : 'sunset'))}
             className="fixed top-6 right-[84px] z-[60] w-12 h-12 flex items-center justify-center rounded-full border border-[#1E2532] bg-[#0B0F1B] text-[#8A99AE] hover:text-[#F0854A] hover:border-[#2A3242] transition-all duration-200"
-            aria-label={
-              scenePref === 'auto'
-                ? `Scene set to auto, currently ${sceneKey} — click to switch to sunset`
-                : scenePref === 'sunset'
-                  ? 'Scene set to sunset — click to switch to morning'
-                  : 'Scene set to morning — click to switch back to auto'
-            }
+            aria-label={sceneKey === 'sunset' ? 'Switch to morning scene' : 'Switch to sunset scene'}
           >
             {sceneKey === 'sunset' ? <FaSun className="text-lg" /> : <FaCloudSun className="text-lg" />}
-            {scenePref === 'auto' && (
-              <span
-                style={{
-                  position: 'absolute',
-                  bottom: 3,
-                  right: 6,
-                  fontSize: 8,
-                  fontWeight: 700,
-                  lineHeight: 1,
-                  color: '#F0854A',
-                }}
-              >
-                A
-              </span>
-            )}
           </button>
         )}
 
