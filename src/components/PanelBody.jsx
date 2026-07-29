@@ -92,15 +92,20 @@ function WorkView({ items }) {
   const [open, setOpen] = useState({});
   const projects = items.filter((i) => i.type.includes('project'));
   const ordered = [...projects.filter((i) => i.featured), ...projects.filter((i) => !i.featured)];
+  const allOpen = ordered.length > 0 && ordered.every((it) => open[it.id]);
+
+  const toggleAll = () => {
+    const next = {};
+    ordered.forEach((it) => { next[it.id] = !allOpen; });
+    setOpen(next);
+  };
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, fontSize: 10, color: '#6D7D95', paddingBottom: 5, borderBottom: '1px dotted #1A202C' }}>
-        <span>{ordered.length} entries</span>
-        <span style={{ color: '#2F3849' }}>|</span>
-        <span style={{ color: '#B9832F' }}>featured first</span>
-        <span style={{ color: '#2F3849' }}>|</span>
-        <span>click to expand</span>
+        <span onClick={toggleAll} style={{ cursor: 'pointer', userSelect: 'none' }}>
+          {allOpen ? 'click to collapse' : 'click to expand'}
+        </span>
       </div>
 
       {ordered.map((it) => {
@@ -178,6 +183,11 @@ function ExperienceView({ items }) {
                 ))}
               </div>
             )}
+            {it.url && (
+              <a href={it.url} target="_blank" rel="noreferrer" className="hover:text-[#F2B94A] transition-colors" style={{ fontSize: 10, color: '#F0854A', marginTop: 2 }}>
+                {stripUrl(it.url)}
+              </a>
+            )}
           </div>
         );
       })}
@@ -185,21 +195,72 @@ function ExperienceView({ items }) {
   );
 }
 
+// Each school's brand color, applied to its name and its indented
+// sub-entries (clubs & activities, relevant coursework) in EducationView.
+const SCHOOL_COLORS = {
+  columbia: '#9FC8E8', // Columbia Blue
+  bu: '#CC0000', // BU Red
+};
+
 function EducationView({ education }) {
+  const [open, setOpen] = useState({});
+  const roots = education.filter((e) => !e.parent);
+  const expandable = roots.filter((e) => education.some((c) => c.parent === e.id));
+  const allOpen = expandable.length > 0 && expandable.every((e) => open[e.id]);
+
+  const toggleAll = () => {
+    const next = {};
+    expandable.forEach((e) => { next[e.id] = !allOpen; });
+    setOpen(next);
+  };
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
-      {education.map((e) => {
+      <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, fontSize: 10, color: '#6D7D95', paddingBottom: 5, borderBottom: '1px dotted #1A202C' }}>
+        <span onClick={toggleAll} style={{ cursor: 'pointer', userSelect: 'none' }}>
+          {allOpen ? 'click to collapse' : 'click to expand'}
+        </span>
+      </div>
+
+      {roots.map((e) => {
+        const children = education.filter((c) => c.parent === e.id);
+        const hasChildren = children.length > 0;
+        const isOpen = !!open[e.id];
         const honors = (e.honors || []).filter((h) => !isPlaceholder(h));
         const detail = isPlaceholder(e.detail) ? null : e.detail;
+        const schoolColor = SCHOOL_COLORS[e.id] || '#E7EDF5';
+
         return (
           <div key={e.id} style={{ borderBottom: '1px dotted #171D28', padding: '7px 0', display: 'flex', flexDirection: 'column', gap: 2 }}>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
-              <span style={{ flex: 1, minWidth: 0, color: '#E7EDF5', fontSize: 13, fontFamily: "'JetBrains Mono', monospace", fontWeight: 600 }}>{e.school}</span>
+            <div
+              onClick={hasChildren ? () => setOpen((s) => ({ ...s, [e.id]: !s[e.id] })) : undefined}
+              style={{ display: 'flex', alignItems: 'baseline', gap: 6, cursor: hasChildren ? 'pointer' : 'default', userSelect: 'none' }}
+            >
+              {hasChildren && <span style={{ flex: 'none', width: 9, color: '#4E5C72', fontSize: 11 }}>{isOpen ? '-' : '+'}</span>}
+              <span style={{ flex: 1, minWidth: 0, color: schoolColor, fontSize: 13, fontFamily: "'JetBrains Mono', monospace", fontWeight: 600 }}>{e.school}</span>
               {!isPlaceholder(e.dates) && <span style={{ flex: 'none', color: '#6D7D95', fontSize: 10 }}>{e.dates}</span>}
             </div>
-            <div style={{ color: '#F0854A', fontSize: 11 }}>{e.degree}</div>
-            {detail && <div style={{ color: '#67788F', fontSize: 10 }}>{detail}</div>}
-            {honors.length > 0 && <div style={{ color: '#B9832F', fontSize: 10 }}>{honors.join(' · ')}</div>}
+            <div style={{ paddingLeft: hasChildren ? 15 : 0, color: '#F0854A', fontSize: 11 }}>{e.degree}</div>
+            {detail && <div style={{ paddingLeft: hasChildren ? 15 : 0, color: '#67788F', fontSize: 10 }}>{detail}</div>}
+            {honors.length > 0 && <div style={{ paddingLeft: hasChildren ? 15 : 0, color: '#B9832F', fontSize: 10 }}>{honors.join(' · ')}</div>}
+
+            {hasChildren && isOpen && (
+              <div style={{ paddingLeft: 15, marginTop: 4, marginLeft: 4, borderLeft: '1px solid #202836', display: 'flex', flexDirection: 'column', gap: 6 }}>
+                {children.map((c) => {
+                  const cHonors = (c.honors || []).filter((h) => !isPlaceholder(h));
+                  const cDetail = isPlaceholder(c.detail) ? null : c.detail;
+                  const cColor = SCHOOL_COLORS[c.parent] || '#AEBBCB';
+                  return (
+                    <div key={c.id} style={{ paddingLeft: 10, display: 'flex', flexDirection: 'column', gap: 2 }}>
+                      <div style={{ color: cColor, fontSize: 11, fontWeight: 600 }}>{c.school}</div>
+                      <div style={{ color: '#8C99AC', fontSize: 10.5, lineHeight: 1.45, textWrap: 'pretty' }}>{c.degree}</div>
+                      {cDetail && <div style={{ color: '#5E6C80', fontSize: 10 }}>{cDetail}</div>}
+                      {cHonors.length > 0 && <div style={{ color: '#B9832F', fontSize: 10 }}>{cHonors.join(' · ')}</div>}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
         );
       })}

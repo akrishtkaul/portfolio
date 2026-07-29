@@ -13,10 +13,12 @@
     ],
     "personalNote": "When I'm not coding or sketching circuits, you'll find me making music, breakdancing, or grappling with my sparring mates.",
     "assistantContext": [
-      "Rising junior at Columbia — 33 transfer credits from prior coursework meant his first year at Columbia (Sep 2025 - May 2026) counted as sophomore standing, not freshman.",
+      "Rising junior as of Fall 2026 (freshman year at Boston University, then transferred to Columbia).",
+      "Collaborative and outgoing, and works well in team settings.",
       "My favorite color is blue, and I love studying and food crawling in NYC.",
       "Some things I like to do for fun: play guitar, play piano, sing, edit videos, breakdance, Brazilian jiu-jitsu, and host parties.",
-      "I have a strong interest in AI and machine learning, and I enjoy exploring new technologies and frameworks."
+      "I have a strong interest in AI and machine learning, and I enjoy exploring new technologies and frameworks.",
+      "Favorite artists: Malcolm Todd, Daniel Caesar, and Bruno Mars."
     ],
     "currentlyWorkingOn": [
       "Designing the hardware for the FSAE car's dashboard, with a focus on a clean UI.",
@@ -42,11 +44,12 @@
       "school": "Columbia University",
       "degree": "B.S. Computer Science",
       "dates": "Sep 2025 - May 2028",
-      "detail": "School of Engineering and Applied Science · 33 credits transferred from prior coursework",
+      "detail": "School of Engineering and Applied Science",
       "honors": ["Dean's List"]
     },
     {
-      "id": "clubs",
+      "id": "columbia-clubs",
+      "parent": "columbia",
       "school": "Clubs & Activities",
       "degree": "Columbia Build Lab · Columbia FSAE · Columbia BJJ",
       "dates": "",
@@ -54,9 +57,36 @@
       "honors": []
     },
     {
+      "id": "bu",
+      "school": "Boston University",
+      "degree": "B.S. Computer Engineering",
+      "dates": "Sep 2024 - May 2025",
+      "detail": "College of Engineering · transferred to Columbia after freshman year",
+      "honors": ["Dean's List"]
+    },
+    {
+      "id": "bu-clubs",
+      "parent": "bu",
+      "school": "Clubs & Activities",
+      "degree": "BU Rocket Propulsion Group · BU Mars Rover Club · Engineers Without Borders · Bulletproof Funk (breakdancing team)",
+      "dates": "",
+      "detail": "",
+      "honors": []
+    },
+    {
       "id": "coursework",
+      "parent": "columbia",
       "school": "Relevant Coursework",
-      "degree": "Programming in Python · Data Structures in Java · Advanced Programming · Discrete Mathematics · Linear Algebra · Multivariable Calculus · Electric Circuits · Artificial Intelligence · UI Design",
+      "degree": "Data Structures in Java · Advanced Programming · Discrete Mathematics · Artificial Intelligence · UI Design",
+      "dates": "",
+      "detail": "",
+      "honors": []
+    },
+    {
+      "id": "coursework-bu",
+      "parent": "bu",
+      "school": "Relevant Coursework",
+      "degree": "Programming in Python · Linear Algebra · Multivariable Calculus · Electric Circuits",
       "dates": "",
       "detail": "",
       "honors": []
@@ -158,9 +188,9 @@
       "org": "Storage Buddy",
       "role": "Full Stack Intern",
       "name": "Storage Buddy Platform",
-      "dates": "2025",
+      "dates": "Sep 2025 - Dec 2025",
       "url": "https://www.storagebuddyco.com/",
-      "description": "Full-stack work on a storage marketplace incubated at Columbia Business School.",
+      "description": "Full-stack internship through Columbia Business School on a storage marketplace platform incubated there.",
       "tags": ["React", "Supabase", "Real-time"],
       "details": [
         "Built a real-time messaging system with sub-second delivery across text, images, and documents, with profanity filtering, PII masking, and user blocking for 50+ users across Boston and NYC",
@@ -206,7 +236,7 @@
       "org": "BU Rocket Propulsion Group",
       "role": "Avionics Team",
       "name": "Ground Support Dashboard",
-      "dates": "2024 - 2025",
+      "dates": "Sep 2024 - Aug 2025",
       "url": "https://burpg.org/",
       "description": "Real-time ground support equipment dashboard for static-fire testing.",
       "tags": ["Python", "Flask", "WebSocket"],
@@ -221,7 +251,7 @@
       "org": "BU Mars Rover Club",
       "role": "Software Team",
       "name": "Object Detection Pipeline",
-      "dates": "2024 - 2025",
+      "dates": "Sep 2024 - Dec 2025",
       "url": "https://www.instagram.com/bumarsrover/",
       "description": "Computer vision pipeline for real-time object detection under rover hardware constraints.",
       "tags": ["Python", "OpenCV", "YOLOv8"],
@@ -237,7 +267,7 @@
       "org": "Engineers Without Borders",
       "role": "Fundraising Lead",
       "name": "Kenya Borehole Project",
-      "dates": "2024 - 2025",
+      "dates": "Sep 2024 - Jun 2025",
       "url": "https://ewbbu.org/",
       "description": "Fundraising and outreach for a clean water borehole project in Kenya.",
       "tags": ["Nonprofit", "Outreach"],
