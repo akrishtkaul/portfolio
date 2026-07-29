@@ -12,7 +12,7 @@ const ICONS = {
 
 const TITLES = {
   about: 'about.txt',
-  work: 'work.dir',
+  work: 'projects.dir',
   experience: 'experience.log',
   education: 'education.txt',
 };
@@ -21,15 +21,15 @@ export default function DeskTop({ app, large = false, toggleLabel = 'expand', on
   const defs = large
     ? [
         ['about', 'about', 16, 14],
-        ['work', 'work', 16, 84],
-        ['education', 'edu', 16, 154],
-        ['experience', 'exp', 16, 224],
+        ['education', 'edu', 16, 84],
+        ['experience', 'exp', 16, 154],
+        ['work', 'projects', 16, 224],
       ]
     : [
         ['about', 'about', 8, 8],
-        ['work', 'work', 8, 72],
-        ['education', 'edu', 8, 136],
-        ['experience', 'exp', 8, 200],
+        ['education', 'edu', 8, 72],
+        ['experience', 'exp', 8, 136],
+        ['work', 'projects', 8, 200],
       ];
 
   const statusW = large ? 540 : 372;
