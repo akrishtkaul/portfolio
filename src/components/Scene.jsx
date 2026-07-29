@@ -123,7 +123,7 @@ export default function Scene() {
   const scene = SCENES[sceneKey];
 
   const deskTop = (onExpandOrCollapse, label, largeMode, onOpen = setApp, showToggle = true) => (
-    <DeskTop app={app} large={largeMode} toggleLabel={label} onOpen={onOpen} onClose={() => setApp(null)} onToggle={onExpandOrCollapse} showToggle={showToggle} />
+    <DeskTop app={app} large={largeMode} mobile={mobile} toggleLabel={label} onOpen={onOpen} onClose={() => setApp(null)} onToggle={onExpandOrCollapse} showToggle={showToggle} />
   );
 
   return (

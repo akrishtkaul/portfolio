@@ -17,7 +17,7 @@ const TITLES = {
   education: 'education.txt',
 };
 
-export default function DeskTop({ app, large = false, toggleLabel = 'expand', onOpen, onClose, onToggle, showToggle = true }) {
+export default function DeskTop({ app, large = false, mobile = false, toggleLabel = 'expand', onOpen, onClose, onToggle, showToggle = true }) {
   const defs = large
     ? [
         ['about', 'about', 16, 14],
@@ -88,19 +88,34 @@ export default function DeskTop({ app, large = false, toggleLabel = 'expand', on
       )}
 
       <div
-        style={{
-          position: 'absolute',
-          right: 12,
-          bottom: 12,
-          width: statusW,
-          maxWidth: 'calc(100% - 24px)',
-          height: statusH,
-          background: '#0B0F1B',
-          border: '1px solid #1E2532',
-          display: 'flex',
-          flexDirection: 'column',
-          overflow: 'hidden',
-        }}
+        style={
+          mobile
+            ? {
+                position: 'absolute',
+                left: iconColumnWidth,
+                right: 6,
+                top: 6,
+                bottom: 6,
+                background: '#0B0F1B',
+                border: '1px solid #1E2532',
+                display: 'flex',
+                flexDirection: 'column',
+                overflow: 'hidden',
+              }
+            : {
+                position: 'absolute',
+                right: 12,
+                bottom: 12,
+                width: statusW,
+                maxWidth: 'calc(100% - 24px)',
+                height: statusH,
+                background: '#0B0F1B',
+                border: '1px solid #1E2532',
+                display: 'flex',
+                flexDirection: 'column',
+                overflow: 'hidden',
+              }
+        }
       >
         <div style={{ flex: 'none', display: 'flex', alignItems: 'center', gap: 6, height: 18, padding: '0 7px', borderBottom: '1px solid #171C28', background: '#0D1220' }}>
           <div style={{ width: 6, height: 6, background: '#F0854A' }} />

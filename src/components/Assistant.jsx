@@ -27,9 +27,13 @@ export default function Assistant() {
   // `disabled={loading}` below forces the browser to blur the input the
   // moment a reply starts loading, and disabling never restores focus on
   // its own — so re-focus it whenever loading finishes (this also covers
-  // the very first mount, when loading is already false).
+  // the very first mount, when loading is already false). Skipped on
+  // mobile, where focusing pops the on-screen keyboard up unprompted;
+  // there, typing should only start once the visitor taps the input.
   useEffect(() => {
-    if (!loading) inputRef.current?.focus();
+    if (loading) return;
+    if (window.matchMedia('(max-width: 900px)').matches) return;
+    inputRef.current?.focus();
   }, [loading]);
 
   useEffect(() => {
@@ -42,6 +46,10 @@ export default function Assistant() {
   }, [input, caretPos]);
 
   const syncCaret = (e) => setCaretPos(e.target.selectionStart ?? input.length);
+  // The status window itself is much taller on mobile (see DeskTop.jsx),
+  // so let the conversation use more of that room before it needs to
+  // scroll internally.
+  const isMobile = window.matchMedia('(max-width: 900px)').matches;
 
   return (
     <div style={{ marginTop: 6 }}>
@@ -68,7 +76,7 @@ export default function Assistant() {
       )}
 
       {(messages.length > 0 || loading || error) && (
-        <div ref={scrollRef} style={{ display: 'flex', flexDirection: 'column', gap: 6, marginTop: 8, maxHeight: 160, overflowY: 'auto' }} data-scroll="1">
+        <div ref={scrollRef} style={{ display: 'flex', flexDirection: 'column', gap: 6, marginTop: 8, maxHeight: isMobile ? 440 : 160, overflowY: 'auto' }} data-scroll="1">
           {messages.map((m, i) => (
             <div key={i} style={{ fontSize: 11, lineHeight: 1.45 }}>
               <span style={{ color: m.role === 'user' ? '#67788F' : '#F0854A' }}>{m.role === 'user' ? 'you > ' : 'ak-bot > '}</span>
