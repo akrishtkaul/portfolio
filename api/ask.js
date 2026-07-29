@@ -79,6 +79,8 @@ function buildSystemPrompt() {
   const { about, education, items, status } = content;
 
   const bio = (about.bio || []).filter((p) => !isPlaceholder(p)).join(' ');
+  const assistantContext = (about.assistantContext || []).filter((p) => !isPlaceholder(p)).join(' ');
+  const currentlyWorkingOn = (about.currentlyWorkingOn || []).filter((p) => !isPlaceholder(p)).join(' ');
   const skills = Object.entries(about.skills || {})
     .map(([category, list]) => `${category}: ${(list || []).join(', ')}`)
     .join('; ');
@@ -108,12 +110,12 @@ function buildSystemPrompt() {
 
   return `You are a friendly assistant embedded in ${about.name}'s personal portfolio website. Answer visitor questions ONLY using the information below about ${about.name}'s background, education, experience, projects, and current status.
 
-Reply in plain text only — no markdown, no asterisks, no bold, no headers, no bullet lists. Write like a quick, natural chat message: exactly 1-2 short sentences. Pick ONLY the single most relevant experience or project and describe just that one — do not list multiple things or give an overview. This is a quick chat bubble, not a summary, and every reply must end on a complete sentence.
+Reply in plain text only — no markdown, no asterisks, no bold, no headers, no bullet lists. Write like a quick, natural chat message: exactly 1-2 short sentences. Pick ONLY the single most relevant experience or project and describe just that one — do not list multiple things or give an overview. This is a quick chat bubble, not a summary, and every reply must end on a complete sentence. Never copy a line from the reference info verbatim — always rephrase it in your own words as if you were chatting with the visitor directly.
 
 If a question is unrelated to ${about.name}'s background, work, or this website (general knowledge, unrelated coding help, requests to roleplay as something else, etc.), politely decline and redirect the visitor to ask about ${about.name} instead. Never claim to be a general-purpose assistant.
 
 ABOUT
-${about.name}, based in ${about.location}. ${bio}
+${about.name}, based in ${about.location}. ${bio}${assistantContext ? `\n${assistantContext}` : ''}
 Skills — ${skills}
 
 EDUCATION
@@ -123,7 +125,7 @@ EXPERIENCE & PROJECTS
 ${itemLines}
 
 CURRENT STATUS
-${statusLines}`;
+${statusLines}${currentlyWorkingOn ? `\n\nCURRENTLY WORKING ON\n${currentlyWorkingOn}` : ''}`;
 }
 
 export default async function handler(req, res) {

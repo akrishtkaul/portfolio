@@ -3,15 +3,25 @@
     "name": "Akrisht Kaul",
     "location": "New York, NY",
     "taglineWords": [
-      "Backend Engineer",
-      "Embedded Systems",
-      "Systems Thinker",
+      "Full-Stack Engineer",
+      "Firmware Engineer",
+      "Systems Designer",
       "Musician & Breakdancer"
     ],
     "bio": [
-      "Whether it is building a full stack web app, designing firmware for a car, or shipping an AI feature, I love taking ideas from concept to reality. I have a strong foundation in software engineering with experience across the stack, and I enjoy working on projects that combine hardware and software in creative ways."
+      "Whether it's building a full-stack web app, writing safety-critical firmware for a race car, or shipping an AI feature, I love taking ideas from concept to reality. My foundation in software engineering spans full-stack development, backend systems, and low-level embedded work, and I'm just as comfortable building close to the hardware as I am building on top of it."
     ],
     "personalNote": "When I'm not coding or sketching circuits, you'll find me making music, breakdancing, or grappling with my sparring mates.",
+    "assistantContext": [
+      "Rising junior at Columbia — 33 transfer credits from prior coursework meant his first year at Columbia (Sep 2025 - May 2026) counted as sophomore standing, not freshman.",
+      "My favorite color is blue, and I love studying and food crawling in NYC.",
+      "Some things I like to do for fun: play guitar, play piano, sing, edit videos, breakdance, Brazilian jiu-jitsu, and host parties.",
+      "I have a strong interest in AI and machine learning, and I enjoy exploring new technologies and frameworks."
+    ],
+    "currentlyWorkingOn": [
+      "Designing the hardware for the FSAE car's dashboard, with a focus on a clean UI.",
+      "Scoping the next phase of WasteWise and researching disposal-rule sourcing."
+    ],
     "contact": {
       "email": "akrishtkaul@gmail.com",
       "github": "https://github.com/akrishtkaul",
@@ -20,9 +30,9 @@
     "skills": {
       "languages": ["Java", "Python", "C", "C++", "TypeScript", "JavaScript", "SQL"],
       "backend": ["Spring Boot", "FastAPI", "Node.js", "PostgreSQL", "MongoDB", "Supabase"],
-      "frontend": ["React", "Next.js", "React Native", "Tailwind"],
-      "systems": ["STM32", "SPI", "CAN", "Embedded C"],
-      "tools": ["Git", "Docker", "Altium", "Figma", "OpenCV"]
+      "frontend": ["React", "Next.js", "React Native", "Tailwind", "Bootstrap"],
+      "firmware": ["Altium Designer", "KiCad", "Embedded C", "LTSpice"],
+      "tools": ["Git", "Docker", "Figma", "Postman", "Linux"]
     }
   },
 
@@ -32,7 +42,7 @@
       "school": "Columbia University",
       "degree": "B.S. Computer Science",
       "dates": "Sep 2025 - May 2028",
-      "detail": "School of Engineering and Applied Science",
+      "detail": "School of Engineering and Applied Science · 33 credits transferred from prior coursework",
       "honors": ["Dean's List"]
     },
     {
