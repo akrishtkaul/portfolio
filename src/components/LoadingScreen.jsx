@@ -57,15 +57,12 @@ export default function LoadingScreen({ onEnter, mobile }) {
             animationDelay: `${BOOT_ANIMATION_DURATION_MS}ms`,
           }}
         >
-          {mobile
-            ? 'or tap resume view (bottom left) for the quick professional version'
-            : 'or click the logo (top left) for a quick, professional view'}
+          {countdown === null
+            ? mobile
+              ? 'or tap resume view (bottom left) for the quick professional version'
+              : 'or click the logo (top left) for a quick, professional view'
+            : `auto-opening in ${countdown}s — press any key or click here to go to the desk instead`}
         </div>
-        {countdown !== null && (
-          <div style={{ marginTop: 6, fontSize: 12, color: '#6D7D95' }}>
-            opening the professional view in {countdown}s — press any key or click here to go to the desk instead
-          </div>
-        )}
       </div>
     </div>
   );
