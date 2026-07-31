@@ -215,7 +215,7 @@ export default function Scene() {
               animation: 'hintPop 220ms ease-out forwards',
             }}
           >
-            ↗ click the expand button (top-right of the screen) for the full view
+            click the expand button (top-right of the screen) for the full view
           </div>
         )}
 
