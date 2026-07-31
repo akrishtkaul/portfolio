@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+import { useCallback, useEffect, useState } from 'react';
+import { FaGithub, FaLinkedin, FaEnvelope, FaArrowLeft } from 'react-icons/fa';
 import content from '../data/content.json';
 import { isPlaceholder } from '../utils/placeholder';
 import logo from '../assets/ak-logo.png';
@@ -18,7 +18,7 @@ export default function ProfessionalView() {
   const experienceItems = content.items.filter((i) => i.type.includes('experience') && i.professional);
   const projectItems = content.items.filter((i) => i.type.includes('project') && i.professional);
 
-  const handleOpen = () => {
+  const handleOpen = useCallback(() => {
     // Dismiss the boot screen if it's still showing — without this, closing
     // the overlay would drop the visitor back on the boot screen instead of
     // the desk scene. This button is a sibling of the boot screen in the
@@ -32,12 +32,19 @@ export default function ProfessionalView() {
     // returns to the small scene instead of leaving it stuck expanded.
     window.dispatchEvent(new Event('pixel-desk-collapse'));
     setOpen(true);
-  };
+  }, []);
 
   const handleClose = () => {
     setOpen(false);
     setFlippedId(null);
   };
+
+  // LoadingScreen's boot-screen countdown dispatches this to auto-open the
+  // professional view the same way the logo button does.
+  useEffect(() => {
+    window.addEventListener('pixel-desk-open-professional', handleOpen);
+    return () => window.removeEventListener('pixel-desk-open-professional', handleOpen);
+  }, [handleOpen]);
 
   useEffect(() => {
     if (!open) return;
@@ -91,10 +98,11 @@ export default function ProfessionalView() {
           <button
             type="button"
             onClick={handleClose}
-            aria-label="Close"
-            className="fixed top-5 right-5 z-[210] w-10 h-10 rounded-full border border-[#1E2532] bg-[#0B0F1B] text-[#8A99AE] hover:text-[#F0854A] hover:border-[#2A3242] flex items-center justify-center transition-colors"
+            aria-label="Back to desk"
+            className="fixed top-5 right-5 z-[210] flex items-center gap-2 h-10 px-4 rounded-full border border-[#1E2532] bg-[#0B0F1B] text-[#8A99AE] hover:text-[#F0854A] hover:border-[#2A3242] transition-colors text-sm font-medium"
           >
-            ✕
+            <FaArrowLeft className="text-xs" />
+            Back to desk
           </button>
 
           <div className="w-full max-w-5xl mx-auto px-6 py-24">

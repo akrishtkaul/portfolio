@@ -1,15 +1,31 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import BootSequence, { BOOT_ANIMATION_DURATION_MS } from './BootSequence';
 
-const AUTO_ADVANCE_DELAY_MS = 5000;
+const AUTO_ADVANCE_SECONDS = 5;
 
 export default function LoadingScreen({ onEnter, mobile }) {
+  const [countdown, setCountdown] = useState(null);
+
+  // Countdown starts once the boot lines finish fading in (immediately under
+  // prefers-reduced-motion, where they show with no animation at all).
   useEffect(() => {
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const delay = AUTO_ADVANCE_DELAY_MS + (reducedMotion ? 0 : BOOT_ANIMATION_DURATION_MS);
-    const timer = setTimeout(onEnter, delay);
-    return () => clearTimeout(timer);
-  }, [onEnter]);
+    const startDelay = reducedMotion ? 0 : BOOT_ANIMATION_DURATION_MS;
+    const startTimer = setTimeout(() => setCountdown(AUTO_ADVANCE_SECONDS), startDelay);
+    return () => clearTimeout(startTimer);
+  }, []);
+
+  useEffect(() => {
+    if (countdown === null) return;
+    if (countdown === 0) {
+      // ProfessionalView listens for this and opens itself — same path as
+      // clicking the logo, so it also silently dismisses this boot screen.
+      window.dispatchEvent(new Event('pixel-desk-open-professional'));
+      return;
+    }
+    const tick = setTimeout(() => setCountdown((c) => c - 1), 1000);
+    return () => clearTimeout(tick);
+  }, [countdown]);
 
   return (
     <div
@@ -45,6 +61,11 @@ export default function LoadingScreen({ onEnter, mobile }) {
             ? 'or tap resume view (bottom left) for the quick professional version'
             : 'or click the logo (top left) for a quick, professional view'}
         </div>
+        {countdown !== null && (
+          <div style={{ marginTop: 6, fontSize: 12, color: '#6D7D95' }}>
+            opening the professional view in {countdown}s — press any key or click here to go to the desk instead
+          </div>
+        )}
       </div>
     </div>
   );
