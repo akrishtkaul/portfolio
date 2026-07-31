@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { FaGithub, FaLinkedin, FaEnvelope, FaArrowLeft } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaEnvelope, FaArrowLeft, FaLightbulb } from 'react-icons/fa';
 import content from '../data/content.json';
 import { isPlaceholder } from '../utils/placeholder';
 import logo from '../assets/ak-logo.png';
@@ -78,11 +78,11 @@ export default function ProfessionalView() {
       {showLogoHint && (
         <div
           onClick={dismissLogoHint}
-          className="hint-pop hidden min-[901px]:block fixed z-[149] cursor-pointer"
+          className="hint-pop hidden min-[901px]:flex fixed z-[149] cursor-pointer items-start gap-2.5"
           style={{
             bottom: 24,
             left: 24,
-            maxWidth: 220,
+            maxWidth: 230,
             padding: '13px 17px',
             borderRadius: 12,
             background: '#0B0F1B',
@@ -94,7 +94,8 @@ export default function ProfessionalView() {
             animation: 'hintPop 220ms ease-out forwards',
           }}
         >
-          click here for the professional view
+          <FaLightbulb className="flex-none mt-0.5" style={{ color: '#F2B94A' }} />
+          <span>click the logo for the professional view</span>
         </div>
       )}
 

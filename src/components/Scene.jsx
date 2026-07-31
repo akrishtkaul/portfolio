@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { FaSun, FaCloudSun } from 'react-icons/fa';
+import { FaSun, FaCloudSun, FaLightbulb } from 'react-icons/fa';
 import DeskTop from './DeskTop';
 import LoadingScreen from './LoadingScreen';
 import MorningPlane from './MorningPlane';
@@ -199,7 +199,7 @@ export default function Scene() {
         {canShowExpandHint && (
           <div
             onClick={dismissExpandHint}
-            className="hint-pop fixed z-[149] cursor-pointer"
+            className="hint-pop fixed z-[149] cursor-pointer flex items-start gap-2.5"
             style={{
               bottom: 24,
               right: 24,
@@ -215,7 +215,8 @@ export default function Scene() {
               animation: 'hintPop 220ms ease-out forwards',
             }}
           >
-            click the expand button (top-right of the screen) for the full view
+            <FaLightbulb className="flex-none mt-0.5" style={{ color: '#F2B94A' }} />
+            <span>click expand on the laptop for the full view</span>
           </div>
         )}
 
