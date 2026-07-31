@@ -61,7 +61,7 @@ export default function LoadingScreen({ onEnter, mobile }) {
             ? mobile
               ? 'or tap resume view (bottom left) for the quick professional version'
               : 'or click the logo (top left) for a quick, professional view'
-            : `auto-opening in ${countdown}s — press any key or click here to go to the desk instead`}
+            : `auto-opening the professional view in ${countdown}s — press any key or click here to go to the desk instead`}
         </div>
       </div>
     </div>

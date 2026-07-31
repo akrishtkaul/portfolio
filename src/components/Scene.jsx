@@ -4,6 +4,7 @@ import DeskTop from './DeskTop';
 import LoadingScreen from './LoadingScreen';
 import MorningPlane from './MorningPlane';
 import { AssistantProvider } from './AssistantContext';
+import useHint from '../hooks/useHint';
 
 const SCENE_WIDTH = 1440;
 const SCENE_HEIGHT = 810;
@@ -47,6 +48,11 @@ export default function Scene() {
   const [vh, setVh] = useState(window.innerHeight);
   const [expanded, setExpanded] = useState(false);
   const [entered, setEntered] = useState(false);
+  const [showExpandHint, dismissExpandHint] = useHint('pixel-desk-show-hints');
+  // Rendered as a plain fixed viewport element (not nested inside the tiny,
+  // clipped laptop-screen rect) so it isn't cut off by that rect's own
+  // overflow:hidden, and reads at normal size instead of the scene's scale.
+  const canShowExpandHint = showExpandHint && entered && !expanded && !mobile;
   // First visit (nothing stored yet) picks from the local clock, evaluated
   // once on mount — never polled, so the scene won't swap under someone
   // mid-visit. Any later toggle overwrites this with an explicit choice
@@ -188,6 +194,29 @@ export default function Scene() {
           >
             {sceneKey === 'sunset' ? <FaSun className="text-lg" /> : <FaCloudSun className="text-lg" />}
           </button>
+        )}
+
+        {canShowExpandHint && (
+          <div
+            onClick={dismissExpandHint}
+            className="hint-pop fixed z-[149] cursor-pointer"
+            style={{
+              bottom: 24,
+              right: 24,
+              maxWidth: 230,
+              padding: '13px 17px',
+              borderRadius: 12,
+              background: '#0B0F1B',
+              border: '1px solid #2A3242',
+              color: '#C6D0DD',
+              fontSize: 14,
+              lineHeight: 1.45,
+              boxShadow: '0 8px 20px rgba(0,0,0,0.4)',
+              animation: 'hintPop 220ms ease-out forwards',
+            }}
+          >
+            ↗ click the expand button (top-right of the screen) for the full view
+          </div>
         )}
 
         {mobile && (

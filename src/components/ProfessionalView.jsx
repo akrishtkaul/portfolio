@@ -80,16 +80,16 @@ export default function ProfessionalView() {
           onClick={dismissLogoHint}
           className="hint-pop hidden min-[901px]:block fixed z-[149] cursor-pointer"
           style={{
-            top: 64,
+            top: 56,
             left: 164,
-            maxWidth: 190,
-            padding: '9px 13px',
+            maxWidth: 220,
+            padding: '13px 17px',
             borderRadius: 12,
             background: '#0B0F1B',
             border: '1px solid #2A3242',
             color: '#C6D0DD',
-            fontSize: 12,
-            lineHeight: 1.4,
+            fontSize: 14,
+            lineHeight: 1.45,
             boxShadow: '0 8px 20px rgba(0,0,0,0.4)',
             animation: 'hintPop 220ms ease-out forwards',
           }}
