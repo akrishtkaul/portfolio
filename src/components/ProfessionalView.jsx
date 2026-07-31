@@ -19,6 +19,15 @@ export default function ProfessionalView() {
   const projectItems = content.items.filter((i) => i.type.includes('project') && i.professional);
 
   const handleOpen = () => {
+    // Dismiss the boot screen if it's still showing — without this, closing
+    // the overlay would drop the visitor back on the boot screen instead of
+    // the desk scene. This button is a sibling of the boot screen in the
+    // component tree (not nested inside it), so the click can't bubble into
+    // its own "click anywhere to continue" handler; no stopPropagation needed.
+    window.dispatchEvent(new Event('pixel-desk-enter-silent'));
+    // This is a real user gesture, so it also satisfies the browser's
+    // autoplay-with-sound requirement for BackgroundMusic.
+    window.dispatchEvent(new Event('pixel-desk-entered'));
     // Collapse the pixel-desk's expanded modal first, so closing this view
     // returns to the small scene instead of leaving it stuck expanded.
     window.dispatchEvent(new Event('pixel-desk-collapse'));

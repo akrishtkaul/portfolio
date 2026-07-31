@@ -65,6 +65,12 @@ body {
   .morning-plane-flight {
     display: none;
   }
+
+  /* pixel-desk: show boot lines immediately instead of staggered fade-in */
+  .boot-line-anim {
+    animation: none !important;
+    opacity: 1 !important;
+  }
 }
 
 /* pixel-desk: hide scrollbars in desktop-window content areas */

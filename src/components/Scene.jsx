@@ -77,6 +77,17 @@ export default function Scene() {
   }, []);
 
   useEffect(() => {
+    // Dismisses the boot screen the same way ProfessionalView's logo /
+    // resume-view button opens the recruiter overlay during boot — sets
+    // `entered` without expanding, so the desk modal doesn't slide in behind
+    // that overlay. Unmounting LoadingScreen this way also cancels its
+    // auto-advance timer.
+    const onSilentEnter = () => setEntered(true);
+    window.addEventListener('pixel-desk-enter-silent', onSilentEnter);
+    return () => window.removeEventListener('pixel-desk-enter-silent', onSilentEnter);
+  }, []);
+
+  useEffect(() => {
     const mq = window.matchMedia('(max-width: 900px)');
     const sync = () => {
       setMobile(mq.matches);
@@ -154,7 +165,7 @@ export default function Scene() {
                 overflow: 'hidden',
               }}
             >
-              {entered ? deskTop(() => setExpanded(true), 'expand', false) : <LoadingScreen onEnter={handleEnter} />}
+              {entered ? deskTop(() => setExpanded(true), 'expand', false) : <LoadingScreen onEnter={handleEnter} mobile={mobile} />}
             </div>
           </div>
         )}
@@ -171,7 +182,7 @@ export default function Scene() {
 
         {mobile && (
           <div style={{ position: 'relative', width: '100%', height: '100%', background: '#090A16', overflow: 'hidden' }}>
-            {entered ? deskTop(() => setExpanded(true), 'expand', false, setApp, false) : <LoadingScreen onEnter={handleEnter} />}
+            {entered ? deskTop(() => setExpanded(true), 'expand', false, setApp, false) : <LoadingScreen onEnter={handleEnter} mobile={mobile} />}
           </div>
         )}
 
