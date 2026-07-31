@@ -5,12 +5,12 @@ import { isPlaceholder } from '../utils/placeholder';
 import logo from '../assets/ak-logo.png';
 import profilePhoto from '../assets/akrisht_profile.jpg';
 import Typewriter from './Typewriter';
-import useHint from '../hooks/useHint';
+import useHint, { triggerHints } from '../hooks/useHint';
 
 export default function ProfessionalView() {
   const [open, setOpen] = useState(false);
   const [flippedId, setFlippedId] = useState(null);
-  const [showLogoHint, dismissLogoHint] = useHint('pixel-desk-show-hints');
+  const [showLogoHint, dismissLogoHint] = useHint();
   const { about } = content;
   const firstName = about.name.split(' ')[0];
   const bioParas = (about.bio || []).filter((p) => !isPlaceholder(p));
@@ -40,8 +40,9 @@ export default function ProfessionalView() {
     setOpen(false);
     setFlippedId(null);
     // Nudges visitors toward the other discovery affordance (expand) now
-    // that they're back on the desk scene.
-    window.dispatchEvent(new Event('pixel-desk-show-hints'));
+    // that they're back on the desk scene. Only fires the first time either
+    // overlay closes, not every time.
+    triggerHints();
   };
 
   // LoadingScreen's boot-screen countdown dispatches this to auto-open the

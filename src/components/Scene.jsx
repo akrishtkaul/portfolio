@@ -4,7 +4,7 @@ import DeskTop from './DeskTop';
 import LoadingScreen from './LoadingScreen';
 import MorningPlane from './MorningPlane';
 import { AssistantProvider } from './AssistantContext';
-import useHint from '../hooks/useHint';
+import useHint, { triggerHints } from '../hooks/useHint';
 
 const SCENE_WIDTH = 1440;
 const SCENE_HEIGHT = 810;
@@ -48,7 +48,7 @@ export default function Scene() {
   const [vh, setVh] = useState(window.innerHeight);
   const [expanded, setExpanded] = useState(false);
   const [entered, setEntered] = useState(false);
-  const [showExpandHint, dismissExpandHint] = useHint('pixel-desk-show-hints');
+  const [showExpandHint, dismissExpandHint] = useHint();
   // Rendered as a plain fixed viewport element (not nested inside the tiny,
   // clipped laptop-screen rect) so it isn't cut off by that rect's own
   // overflow:hidden, and reads at normal size instead of the scene's scale.
@@ -86,10 +86,10 @@ export default function Scene() {
   // Escape) — distinct from the silent auto-collapse above, which happens
   // when the professional view opens rather than when this modal is closed.
   // Triggers the logo/expand discovery hints the same way closing the
-  // professional view does.
+  // professional view does (only the first time either closes, not every time).
   const handleCollapseExpanded = useCallback(() => {
     setExpanded(false);
-    window.dispatchEvent(new Event('pixel-desk-show-hints'));
+    triggerHints();
   }, []);
 
   useEffect(() => {
