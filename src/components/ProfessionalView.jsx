@@ -5,10 +5,12 @@ import { isPlaceholder } from '../utils/placeholder';
 import logo from '../assets/ak-logo.png';
 import profilePhoto from '../assets/akrisht_profile.jpg';
 import Typewriter from './Typewriter';
+import useHint from '../hooks/useHint';
 
 export default function ProfessionalView() {
   const [open, setOpen] = useState(false);
   const [flippedId, setFlippedId] = useState(null);
+  const [showLogoHint, dismissLogoHint] = useHint('pixel-desk-show-hints');
   const { about } = content;
   const firstName = about.name.split(' ')[0];
   const bioParas = (about.bio || []).filter((p) => !isPlaceholder(p));
@@ -37,6 +39,9 @@ export default function ProfessionalView() {
   const handleClose = () => {
     setOpen(false);
     setFlippedId(null);
+    // Nudges visitors toward the other discovery affordance (expand) now
+    // that they're back on the desk scene.
+    window.dispatchEvent(new Event('pixel-desk-show-hints'));
   };
 
   // LoadingScreen's boot-screen countdown dispatches this to auto-open the
@@ -69,6 +74,29 @@ export default function ProfessionalView() {
       >
         <img src={logo} alt="Akrisht Kaul logo" className="w-full h-full object-cover" />
       </button>
+
+      {showLogoHint && (
+        <div
+          onClick={dismissLogoHint}
+          className="hint-pop hidden min-[901px]:block fixed z-[149] cursor-pointer"
+          style={{
+            top: 64,
+            left: 164,
+            maxWidth: 190,
+            padding: '9px 13px',
+            borderRadius: 12,
+            background: '#0B0F1B',
+            border: '1px solid #2A3242',
+            color: '#C6D0DD',
+            fontSize: 12,
+            lineHeight: 1.4,
+            boxShadow: '0 8px 20px rgba(0,0,0,0.4)',
+            animation: 'hintPop 220ms ease-out forwards',
+          }}
+        >
+          ← click here for the professional view
+        </div>
+      )}
 
       {/* Mobile: the desk scene isn't rendered below 900px, so the logo above
           is hidden. This sits in the icon column's own reserved strip (the

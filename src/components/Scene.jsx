@@ -76,6 +76,16 @@ export default function Scene() {
     return () => window.removeEventListener('pixel-desk-collapse', onCollapse);
   }, []);
 
+  // User-initiated close of the expanded desk modal (toggle button or
+  // Escape) — distinct from the silent auto-collapse above, which happens
+  // when the professional view opens rather than when this modal is closed.
+  // Triggers the logo/expand discovery hints the same way closing the
+  // professional view does.
+  const handleCollapseExpanded = useCallback(() => {
+    setExpanded(false);
+    window.dispatchEvent(new Event('pixel-desk-show-hints'));
+  }, []);
+
   useEffect(() => {
     // Dismisses the boot screen the same way ProfessionalView's logo /
     // resume-view button opens the recruiter overlay during boot — sets
@@ -111,11 +121,11 @@ export default function Scene() {
       }
       if (e.key !== 'Escape') return;
       if (app) setApp(null);
-      else setExpanded(false);
+      else handleCollapseExpanded();
     };
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [app, expanded, mobile, entered, handleEnter]);
+  }, [app, expanded, mobile, entered, handleEnter, handleCollapseExpanded]);
 
   // Never shrink below native size (keeps the panel text legible), but on
   // viewports larger than the native 1440x810 scale the whole scene up to
@@ -189,7 +199,7 @@ export default function Scene() {
         {expanded && !mobile && (
           <div style={{ position: 'fixed', inset: 0, zIndex: 50, background: 'rgba(6, 8, 16, 0.55)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
             <div style={{ width: EXPANDED_WIDTH, height: EXPANDED_HEIGHT, background: '#090A16', border: '1px solid #1A202C', overflow: 'hidden', transform: `scale(${expandedScale})`, transformOrigin: 'center center' }}>
-              {deskTop(() => setExpanded(false), 'close', true)}
+              {deskTop(handleCollapseExpanded, 'close', true)}
             </div>
           </div>
         )}

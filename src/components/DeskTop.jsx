@@ -1,4 +1,5 @@
 import PanelBody from './PanelBody';
+import useHint from '../hooks/useHint';
 
 const ORANGE = '#F0854A';
 const MUTED = '#8A99AE';
@@ -18,6 +19,12 @@ const TITLES = {
 };
 
 export default function DeskTop({ app, large = false, mobile = false, toggleLabel = 'expand', onOpen, onClose, onToggle, showToggle = true }) {
+  const [showExpandHint, dismissExpandHint] = useHint('pixel-desk-show-hints');
+  // Only the small (collapsed, desktop) view has an "expand" button worth
+  // pointing at — the large view's toggle says "close" instead, and mobile
+  // never renders the toggle at all (showToggle is false there).
+  const canShowExpandHint = showExpandHint && !large && showToggle;
+
   const defs = large
     ? [
         ['about', 'about', 16, 14],
@@ -89,6 +96,32 @@ export default function DeskTop({ app, large = false, mobile = false, toggleLabe
             <div style={{ width: 5, height: 4, background: 'currentColor' }} />
           </div>
           <span>{toggleLabel}</span>
+        </div>
+      )}
+
+      {canShowExpandHint && (
+        <div
+          onClick={dismissExpandHint}
+          className="hint-pop"
+          style={{
+            position: 'absolute',
+            top: 34,
+            right: 6,
+            maxWidth: 150,
+            padding: '8px 11px',
+            borderRadius: 10,
+            background: '#0B0F1B',
+            border: '1px solid #2A3242',
+            color: '#C6D0DD',
+            fontSize: 11,
+            lineHeight: 1.35,
+            boxShadow: '0 8px 20px rgba(0,0,0,0.4)',
+            cursor: 'pointer',
+            zIndex: 5,
+            animation: 'hintPop 220ms ease-out forwards',
+          }}
+        >
+          ↑ click here to expand
         </div>
       )}
 
