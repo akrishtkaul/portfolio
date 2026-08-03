@@ -45,7 +45,7 @@
       "degree": "B.S. Computer Science",
       "dates": "Sep 2025 - May 2028",
       "detail": "School of Engineering and Applied Science",
-      "honors": ["Dean's List"]
+      "honors": ["Dean's List", "GPA: 3.73/4.00"]
     },
     {
       "id": "columbia-clubs",
@@ -62,7 +62,7 @@
       "degree": "B.S. Computer Engineering",
       "dates": "Sep 2024 - May 2025",
       "detail": "College of Engineering · transferred to Columbia after freshman year",
-      "honors": ["Dean's List"]
+      "honors": ["Dean's List", "GPA: 3.96/4.00"]
     },
     {
       "id": "bu-clubs",
@@ -102,14 +102,14 @@
       "org": "Eulerity",
       "role": "Backend Engineer Intern",
       "name": "Ad Automation Platform",
-      "dates": "Jun 2026 - Present",
+      "dates": "May 2026 - Present",
       "url": "https://www.eulerity.ai/",
       "description": "Production backend for an AI-driven ad platform automating multi-channel campaign deployment for small businesses.",
       "tags": ["Java 17", "Spring Boot", "Google Ads API", "Twilio", "REST"],
       "details": [
-        "Refactored fake-data generation which included 42 endpoints and 10+ services, reducing test data generation time from 2 minutes to 30 seconds",
-        "Designed bulk campaign ad creation using CSV, allows for 500 ads to be scheduled to 50 locations in one go",
-        "Co-built an internal applicant tracking system to replace a paid Greenhouse contract, designed to handle ~3,000 applications annually"
+        "Closed 5 prod-reachable vulnerabilities across 42 endpoints and cut boilerplate 90% by centralizing scattered servlet logic into a policy and hash map dispatch layer, enforced via pre-commit hooks",
+        "Cut hiring software costs by $8K/year by building an in-house ATS with role-specific assessments and AI-generated-response detection, designed to scale to 3,000 applications annually",
+        "Removed manual per-location uploads and engineering involvement from franchise onboarding by shipping a self-serve tool publishing 500 posts across 50 locations per batch"
       ]
     },
     {
@@ -188,7 +188,7 @@
       "org": "Storage Buddy",
       "role": "Full Stack Intern",
       "name": "Storage Buddy Platform",
-      "dates": "Sep 2025 - Dec 2025",
+      "dates": "Sep 2025 - Jan 2026",
       "url": "https://www.storagebuddyco.com/",
       "description": "Full-stack internship through Columbia Business School on a storage marketplace platform incubated there.",
       "tags": ["React", "Supabase", "Real-time"],
@@ -233,6 +233,7 @@
       "id": "burpg",
       "type": ["experience"],
       "featured": false,
+      "professional": true,
       "org": "BU Rocket Propulsion Group",
       "role": "Avionics Team",
       "name": "Ground Support Dashboard",
@@ -241,7 +242,8 @@
       "description": "Real-time ground support equipment dashboard for static-fire testing.",
       "tags": ["Python", "Flask", "WebSocket"],
       "details": [
-        "Built a real-time ground support dashboard in Flask with WebSocket streaming across 4 sensors and 8 actuators, handling autosequence launch/abort with armed and disarmed safety states"
+        "Designed a Flask ground support dashboard for rocket engine testing, streaming 20+ sensor and actuator channels at 20 Hz over WebSockets and marking any channel silent for 5s as disconnected instead of showing stale readings",
+        "Sent a heartbeat to 4 firmware controllers every 2.5s so they could detect a lost connection and automatically shut off valves and ignition without operator input"
       ]
     },
     {
@@ -328,5 +330,5 @@
       ]
     }
   ],
-  "syncedAt": "2026-07-28 14:02 EDT"
+  "syncedAt": "2026-08-02 12:00 EDT"
 }
