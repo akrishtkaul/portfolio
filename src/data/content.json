@@ -26,15 +26,16 @@
     ],
     "contact": {
       "email": "akrishtkaul@gmail.com",
-      "github": "https://github.com/akrishtkaul",
-      "linkedin": "https://www.linkedin.com/in/akrishtkaul"
+"github": "https://github.com/akrishtkaul",
+      "linkedin": "https://www.linkedin.com/in/akrishtk",
+      "website": "https://akrishtkaul.com"
     },
     "skills": {
-      "languages": ["Java", "Python", "C", "C++", "TypeScript", "JavaScript", "SQL"],
-      "backend": ["Spring Boot", "FastAPI", "Node.js", "PostgreSQL", "MongoDB", "Supabase"],
-      "frontend": ["React", "Next.js", "React Native", "Tailwind", "Bootstrap"],
-      "firmware": ["Altium Designer", "KiCad", "Embedded C", "LTSpice"],
-      "tools": ["Git", "Docker", "Figma", "Postman", "Linux"]
+      "languages": ["Python", "Java", "C++", "JavaScript/TypeScript", "SQL", "C", "Bash"],
+      "backend": ["Spring Boot", "REST APIs", "FastAPI", "Google App Engine", "Kubernetes", "Docker", "PostgreSQL", "Git"],
+      "frontend": ["React", "React Native", "Next.js", "Tailwind CSS", "shadcn/ui", "Figma"],
+      "firmware": ["Altium Designer", "KiCad", "Embedded C/C++", "STM32", "LTSpice"],
+      "ai": ["Claude/OpenAI/Gemini APIs", "LLM tool calling", "Agent design", "RAG", "Vector search", "MCP"]
     }
   },
 
@@ -62,7 +63,7 @@
       "degree": "B.S. Computer Engineering",
       "dates": "Sep 2024 - May 2025",
       "detail": "College of Engineering · transferred to Columbia after freshman year",
-      "honors": ["Dean's List", "GPA: 3.96/4.00"]
+      "honors": ["Dean's List", "GPA: 3.96/4.00", "Distinguished Summer Research Fellowship (top 1%)"]
     },
     {
       "id": "bu-clubs",
@@ -77,7 +78,7 @@
       "id": "coursework",
       "parent": "columbia",
       "school": "Relevant Coursework",
-      "degree": "Data Structures in Java · Advanced Programming · Discrete Mathematics · Artificial Intelligence · UI Design",
+      "degree": "Data Structures in Java · Databases · Artificial Intelligence · Advanced Software Engineering · UI Design",
       "dates": "",
       "detail": "",
       "honors": []
@@ -107,9 +108,27 @@
       "description": "Production backend for an AI-driven ad platform automating multi-channel campaign deployment for small businesses.",
       "tags": ["Java 17", "Spring Boot", "Google Ads API", "Twilio", "REST"],
       "details": [
-        "Closed 5 prod-reachable vulnerabilities across 42 endpoints and cut boilerplate 90% by centralizing scattered servlet logic into a policy and hash map dispatch layer, enforced via pre-commit hooks",
-        "Cut hiring software costs by $8K/year by building an in-house ATS with role-specific assessments and AI-generated-response detection, designed to scale to 3,000 applications annually",
+        "Removed manual first-pass triage from a 7-engineer on-call rotation by building an autonomous triage agent that investigates 20–30 bug tickets/week, escalating to a human via a policy gate whenever a change would delete code",
+        "Reduced fake-data integration time by 90% and closed 5 prod-reachable vulnerabilities across 42 Java endpoints by refactoring scattered servlet logic into a three-layer architecture enforced via pre-commit hooks",
+        "Replaced a Greenhouse contract, saving $8K/year, by co-building an in-house ATS designed to scale to 3,000 annual applications, with role-specific assessments and AI detection of LLM-generated responses",
         "Removed manual per-location uploads and engineering involvement from franchise onboarding by shipping a self-serve tool publishing 500 posts across 50 locations per batch"
+      ]
+    },
+    {
+      "id": "columbia-ta",
+      "type": ["experience"],
+      "featured": true,
+      "professional": true,
+      "org": "Columbia CS Department",
+      "role": "Teaching Assistant",
+      "name": "AI & Advanced Software Engineering TA",
+      "dates": "Sep 2026 - Present",
+      "url": "https://www.cs.columbia.edu/",
+      "description": "TA for two upper-division CS courses at Columbia, running office hours, recitations, and guiding teams through a full semester SaaS project.",
+      "tags": ["AI", "Software Engineering", "Teaching"],
+      "details": [
+        "Hold office hours and recitations for 130 students in COMS W4701 Artificial Intelligence",
+        "Lead ~100 students in COMS W4156 Advanced Software Engineering through a semester-long software-as-a-service project"
       ]
     },
     {
@@ -119,15 +138,31 @@
       "professional": true,
       "org": "Columbia FSAE",
       "role": "Head of Firmware",
-      "name": "Battery Management System Firmware",
+      "name": "Battery Management System & Dashboard Firmware",
       "dates": "Sep 2025 - Present",
       "url": "https://www.instagram.com/columbiafsae/",
-      "description": "Safety-critical embedded firmware for a high-voltage battery management system on a Formula SAE race car.",
-      "tags": ["C", "C++", "STM32G4", "SPI", "CAN", "Embedded"],
+      "description": "Safety-critical embedded firmware for a high-voltage battery management system and driver dashboard on a Formula SAE race car.",
+      "tags": ["C", "C++", "STM32G4", "SPI", "CAN", "Embedded", "React"],
       "details": [
-        "Developed embedded C/C++ firmware on an STM32G4 for a safety-critical high-voltage BMS, monitoring 14 battery cells via the ADBMS6830 over SPI and coordinating 6 concurrent timed tasks for sensing, balancing, contactor control, and real-time fault monitoring",
-        "Achieved 10 ms contactor response and 100 ms CAN fault broadcast latency",
+        "Achieved 10 ms contactor response and 100 ms CAN fault broadcast on a safety-critical high-voltage BMS by writing STM32G4 C/C++ firmware that monitors 14 cells via the ADBMS6830 over SPI across 6 concurrent tasks",
+        "Building the steering-wheel dashboard for the 2027 FSAE competition car, streaming 14 cell readings, torque at all four wheels, and track speed, and giving the driver live wheel-torque control (C/C++ firmware, React UI)",
         "Diagnosed and eliminated a critical SPI hang in the ADBMS6830 driver that could freeze the entire BMS loop indefinitely, replacing HAL_MAX_DELAY with a 500 ms timeout for fail-safe recovery"
+      ]
+    },
+    {
+      "id": "glug",
+      "type": ["experience"],
+      "featured": true,
+      "professional": true,
+      "org": "Glug",
+      "role": "Founding Engineer",
+      "name": "Wine Discovery iOS App",
+      "dates": "Sep 2026 - Present",
+      "url": null,
+      "description": "React Native iOS wine app with 50 users, built loading/empty/error states across core screens for a polished production experience.",
+      "tags": ["React Native", "iOS", "TypeScript"],
+      "details": [
+        "Shipped loading, empty, and error states across the home, catalog, and scanner screens of a React Native iOS wine app with 50 users, replacing blank flashes with skeletons and adding retry and scan-the-bottle fallbacks"
       ]
     },
     {
@@ -159,8 +194,7 @@
       "description": "Full-stack AI fitness trainer with RAG-based chat that retrieves workout history to deliver personalized advice.",
       "tags": ["React", "FastAPI", "MongoDB Atlas", "OpenAI API"],
       "details": [
-        "Built a full-stack AI fitness trainer with RAG-based chat that retrieves workout history to deliver personalized advice via GPT-4o mini",
-        "Integrated a 1,300+ exercise library with auto-save persistence and real-time search"
+        "Built a full-stack AI fitness trainer with RAG-based chat over MongoDB Atlas Vector Search, retrieving a user's workout history to personalize GPT-4o mini coaching across a 1,300+ exercise library with real-time search"
       ]
     },
     {
@@ -174,10 +208,9 @@
       "dates": "Feb 2026",
       "url": null,
       "description": "Agentic trading copilot that makes stock trading approachable through voice-driven LLM tool execution.",
-      "tags": ["React", "Node.js", "Gemini API", "Alpaca API", "Python"],
+      "tags": ["Python", "React", "Node.js", "Gemini API", "Alpaca API", "MCP"],
       "details": [
-        "Built an agentic trading copilot where users interact via voice with an LLM that executes trades, tracks portfolios, and delivers real-time market news",
-        "Prevented hallucinations through structured audit trails, validated across 50+ test trades"
+        "Built an agentic trading copilot where users speak to an LLM that calls typed tools to place schema-validated trades, track portfolios, and pull market news, with audit trails constraining hallucinations across 50+ trades"
       ]
     },
     {
@@ -190,11 +223,11 @@
       "name": "Storage Buddy Platform",
       "dates": "Sep 2025 - Jan 2026",
       "url": "https://www.storagebuddyco.com/",
-      "description": "Full-stack internship through Columbia Business School on a storage marketplace platform incubated there.",
+      "description": "Full-stack internship through Columbia Business School's Build Lab on a storage marketplace platform.",
       "tags": ["React", "Supabase", "Real-time"],
       "details": [
-        "Built a real-time messaging system with sub-second delivery across text, images, and documents, with profanity filtering, PII masking, and user blocking for 50+ users across Boston and NYC",
-        "Migrated the core platform from Bubble.io to a React/Supabase stack, reducing no-code dependency and enabling custom feature development across a 4-person team"
+        "Shipped browsing, onboarding, and real-time messaging to ~100 renters and hosts in Boston and NYC by migrating an early-stage storage marketplace from Bubble.io to React and Supabase, with PII masking and user blocking",
+        "Reduced no-code dependency and enabled custom feature development across a 4-person team"
       ]
     },
     {
@@ -206,11 +239,26 @@
       "name": "Add Up Cafe",
       "dates": "Dec 2025 - Jan 2026",
       "url": null,
-      "description": "Classroom management platform with gamified learning, built for a special-education environment.",
-      "tags": ["Next.js", "Tailwind", "shadcn/ui", "Firebase"],
+      "description": "Restaurant-simulation app that teaches special-education students to add prices and buy food, with role-based flows and assignment tracking.",
+      "tags": ["Next.js", "TypeScript", "Tailwind", "shadcn/ui", "Firebase", "Vercel"],
       "details": [
-        "Built and deployed a full-stack classroom management platform with role-based user flows, assignment tracking, and gamified learning features",
-        "Iterated directly with a special-education teacher and 15 students in a live classroom to refine UX and feature reliability"
+        "Deployed a restaurant-simulation app that teaches special-education students to add prices and buy food, with role-based flows and assignment tracking",
+        "Iterated directly with a teacher and 15 students in a live classroom to refine UX and feature reliability"
+      ]
+    },
+    {
+      "id": "tire-model-surrogate",
+      "type": ["project"],
+      "featured": false,
+      "org": null,
+      "role": null,
+      "name": "Tire Model Surrogate",
+      "dates": "2025",
+      "url": null,
+      "description": "Replaced an FSAE traction-control lookup table with a fitted ML regressor, matching accuracy at a fraction of the memory footprint.",
+      "tags": ["Python", "TensorFlow", "Keras", "scikit-learn", "NumPy"],
+      "details": [
+        "Replaced an FSAE traction-control lookup table with a fitted regressor, matching the 32x32 table's accuracy while shrinking its memory footprint from 4,352 bytes to 80 bytes"
       ]
     },
     {
@@ -302,33 +350,32 @@
       "segments": [
         { "text": "backend intern @ ", "tone": "muted" },
         { "text": "Eulerity", "tone": "accent" },
-        { "text": ", NYC", "tone": "muted" }
+        { "text": " — triage agent", "tone": "muted" }
+      ]
+    },
+    {
+      "label": "teaching",
+      "segments": [
+        { "text": "TA for ", "tone": "muted" },
+        { "text": "AI + SWE", "tone": "accent" },
+        { "text": " @ Columbia", "tone": "muted" }
       ]
     },
     {
       "label": "building",
       "segments": [
-        { "text": "BMS firmware", "tone": "amber" },
-        { "text": " for ", "tone": "muted" },
-        { "text": "Columbia FSAE", "tone": "light" }
+        { "text": "FSAE dashboard", "tone": "amber" },
+        { "text": " — C/C++ + React", "tone": "muted" }
       ]
     },
     {
-      "label": "last commit",
+      "label": "also",
       "segments": [
-        { "text": "fsae-bms", "tone": "light" },
-        { "text": " — ", "tone": "muted" },
-        { "text": "spi timeout guard, 500ms", "tone": "light" }
-      ],
-      "mark": "6d"
-    },
-    {
-      "label": "solved",
-      "segments": [
-        { "text": "SPI hang", "tone": "accent" },
-        { "text": " that froze the whole BMS loop", "tone": "muted" }
+        { "text": "founding eng @ ", "tone": "muted" },
+        { "text": "Glug", "tone": "accent" },
+        { "text": " (React Native)", "tone": "muted" }
       ]
     }
   ],
-  "syncedAt": "2026-08-02 12:00 EDT"
+  "syncedAt": "2026-10-08 12:00 EDT"
 }
