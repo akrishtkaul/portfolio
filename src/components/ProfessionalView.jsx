@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { FaGithub, FaLinkedin, FaEnvelope, FaArrowLeft, FaLightbulb } from 'react-icons/fa';
 import content from '../data/content.json';
 import { isPlaceholder } from '../utils/placeholder';
@@ -6,6 +6,38 @@ import logo from '../assets/ak-logo.png';
 import profilePhoto from '../assets/akrisht_profile.jpg';
 import Typewriter from './Typewriter';
 import useHint, { triggerHints } from '../hooks/useHint';
+
+function FadeUpCard({ children, delay = 0, className = '', style = {}, ...props }) {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect(); } },
+      { threshold: 0.08 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className={className}
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? 'translateY(0px)' : 'translateY(36px)',
+        transition: `opacity 0.55s cubic-bezier(0.22,1,0.36,1) ${delay}ms, transform 0.55s cubic-bezier(0.22,1,0.36,1) ${delay}ms`,
+        ...style,
+      }}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+}
 
 export default function ProfessionalView() {
   const [open, setOpen] = useState(false);
@@ -212,18 +244,15 @@ export default function ProfessionalView() {
             <div className="mt-16">
               <h2 className="text-2xl font-bold text-[#E7EDF5] mb-6">Recent Experiences</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                {experienceItems.map((item) => (
-                  <div
-                    key={item.id}
-                    className="flex flex-col h-full rounded-2xl border border-[#232B3A] bg-[#0B0F1B] p-5"
-                  >
+                {experienceItems.map((item, idx) => (
+                  <FadeUpCard key={item.id} delay={idx * 70} className="flex flex-col h-full rounded-2xl border border-[#232B3A] bg-[#0B0F1B] p-5">
                     <h3 className="text-lg font-semibold text-[#E7EDF5]">{item.org}</h3>
                     <p className="text-[#F0854A] font-medium text-sm mt-0.5">{item.role}</p>
                     {!isPlaceholder(item.dates) && <p className="text-[#67788F] text-xs mt-1">{item.dates}</p>}
                     {!isPlaceholder(item.description) && (
                       <p className="mt-3 text-[#B8C4D4] text-sm leading-relaxed">{item.description}</p>
                     )}
-                  </div>
+                  </FadeUpCard>
                 ))}
               </div>
             </div>
@@ -243,15 +272,16 @@ export default function ProfessionalView() {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                {projectItems.map((item) => {
+                {projectItems.map((item, idx) => {
                   const isFlipped = flippedId === item.id;
                   const dates = isPlaceholder(item.dates) ? null : item.dates;
                   const description = isPlaceholder(item.description) ? null : item.description;
                   const details = (item.details || []).filter((d) => !isPlaceholder(d));
 
                   return (
-                    <div
+                    <FadeUpCard
                       key={item.id}
+                      delay={idx * 70}
                       onClick={() => setFlippedId(isFlipped ? null : item.id)}
                       className="h-72 cursor-pointer"
                       style={{ perspective: 1000 }}
@@ -300,14 +330,14 @@ export default function ProfessionalView() {
                           <ul className="space-y-2">
                             {details.map((d, i) => (
                               <li key={i} className="flex gap-2 text-sm text-[#96A3B6] leading-relaxed">
-                                <span className="text-[#F0854A] mt-1 flex-shrink-0">•</span>
+                                {details.length > 1 && <span className="text-[#F0854A] mt-1 flex-shrink-0">•</span>}
                                 <span>{d}</span>
                               </li>
                             ))}
                           </ul>
                         </div>
                       </div>
-                    </div>
+                    </FadeUpCard>
                   );
                 })}
               </div>
